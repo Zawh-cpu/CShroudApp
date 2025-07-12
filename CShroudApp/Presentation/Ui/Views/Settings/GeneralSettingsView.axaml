@@ -1,0 +1,149 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CShroudApp.Presentation.Ui.ViewModels.Settings"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:CShroudApp.Presentation.Ui.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="485" d:DesignHeight="715"
+             x:Class="CShroudApp.Presentation.Ui.Views.Settings.GeneralSettingsView"
+             x:DataType="vm:GeneralSettingsViewModel"
+             Background="#161616">
+    
+    <Design.DataContext>
+        <viewModels:DesignerViewModel/>
+    </Design.DataContext>
+    
+    <UserControl.Styles>
+        <Style Selector="Border.SettingsItem">
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="Background" Value="#242424"/>
+            
+            <Style Selector="^ StackPanel.Wrapper">
+                <Setter Property="Orientation" Value="Horizontal"/>
+                <Setter Property="Spacing" Value="20"/>
+                
+                <Style Selector="^ TextBlock.Header">
+                    <Setter Property="Foreground" Value="#D5D5D5"/>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="FontWeight" Value="500"/>
+                </Style>
+            </Style>
+            
+            <Style Selector="^ Border.ItemIcon">
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Style Selector="^ Svg">
+                    <Setter Property="Css" Value="* { fill: #fff;  }"/>
+                </Style>
+            </Style>
+            
+            <Style Selector="^ Border.ItemIcon-Alt">
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Style Selector="^ Svg">
+                    <Setter Property="Css" Value="* { stroke: #fff;  }"/>
+                </Style>
+            </Style>
+        </Style>
+        
+        <Style Selector="StackPanel.SettingsSection">
+            <Style Selector="^ > Border.SettingsItem:nth-child(1)">
+                <Setter Property="CornerRadius" Value="12 12 0 0"/>
+            </Style>
+            
+            <Style Selector="^ > Border.SettingsItem:nth-last-child(1)">
+                <Setter Property="CornerRadius" Value="0 0 12 12"/>
+            </Style>
+            
+            <Style Selector="^ > Border.SettingsItem:nth-child(1):nth-last-child(1)">
+                <Setter Property="CornerRadius" Value="12 12 12 12"/>
+            </Style>
+        </Style>
+    </UserControl.Styles>
+    
+    <StackPanel Margin="20">
+        <Grid ColumnDefinitions="Auto, *, Auto" Margin="0 0 0 20">
+            <TextBlock Classes="h3" Margin="0" Text="Settings-Text" Foreground="#fff" VerticalAlignment="Center"/>
+            <Button Grid.Column="2" Content="Back ->" FontSize="20" Foreground="#fff" VerticalAlignment="Center" Command="{ Binding BackCommand }"/>
+        </Grid>
+        <StackPanel Spacing="10">
+            <StackPanel Classes="SettingsSection">
+                <Border Classes="SettingsItem">
+                    <StackPanel Classes="Wrapper">
+                        <Border Classes="ItemIcon-Alt" Background="#6C757D">
+                            <Svg Path="avares://CShroudApp/Assets/icons/svg/settings-2.svg" Width="24" Height="24"/>
+                        </Border>
+                        
+                        <TextBlock Classes="Header" Text="Общие настройки" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            
+            <StackPanel Classes="SettingsSection">
+                <Border Classes="SettingsItem">
+                    <StackPanel Classes="Wrapper">
+                        <Border Classes="ItemIcon" Background="#1B998B">
+                            <Svg Path="avares://CShroudApp/Assets/icons/svg/ethernet-off.svg" Width="24" Height="24"/>
+                        </Border>
+                        <TextBlock Classes="Header" Text="Сеть" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+                <Border Classes="SettingsItem">
+                    <StackPanel Classes="Wrapper">
+                        <Border Classes="ItemIcon-Alt" Background="#28A745">
+                            <Svg Path="avares://CShroudApp/Assets/icons/svg/split.svg" Width="24" Height="24"/>
+                        </Border>
+                        <TextBlock Classes="Header" Text="Split-Туннелирование" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <StackPanel Classes="SettingsSection">
+                <Border Classes="SettingsItem">
+                    <Grid ColumnDefinitions="Auto, *, Auto">
+                        <StackPanel Classes="Wrapper">
+                            <Border Classes="ItemIcon" Background="#0496FF">
+                                <Svg Path="avares://CShroudApp/Assets/icons/svg/sync.svg" Width="24" Height="24"/>
+                            </Border>
+                            <TextBlock Classes="Header" Text="Системные обновления" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        
+                        <TextBlock Grid.Column="2" Text="v0.0.1 -> v0.2.0" Foreground="#0496FF" VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+                <Border Classes="SettingsItem">
+                    <StackPanel Classes="Wrapper">
+                        <Border Classes="ItemIcon" Background="#6F2DBD">
+                            <Svg Path="avares://CShroudApp/Assets/icons/svg/exclamationmark.svg" Width="24" Height="24"/>
+                        </Border>
+                        <TextBlock Classes="Header" Text="О приложении" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            
+            <StackPanel Classes="SettingsSection">
+                <Border Classes="SettingsItem">
+                    <StackPanel Classes="Wrapper">
+                        <Border Classes="ItemIcon" Background="#FD7E14">
+                            <Svg Path="avares://CShroudApp/Assets/icons/svg/lifebuoy.svg" Width="24" Height="24"/>
+                        </Border>
+                        
+                        <TextBlock Classes="Header" Text="Резервные адреса" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            
+            <StackPanel Classes="SettingsSection">
+                <Border Classes="SettingsItem">
+                    <StackPanel Classes="Wrapper">
+                        <Border Classes="ItemIcon" Background="#D72483">
+                            <Svg Path="avares://CShroudApp/Assets/icons/svg/repair-tool.svg" Width="24" Height="24"/>
+                        </Border>
+                        
+                        <TextBlock Classes="Header" Text="Режим отладки" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+    
+</UserControl>
