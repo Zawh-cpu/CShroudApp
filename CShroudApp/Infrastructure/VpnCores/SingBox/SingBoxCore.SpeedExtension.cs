@@ -19,6 +19,7 @@ public partial class SingBoxCore
 
     public async Task StartSpeedStreamAsync(CancellationToken token)
     {
+        Console.WriteLine($"STARTING SPEED STREAM {_settings.DeveloperSettings.ClashApiPort}");
         try
         {
             var handler = new SocketsHttpHandler

@@ -55,8 +55,10 @@ public partial class QuickLoginViewModel : ViewModelBase
         _quickAuthSessionDto = session;
     }
 
-    public override void OnNavigated()
+    public override void OnLoaded()
     {
+        base.OnLoaded();
+        
         var cts = new CancellationTokenSource();
         _quickAuthService.RunSession(cts.Token);
     }

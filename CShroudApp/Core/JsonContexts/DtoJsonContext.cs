@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using CShroudApp.Application.DTOs;
+using CShroudApp.Core.Entities;
 
 namespace CShroudApp.Core.JsonContexts;
 
@@ -9,4 +10,5 @@ namespace CShroudApp.Core.JsonContexts;
 [JsonSerializable(typeof(QuickAuthSessionDto))]
 [JsonSerializable(typeof(ActionTokenRefreshDto))]
 [JsonSerializable(typeof(GetUserDto))]
+[JsonSerializable(typeof(Location[]))]
 public partial class DtoJsonContext : JsonSerializerContext;

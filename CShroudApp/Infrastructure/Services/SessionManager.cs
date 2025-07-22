@@ -68,7 +68,7 @@ public class SessionManager : ISessionManager
         if (token is not null)
         {
             var parsedToken = Token.Parse(token);
-            if (parsedToken.Expiration > DateTime.Now)
+            if (parsedToken.Expiration > DateTime.UtcNow)
             {
                 RefreshToken = token;
                 SessionHasBeenAuthorized?.Invoke();

@@ -15,7 +15,7 @@ public class WindowsProxyService : IProxyManager
         set
         {
             if (value is not null)
-                _storageManager.SetValue("cachedProxy", value);
+                _storageManager.SetValueAsync("cachedProxy", value);
         }
     }
     

@@ -119,7 +119,7 @@
                                                                         </TextBlock>
                                                                 </Grid>-->
                                                                 
-                                                                <ComboBox SelectedItem="{ Binding SelectedLocation }" ItemsSource="{Binding AvailableLocations}" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectedIndex="0">
+                                                                <ComboBox ItemsSource="{Binding AvailableLocations}" SelectedItem="{Binding SelectedLocation, Mode=Default}"  Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectedIndex="0">
                                                                         <ComboBox.Background>
                                                                                 Transparent
                                                                         </ComboBox.Background>
@@ -187,7 +187,7 @@
                                                 <Border Grid.Column="2" BorderThickness="1" CornerRadius="25" Padding="14" Background="#1B1B1D">
                                                         <Grid RowDefinitions="Auto, 7, Auto">
                                                                 <TextBlock  FontWeight="Medium" FontSize="14" Foreground="#565658" Text="{mext:Loc DashBoard-Ui-ModeChosen}"/>
-                                                                <ComboBox SelectedItem="{Binding SelectedMode, Mode=TwoWay}" ItemsSource="{Binding ModesForView}" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectedIndex="0">
+                                                                <ComboBox SelectedItem="{Binding SelectedMode, Mode=TwoWay}" ItemsSource="{Binding ModesForView}" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                                                         <ComboBox.Background>
                                                                                 Transparent
                                                                         </ComboBox.Background>

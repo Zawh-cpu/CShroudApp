@@ -171,26 +171,23 @@ public class ApiRepository : IApiRepository
 
         return dto;
     }
+    
     public async Task<Result<Location[]>> GetAvailableLocationsAsync()
     {
-        return new Location[]
-        {
-            new()
-            {
-                City = "frankfurt",
-                Country = "de",
-            },
-            new()
-            {
-                City = "newyorkcity", 
-                Country = "us",
-            },
-            new()
-            {
-                City = "amsterdam",
-                Country = "nl",
-            }
-        };
+        var token = ActionToken;
+        if (token is null) return Result.Unavailable();
+        var request = new HttpRequestMessage(HttpMethod.Get, "/api/v1/vpn/locations");
+        
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        
+        var response = await MakeRequestAsync(request);
+        if (!response.IsSuccess) return response.Map();
+        
+        var stream = await response.Value.Content.ReadAsStreamAsync();
+        var dto = await JsonSerializer.DeserializeAsync(stream, DtoJsonContext.Default.LocationArray);
+        if (dto is null) return Result.Error();
+
+        return dto;
     }
     
     public async Task<Result<VpnConnectionCredentials>> TryConnectToVpnNetworkAsync(VpnProtocol[] supportedProtocols, string location)

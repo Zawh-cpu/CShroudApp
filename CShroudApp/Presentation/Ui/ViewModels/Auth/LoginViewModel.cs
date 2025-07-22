@@ -48,8 +48,8 @@ public partial class LoginViewModel : ViewModelBase
     private void ToggleVisibility()
     {
         _isPasswordVisible = !_isPasswordVisible;
-        //OnPropertyChanged(nameof(PasswordChar));
-        //OnPropertyChanged(nameof(EyeIcon));
+        OnPropertyChanged(nameof(PasswordChar));
+        OnPropertyChanged(nameof(EyeIcon));
     }
 
     /*public event PropertyChangedEventHandler PropertyChanged;

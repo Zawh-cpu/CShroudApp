@@ -129,13 +129,13 @@
                 <Grid Grid.Row="0" RowDefinitions="*, 10, *, 20, *">
                     <Grid Grid.Row="0" RowDefinitions="Auto, 5, *">
                         <TextBlock Classes="inputField_FieldText">Login</TextBlock>
-                        <TextBox Grid.Row="2" Classes="inputField" Name="LoginBox" Watermark="Login" CornerRadius="5 5 5 5"></TextBox>
+                        <TextBox Grid.Row="2" Classes="inputField" Name="LoginBox" Watermark="Login" CornerRadius="5 5 5 5"/>
                     </Grid>
                     
                     <Grid Grid.Row="2" RowDefinitions="Auto, 5, *">
                         <TextBlock Classes="inputField_FieldText">Password</TextBlock>
                         <Grid Grid.Row="2" ColumnDefinitions="*, Auto">
-                            <MaskedTextBox Classes="inputField" Name="PasswordMaskedBox" PasswordChar="{Binding PasswordChar, UpdateSourceTrigger=PropertyChanged}" Watermark="Password" CornerRadius="5 0 0 5">dafwqeq</MaskedTextBox>
+                            <MaskedTextBox Classes="inputField" Name="PasswordMaskedBox" PasswordChar="{Binding PasswordChar, UpdateSourceTrigger=PropertyChanged}" Watermark="Password" CornerRadius="5 0 0 5"/>
                             <Button Grid.Column="1" Classes="inputField_FieldButton" Command="{Binding TogglePasswordVisibilityCommand}" VerticalAlignment="Stretch">
                                 <Svg Grid.Column="1" Path="{Binding EyeIcon, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="18" Height="18"></Svg>
                             </Button>

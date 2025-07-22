@@ -84,7 +84,7 @@ public class StorageManager : IStorageManager
         return value.Value as TEntity;
     }
         
-    public async Task SetValue(string key, object data, TimeSpan? aliveTime = null, bool saveChanges = true)
+    public async Task SetValueAsync(string key, object data, TimeSpan? aliveTime = null, bool saveChanges = true)
     {
         _storage[key] = new ContainerStruct { Value = data, AliveUntil = aliveTime is not null ? DateTime.UtcNow + aliveTime : null };
         if (saveChanges)
@@ -99,7 +99,7 @@ public class StorageManager : IStorageManager
             await SaveChanges();
     }
 
-    public async Task DelValue(string key, bool saveChanges = true)
+    public async Task DelValueAsync(string key, bool saveChanges = true)
     {
         _storage.Remove(key);
         if (saveChanges)

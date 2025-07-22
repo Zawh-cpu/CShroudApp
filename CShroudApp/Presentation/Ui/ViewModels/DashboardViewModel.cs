@@ -46,28 +46,10 @@ public partial class DashboardViewModel : ViewModelBase, IDisposable
     public ObservableCollection<KeyValuePair<VpnMode, ModeItem>> Modes { get; } = new();
     
     public IEnumerable<ModeItem> ModesForView => Modes.Select(x => x.Value);
-
-    public DateTime? LocationsExpires;
     
-    private ObservableCollection<Location> _availableLocations = new();
-    
-    public ObservableCollection<Location> AvailableLocations
-    {
-        get
-        {
-            if (LocationsExpires is null || LocationsExpires <= DateTime.UtcNow)
-            {
-                LocationsExpires = DateTime.UtcNow +  TimeSpan.FromMinutes(5);
-                Task.Run(UpdateLocations);
-            }
-            
-            return _availableLocations;
-        }
-        
-        set => SetProperty(ref _availableLocations, value);
-    }
+    public ObservableCollection<Location> AvailableLocations { get; set; }= new();
 
-    public Location? SelectedLocation { get; set; }
+    [ObservableProperty] private Location? _selectedLocation;
     
     public ICommand ToggleVpnCommand { get; }
     public ICommand GoToSettingsCommand { get; }
@@ -99,7 +81,6 @@ public partial class DashboardViewModel : ViewModelBase, IDisposable
         GoToSettingsCommand = new RelayCommand(() => _navigationService.GoTo<GeneralSettingsViewModel>());
 
         SelectedMode = Modes.FirstOrDefault(x => x.Key == _config.Vpn.Mode).Value ?? Modes.FirstOrDefault(x => x.Key == VpnMode.Tun).Value;
-        SelectedLocation = AvailableLocations.FirstOrDefault();
         
         _vpnService.VpnEnabled += OnVpnEnabled;
         _vpnService.VpnDisabled += OnVpnDisabled;
@@ -118,11 +99,26 @@ public partial class DashboardViewModel : ViewModelBase, IDisposable
     
     public async Task UpdateLocations()
     {
-        var res = await _apiRepository.GetAvailableLocationsAsync();
-        if (!res.IsSuccess) return;
-
-        LocationsExpires = DateTime.UtcNow + TimeSpan.FromMinutes(30);
-        AvailableLocations = new ObservableCollection<Location>(res.Value);
+        Location[]? res = _storageManager.GetValue<Location[]>("CachedLocations");
+        if (res is null)
+        {
+            var request = await _apiRepository.GetAvailableLocationsAsync();
+            if (!request.IsSuccess) return;
+            res = request.Value;
+            await _storageManager.SetValueAsync("CachedLocations", res, TimeSpan.FromMinutes(7), saveChanges: true);
+        }
+        
+        if (res is null) return;
+        
+        AvailableLocations = new ObservableCollection<Location>(res);
+        
+        if (SelectedLocation is not null) return;
+        
+        var item = _storageManager.GetValue<Location>("SelectedLocation");
+        if (item is not null)
+            SelectedLocation = AvailableLocations.FirstOrDefault(x => x.City == item.City && x.Country == item.Country);
+        
+        if (SelectedLocation is null && AvailableLocations.Any()) SelectedLocation = AvailableLocations.First();
     }
     
     public async Task ToggleVpn()
@@ -133,28 +129,45 @@ public partial class DashboardViewModel : ViewModelBase, IDisposable
         }
         else
         {
-            VpnConnectionCredentials? credentials = _storageManager.GetValue<VpnConnectionCredentials>("VpnConnectionCredentials");
-            if (credentials is null)
-            {
-                var temp = await _apiRepository.TryConnectToVpnNetworkAsync(_vpnService.SupportedProtocols,
-                    "frankfurt");
-                if (temp.IsSuccess) credentials = temp.Value;
-            }
-            
-            if (credentials is null)
+            await StartVpn(SelectedLocation);
+        }
+    }
+
+    public async Task StartVpn(Location? location)
+    {
+        if (_vpnService.IsRunning) return;
+        VpnConnectionCredentials? credentials = _storageManager.GetValue<VpnConnectionCredentials>("VpnConnectionCredentials");
+        if (credentials is null)
+        {
+            if (location is null)
             {
                 _notificationManager.AddNotification(new NotificationObject()
                 {
-                    Title = LocalizationService.Translate("VpnNetwork-ErrorConnection"),
-                    Message = LocalizationService.Translate("VpnNetwork-ErrorConnection-Text"),
+                    Title = LocalizationService.Translate("VpnNetwork-NoSelectedLocation"),
+                    Message = LocalizationService.Translate("VpnNetwork-NoSelectedLocation-Text"),
                     Type = NotificationType.Error
                 });
-                
                 return;
             }
-
-            await _vpnService.EnableAsync(_config.Vpn.Mode, credentials);
+                
+            var temp = await _apiRepository.TryConnectToVpnNetworkAsync(_vpnService.SupportedProtocols,
+                location.City);
+            if (temp.IsSuccess) credentials = temp.Value;
         }
+            
+        if (credentials is null)
+        {
+            _notificationManager.AddNotification(new NotificationObject()
+            {
+                Title = LocalizationService.Translate("VpnNetwork-ErrorConnection"),
+                Message = LocalizationService.Translate("VpnNetwork-ErrorConnection-Text"),
+                Type = NotificationType.Error
+            });
+                
+            return;
+        }
+
+        await _vpnService.EnableAsync(_config.Vpn.Mode, credentials);
     }
 
     private void OnVpnEnabled(object? sender, EventArgs e)
@@ -222,7 +235,7 @@ public partial class DashboardViewModel : ViewModelBase, IDisposable
 
     partial void OnSelectedModeChanged(ModeItem? value)
     {
-        if (value is null) return;
+        if (!_isShowedNow || value is null) return;
         
         var key = Modes.FirstOrDefault(x => x.Value.Name == value.Name).Key;
 
@@ -232,23 +245,31 @@ public partial class DashboardViewModel : ViewModelBase, IDisposable
             _ = _configManager.SaveConfigAsync();
             if (_vpnService.IsRunning)
             {
-                VpnConnectionCredentials? credentials = _storageManager.GetValue<VpnConnectionCredentials>("VpnConnectionCredentials");
-                if (credentials is null)
-                {
-                    var temp = await _apiRepository.TryConnectToVpnNetworkAsync(_vpnService.SupportedProtocols,
-                        "frankfurt");
-                    if (temp.IsSuccess) credentials = temp.Value;
-                }
-
-                if (credentials is not null)
-                    await _vpnService.RestartAsync(_config.Vpn.Mode, credentials);
-
+                await _vpnService.DisableAsync();
+                await StartVpn(SelectedLocation);
             }
         });
         
         _configManager.NotifyConfigChanged();
     }
 
+    partial void OnSelectedLocationChanged(Location? value)
+    {
+        if (!_isShowedNow || value is null) return;
+        
+        _storageManager.SetValueAsync("SelectedLocation", value);
+
+        Task.Run(async () =>
+        {
+            _ = _configManager.SaveConfigAsync();
+            if (_vpnService.IsRunning)
+            {
+                await _vpnService.DisableAsync();
+                await StartVpn(value);
+            }
+        });
+    }
+    
     public void OnConfigChanged()
     {
         var mode = Modes.FirstOrDefault(x => x.Key == _config.Vpn.Mode).Value;

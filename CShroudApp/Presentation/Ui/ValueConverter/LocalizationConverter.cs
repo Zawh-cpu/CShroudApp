@@ -1,4 +1,5 @@
 using System.Globalization;
+using Avalonia;
 using Avalonia.Data.Converters;
 using CShroudApp.Infrastructure.StaticServices;
 
@@ -8,11 +9,17 @@ public class LocalizationConverter : IMultiValueConverter
 {
     public object Convert(IList<object?> values, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (values[0] is string city)
+        switch (values[0])
         {
-            var key = $"{city}";
-            return LocalizationService.Translate(key); // или твой способ локализации
+            case string city:
+            {
+                var key = $"{city}";
+                return LocalizationService.Translate(key); // или твой способ локализации
+            }
+            case UnsetValueType:
+                return "";
+            default:
+                return "loc-err";
         }
-        return "loc-err";
     }
 }

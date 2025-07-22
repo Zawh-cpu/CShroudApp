@@ -32,6 +32,7 @@ public partial class MainViewModel : ViewModelBase
 
     public MainViewModel(INavigationService navigationService, INotificationManager notificationManager, ISessionManager sessionManager)
     {
+        Console.WriteLine("FGWEFWEFWEFFWEF");
         _navigationService = navigationService;
         
         navigationService.ViewModelChanged += ChangeWindow;
@@ -51,7 +52,7 @@ public partial class MainViewModel : ViewModelBase
             if (sessionManager.RefreshToken is null)
                 _navigationService.GoTo<LoginViewModel>();
             else
-                _navigationService.GoTo<GeneralSettingsViewModel>();
+                _navigationService.GoTo<DashboardViewModel>();
 
         }
         catch (Exception e)
