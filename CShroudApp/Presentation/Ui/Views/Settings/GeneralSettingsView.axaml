@@ -29,6 +29,17 @@
                 </Style>
             </Style>
             
+            <Style Selector="^ Grid.Wrapper">
+                <Setter Property="ColumnSpacing" Value="20"/>
+                
+                <Style Selector="^ TextBlock.Header">
+                    <Setter Property="Foreground" Value="#D5D5D5"/>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="FontWeight" Value="500"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
+            </Style>
+            
             <Style Selector="^ Border.ItemIcon">
                 <Setter Property="Padding" Value="5"/>
                 <Setter Property="CornerRadius" Value="5"/>
@@ -42,6 +53,8 @@
                 <Setter Property="CornerRadius" Value="5"/>
                 <Style Selector="^ Svg">
                     <Setter Property="Css" Value="* { stroke: #fff;  }"/>
+                    <Setter Property="Width" Value="24"/>
+                    <Setter Property="Height" Value="24"/>
                 </Style>
             </Style>
         </Style>
@@ -67,80 +80,112 @@
             <Button Grid.Column="2" Content="Back ->" FontSize="20" Foreground="#fff" VerticalAlignment="Center" Command="{ Binding BackCommand }"/>
         </Grid>
         <StackPanel Spacing="10">
-            <StackPanel Classes="SettingsSection">
+            <!--<StackPanel Classes="SettingsSection">
                 <Border Classes="SettingsItem">
-                    <StackPanel Classes="Wrapper">
-                        <Border Classes="ItemIcon-Alt" Background="#6C757D">
-                            <Svg Path="avares://CShroudApp/Assets/icons/svg/settings-2.svg" Width="24" Height="24"/>
+                    <Grid ColumnDefinitions="Auto, *, Auto">
+                        <Border Width="64" Height="64" ClipToBounds="True" CornerRadius="96" Margin="0 0 12 0">
+                            <Image Source="avares://CShroudApp/Assets/imgs/default-avatar.jpg"/>
                         </Border>
                         
-                        <TextBlock Classes="Header" Text="Общие настройки" VerticalAlignment="Center"/>
-                    </StackPanel>
+                        <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Label Content="Daniel Gaykalov"/>
+                            <Label Content="Avatar, Security, Personal data"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Svg Width="16" Height="16" Path="avares://CShroudApp/Assets/icons/svg/arrow-right.svg"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>-->
+            
+            <StackPanel Classes="SettingsSection">
+                <Border Classes="SettingsItem">
+                    <Grid Classes="Wrapper" ColumnDefinitions="Auto, *, Auto">
+                        <Border Classes="ItemIcon-Alt" Background="#6C757D">
+                            <Svg Path="avares://CShroudApp/Assets/icons/svg/settings-2.svg"/>
+                        </Border>
+                        <TextBlock Grid.Column="1" Classes="Header" Text="Общие настройки"/>
+                        <Svg Grid.Column="2" Path="avares://CShroudApp/Assets/icons/svg/chevron-right.svg"/>
+                    </Grid>
                 </Border>
             </StackPanel>
             
             <StackPanel Classes="SettingsSection">
                 <Border Classes="SettingsItem">
-                    <StackPanel Classes="Wrapper">
+                    <Grid Classes="Wrapper" ColumnDefinitions="Auto, *, Auto">
                         <Border Classes="ItemIcon" Background="#1B998B">
-                            <Svg Path="avares://CShroudApp/Assets/icons/svg/ethernet-off.svg" Width="24" Height="24"/>
+                            <Svg Path="avares://CShroudApp/Assets/icons/svg/ethernet-off.svg"/>
                         </Border>
-                        <TextBlock Classes="Header" Text="Сеть" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Border>
-                <Border Classes="SettingsItem">
-                    <StackPanel Classes="Wrapper">
-                        <Border Classes="ItemIcon-Alt" Background="#28A745">
-                            <Svg Path="avares://CShroudApp/Assets/icons/svg/split.svg" Width="24" Height="24"/>
-                        </Border>
-                        <TextBlock Classes="Header" Text="Split-Туннелирование" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Border>
-            </StackPanel>
-            <StackPanel Classes="SettingsSection">
-                <Border Classes="SettingsItem">
-                    <Grid ColumnDefinitions="Auto, *, Auto">
-                        <StackPanel Classes="Wrapper">
-                            <Border Classes="ItemIcon" Background="#0496FF">
-                                <Svg Path="avares://CShroudApp/Assets/icons/svg/sync.svg" Width="24" Height="24"/>
-                            </Border>
-                            <TextBlock Classes="Header" Text="Системные обновления" VerticalAlignment="Center"/>
-                        </StackPanel>
-                        
-                        <TextBlock Grid.Column="2" Text="v0.0.1 -> v0.2.0" Foreground="#0496FF" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Classes="Header" Text="Сеть" VerticalAlignment="Center"/>
+                        <Svg Grid.Column="2" Path="avares://CShroudApp/Assets/icons/svg/chevron-right.svg"/>
                     </Grid>
                 </Border>
                 <Border Classes="SettingsItem">
-                    <StackPanel Classes="Wrapper">
+                    <Grid Classes="Wrapper" ColumnDefinitions="Auto, *, Auto">
+                        <Border Classes="ItemIcon-Alt" Background="#28A745">
+                            <Svg Path="avares://CShroudApp/Assets/icons/svg/split.svg"/>
+                        </Border>
+                        <TextBlock Grid.Column="1" Classes="Header" Text="Split-Туннелирование" VerticalAlignment="Center"/>
+                        <Svg Grid.Column="2" Path="avares://CShroudApp/Assets/icons/svg/chevron-right.svg"/>
+                    </Grid>
+                </Border>
+            </StackPanel>
+            <StackPanel Classes="SettingsSection">
+                <Border Classes="SettingsItem">
+                    <Grid Classes="Wrapper" ColumnDefinitions="Auto, *, Auto, Auto">
+                        <Border Classes="ItemIcon" Background="#0496FF">
+                            <Svg Path="avares://CShroudApp/Assets/icons/svg/sync.svg" Width="24" Height="24"/>
+                        </Border>
+                        <TextBlock Grid.Column="1" Classes="Header" Text="Системные обновления" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="2" Text="v0.0.1 -> v0.2.0" Foreground="#0496FF" VerticalAlignment="Center"/>
+                        <Svg Grid.Column="3" Path="avares://CShroudApp/Assets/icons/svg/chevron-right.svg"/>
+                    </Grid>
+                </Border>
+                <Border Classes="SettingsItem">
+                    <Grid Classes="Wrapper" ColumnDefinitions="Auto, *, Auto">
                         <Border Classes="ItemIcon" Background="#6F2DBD">
                             <Svg Path="avares://CShroudApp/Assets/icons/svg/exclamationmark.svg" Width="24" Height="24"/>
                         </Border>
-                        <TextBlock Classes="Header" Text="О приложении" VerticalAlignment="Center"/>
-                    </StackPanel>
+                        <TextBlock Grid.Column="1" Classes="Header" Text="О приложении" VerticalAlignment="Center"/>
+                        <Svg Grid.Column="2" Path="avares://CShroudApp/Assets/icons/svg/chevron-right.svg"/>
+                    </Grid>
                 </Border>
             </StackPanel>
             
             <StackPanel Classes="SettingsSection">
                 <Border Classes="SettingsItem">
-                    <StackPanel Classes="Wrapper">
+                    <Grid Classes="Wrapper" ColumnDefinitions="Auto, *, Auto">
                         <Border Classes="ItemIcon" Background="#FD7E14">
                             <Svg Path="avares://CShroudApp/Assets/icons/svg/lifebuoy.svg" Width="24" Height="24"/>
                         </Border>
-                        
-                        <TextBlock Classes="Header" Text="Резервные адреса" VerticalAlignment="Center"/>
-                    </StackPanel>
+                        <TextBlock Grid.Column="1" Classes="Header" Text="Резервные адреса" VerticalAlignment="Center"/>
+                        <Svg Grid.Column="2" Path="avares://CShroudApp/Assets/icons/svg/chevron-right.svg"/>
+                    </Grid>
                 </Border>
             </StackPanel>
             
             <StackPanel Classes="SettingsSection">
                 <Border Classes="SettingsItem">
-                    <StackPanel Classes="Wrapper">
+                    <Grid Classes="Wrapper" ColumnDefinitions="Auto, *, Auto">
                         <Border Classes="ItemIcon" Background="#D72483">
                             <Svg Path="avares://CShroudApp/Assets/icons/svg/repair-tool.svg" Width="24" Height="24"/>
                         </Border>
+                        <TextBlock Grid.Column="1" Classes="Header" Text="Режим отладки" VerticalAlignment="Center"/>
+                        <Svg Grid.Column="2" Path="avares://CShroudApp/Assets/icons/svg/chevron-right.svg"/>
+                    </Grid>
+                </Border>
+            </StackPanel>
+            <StackPanel Classes="SettingsSection">
+                <Border Classes="SettingsItem">
+                    <Grid Classes="Wrapper" ColumnDefinitions="Auto, *, Auto">
+                        <Border Classes="ItemIcon" Background="Crimson">
+                            <Svg Path="avares://CShroudApp/Assets/icons/svg/repair-tool.svg" Width="24" Height="24"/>
+                        </Border>
                         
-                        <TextBlock Classes="Header" Text="Режим отладки" VerticalAlignment="Center"/>
-                    </StackPanel>
+                        <TextBlock Grid.Column="1" Classes="Header" Text="Выйти" Foreground="Crimson" VerticalAlignment="Center"/>
+                        <Svg Grid.Column="2" Path="avares://CShroudApp/Assets/icons/svg/chevron-right.svg"/>
+                    </Grid>
                 </Border>
             </StackPanel>
         </StackPanel>
