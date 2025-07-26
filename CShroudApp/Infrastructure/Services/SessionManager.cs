@@ -15,6 +15,7 @@ public class SessionManager : ISessionManager
 
     public event EventHandler? UnauthorizedSession;
     public event Action? SessionHasBeenAuthorized;
+    public event Action? LogoutAction;
     
     public User Session
     {
@@ -90,5 +91,10 @@ public class SessionManager : ISessionManager
             Rate = result.Value.Rate,
             Role = result.Value.Role
         };
+    }
+
+    public void Logout()
+    {
+        LogoutAction?.Invoke();
     }
 }

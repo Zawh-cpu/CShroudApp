@@ -196,12 +196,12 @@ public class ApiRepository : IApiRepository
         {
             Host = "localhost",
             Port = 443,
-            IpAddressV4 = "127.0.0.1",
+            IpAddressV4 = "179.61.132.185",
             IpAddressV6 = "::1",
             Location = "frankfurt",
             Obtained = DateTime.UtcNow,
             Protocol = VpnProtocol.Vless,
-            YourAddress = "127.0.0.1",
+            YourAddress = "179.61.132.185",
             TransparentHosts = new()
             {
                 "frankfurt.reality.zawh.ru",

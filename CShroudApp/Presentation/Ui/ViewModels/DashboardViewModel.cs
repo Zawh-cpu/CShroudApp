@@ -277,6 +277,12 @@ public partial class DashboardViewModel : ViewModelBase, IDisposable
 
         SelectedMode = mode;
     }
+
+    [RelayCommand]
+    private async Task Logout()
+    {
+        //await _sessionManager.Logout();
+    }
     
     public void Dispose()
     {
