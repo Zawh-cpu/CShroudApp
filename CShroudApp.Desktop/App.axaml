@@ -1,0 +1,51 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:entities="clr-namespace:Backend.Domain.Entities;assembly=Backend"
+             xmlns:lang="clr-namespace:CShroudApp.Desktop.Assets.Localization"
+             xmlns:viewModels="clr-namespace:CShroudApp.Desktop.ViewModels"
+             xmlns:local="clr-namespace:CShroudApp.Desktop"
+             xmlns:converters="clr-namespace:CShroudApp.Desktop.Resources.Converters"
+             x:Class="CShroudApp.Desktop.App"
+             x:DataType="viewModels:AppViewModel"
+             RequestedThemeVariant="Default">
+    
+    <Application.Styles>
+        <FluentTheme/>
+    </Application.Styles>
+    
+    <Application.Resources>
+        <FontFamily x:Key="InterFont">avares://CShroudApp.Desktop/Assets/Fonts/Inter#Inter</FontFamily>
+        <FontFamily x:Key="NunitoFont">avares://CShroudApp.Desktop/Assets/Fonts/Nunito#Nunito</FontFamily>
+        
+        <converters:ResourceKeyToStringConverter x:Key="ResourceKeyToStringConverter" />
+    </Application.Resources>
+    
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+    
+    <TrayIcon.Icons>
+        <TrayIcons>
+            <TrayIcon ToolTipText="CrimsonShroud" Icon="avares://CShroudApp.Desktop/Assets/logo.ico" Command="{Binding ShowCommand}">
+                <TrayIcon.Menu>
+                    <NativeMenu>
+                        <NativeMenuItem Header="{x:Static lang:Resources.TrayUiShowApp}" Command="{Binding ShowCommand}" />
+                        <NativeMenuItem Header="{x:Static lang:Resources.TrayUiHideApp}" Command="{Binding HideCommand}" />
+                        <NativeMenuItemSeparator/>
+                        <NativeMenuItem Header="{Binding VpnTogglerText}" Command="{Binding ToggleVpnCommand}"/>
+                        <NativeMenuItem Header="{x:Static lang:Resources.TrayUiChangeMode}">
+                            <NativeMenu>
+                                <NativeMenuItem Header="{x:Static lang:Resources.VpnModeTun}" Command="{Binding SetModeCommand}" CommandParameter="{x:Static entities:VpnMode.Tun}"/>
+                                <NativeMenuItem Header="{x:Static lang:Resources.VpnModeTunPlusProxy}" Command="{Binding SetModeCommand}" CommandParameter="{x:Static entities:VpnMode.TunPlusProxy}"/>
+                                <NativeMenuItem Header="{x:Static lang:Resources.VpnModeProxy}" Command="{Binding SetModeCommand}" CommandParameter="{x:Static entities:VpnMode.Proxy}"/>
+                                <NativeMenuItem Header="{x:Static lang:Resources.VpnModeTransparentProxy}" Command="{Binding SetModeCommand}" CommandParameter="{x:Static entities:VpnMode.TransparentProxy}"/>
+                            </NativeMenu>
+                        </NativeMenuItem>
+                        <NativeMenuItemSeparator/>
+                        <NativeMenuItem Header="{x:Static lang:Resources.TrayUiExit}" Command="{Binding ExitCommand}" />
+                    </NativeMenu>
+                </TrayIcon.Menu>
+            </TrayIcon>
+        </TrayIcons>
+    </TrayIcon.Icons>
+</Application>

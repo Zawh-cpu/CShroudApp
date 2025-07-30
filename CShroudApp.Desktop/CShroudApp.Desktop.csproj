@@ -1,28 +1,67 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <!--If you are willing to use Windows/MacOS native APIs you will need to create 3 projects.
-        One for Windows with net9.0-windows TFM, one for MacOS with net9.0-macos and one with net9.0 TFM for Linux.-->
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    </PropertyGroup>
-
-    <PropertyGroup>
         <ApplicationManifest>app.manifest</ApplicationManifest>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <RootNamespace>CShroudApp.Desktop</RootNamespace>
+
+        <IsAotCompatible>true</IsAotCompatible>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia.Desktop"/>
-        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Include="Avalonia.Diagnostics">
-            <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
-            <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
-        </PackageReference>
-        <PackageReference Include="Microsoft.Extensions.Logging" />
+        <ProjectReference Include="..\Backend\Backend.csproj"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <AvaloniaResource Include="Assets\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\CShroudApp\CShroudApp.csproj"/>
+        <ProjectCapability Include="Avalonia" />
+        <TrimmerRootAssembly Include="Avalonia.Themes.Fluent" />
     </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia"/>
+        <PackageReference Include="Avalonia.Desktop"/>
+        <PackageReference Include="Avalonia.Labs.Gif" />
+        <PackageReference Include="Avalonia.Labs.Lottie" />
+        <PackageReference Include="Avalonia.Themes.Fluent"/>
+        <PackageReference Include="Avalonia.Fonts.Inter"/>
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics"/>
+        <PackageReference Include="CommunityToolkit.Mvvm"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Update="Assets\Localization\Resources.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <PublicClass>true</PublicClass>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+            <StronglyTypedFileName>Assets\Resources.Designer.cs</StronglyTypedFileName>
+            <StronglyTypedLanguage>CSharp</StronglyTypedLanguage>
+            <StronglyTypedNamespace>CShroudApp.Desktop.Assets.Localization</StronglyTypedNamespace>
+            <StronglyTypedClassName>Resources</StronglyTypedClassName>
+        </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Resources\Panels\" />
+      <Folder Include="Resources\Templates\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Resources\Panels\Auth\DefaultLoginPanel.axaml" />
+    </ItemGroup>
+
+    <!--<ItemGroup>
+        <Compile Update="Assets\Localization\Resources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>-->
 </Project>

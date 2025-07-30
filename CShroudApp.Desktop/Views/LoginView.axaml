@@ -1,0 +1,447 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:lottie="clr-namespace:Avalonia.Labs.Lottie;assembly=Avalonia.Labs.Lottie"
+             xmlns:auth="clr-namespace:CShroudApp.Desktop.Resources.Templates.Auth"
+             xmlns:viewModels="clr-namespace:CShroudApp.Desktop.Resources.Panels.Auth.ViewModels"
+             xmlns:vm="clr-namespace:CShroudApp.Desktop.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="700"
+             x:DataType="vm:LoginViewModel"
+             x:Class="CShroudApp.Desktop.Views.LoginView">
+    
+    <UserControl.Styles>
+        <Style Selector="Label">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="{StaticResource InterFont}"/>
+        </Style>
+        <Style Selector="TextBox">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="{StaticResource InterFont}"/>
+        </Style>
+        <Style Selector="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="{StaticResource InterFont}"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        
+        <Style Selector="StackPanel.InputBox">
+            <Setter Property="Spacing" Value="6"/>
+            <Setter Property="Margin" Value="0"/>
+            
+            <Style Selector="^ Label.InputLabel">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="Medium"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+            
+            <Style Selector="^ TextBox.InputTextBox">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontWeight" Value="Normal"/>
+                <Setter Property="Height" Value="36"/>
+                <Setter Property="Padding" Value="12 0"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="CornerRadius" Value="6"/>
+                <Setter Property="Foreground" Value="#585858"/>
+                
+                <Style Selector="^:pointerover">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="#585858"/>
+                </Style>
+                
+                <Style Selector="^:pointerover /template/ Border#PART_BorderElement"> 
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="Background" Value="Transparent" /> 
+                </Style>
+                
+                <Style Selector="^:focus /template/ Border#PART_BorderElement"> 
+                    <Setter Property="BorderBrush" Value="#585858"/> 
+                    <Setter Property="BorderThickness" Value="2"/> 
+                    <Setter Property="Background" Value="Transparent" />
+                </Style> 
+  
+            </Style>
+            
+            <Style Selector="^ Grid.InputGridWrapper">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            
+            <Style Selector="^ Border.InputBorderWrapper">
+                <Setter Property="Background" Value="#1B1B1B"/>
+                <Setter Property="BorderBrush" Value="#282828"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Height" Value="36"/>
+                <Setter Property="CornerRadius" Value="6"/>
+            </Style>
+            
+            <Style Selector="^ ToggleButton.InputBoxToggleButton">
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                <Setter Property="CornerRadius" Value="0 6 6 0"/>
+            </Style>
+        </Style>
+        
+        <Style Selector="Button.GradientBlueButton">
+            <Setter Property="Background">
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                    <GradientStop Color="#1447E5" Offset="0.0"/>
+                    <GradientStop Color="#1841CE" Offset="0.5"/>
+                    <GradientStop Color="#1A3CB9" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.GradientBlueButton:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#155DFC"/>
+        </Style>
+        
+        <Style Selector="Button.GradientCoreColorsButton">
+            <Setter Property="Background">
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                    <GradientStop Color="#D2F67E47" Offset="0.0"/>
+                    <GradientStop Color="#D2A53889" Offset="0.5"/>
+                    <GradientStop Color="#D2F02E39" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.GradientCoreColorsButton:pointerover /template/ ContentPresenter">
+            <Setter Property="Background">
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                    <GradientStop Color="#F67E47" Offset="0.0"/>
+                    <GradientStop Color="#A53889" Offset="0.5"/>
+                    <GradientStop Color="#F02E39" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        
+        <Style Selector="Button.InputLineButton">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            
+            <Style Selector="^ StackPanel.InputLineButtonWrapper">
+                <Setter Property="Orientation" Value="Horizontal"/>
+                <Setter Property="Spacing" Value="10"/>
+            </Style>
+            
+            <Style Selector="^ Svg.InputLineButtonIcon">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Width" Value="12"/>
+                <Setter Property="Height" Value="12"/>
+                <Setter Property="Css" Value="* { fill: white; }"/>
+            </Style>
+            
+            <Style Selector="^ TextBlock.InputLineButtonText">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+            </Style>
+        </Style>
+        
+        <Style Selector="Button.EmptyButton">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            
+            <Setter Property="FontSize" Value="12.25"/>
+            <Setter Property="FontFamily" Value="{StaticResource InterFont}"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Button.EmptyButton:pointerover /template/ ContentPresenter">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="Button.EmptyButton:disabled /template/ ContentPresenter">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#444444"/>
+        </Style>
+        
+        <Style Selector="Button.ButtonType1">
+            <Setter Property="Padding" Value="10.5 10"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="CornerRadius" Value="5.25"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            
+            <Style Selector="^ StackPanel.ButtonWrapper">
+                <Setter Property="Orientation" Value="Horizontal"/>
+                <Setter Property="Spacing" Value="14"/>
+                
+                <Style Selector="^ Svg.ButtonWrapperIcon">
+                    <Setter Property="Width" Value="14"/>
+                    <Setter Property="Height" Value="14"/>
+                    <Setter Property="Css" Value="* { fill: #ffffff; }"/>
+                </Style>
+                
+                <Style Selector="^ TextBlock.ButtonWrapperText">
+                    <Setter Property="FontSize" Value="12.25"/>
+                    <Setter Property="FontFamily" Value="{StaticResource InterFont}"/>
+                    <Setter Property="Foreground" Value="#FFFFFF"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
+            </Style>
+        </Style>
+        
+        <Style Selector="Button.ButtonColorSpirit">
+            <Setter Property="BorderBrush" Value="#90CBD5E1"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="#10FFFFFF"/>
+            
+            <Style Selector="^ StackPanel.ButtonWrapper">
+                <Style Selector="^ Svg.ButtonWrapperIcon">
+                    <Setter Property="Css" Value="* { fill: #CBD5E1; }"/>
+                </Style>
+                
+                <Style Selector="^ TextBlock.ButtonWrapperText">
+                    <Setter Property="Foreground" Value="#D9CBD5E1"/>
+                </Style>
+            </Style>
+        </Style>
+        <Style Selector="Button.ButtonColorSpirit:pointerover /template/ ContentPresenter">
+            <Setter Property="BorderBrush" Value="#90CBD5E1"/>
+            <Setter Property="Background" Value="#30CBD5E1"/>
+        </Style>
+        <Style Selector="Button.ButtonColorSpirit:pointerover">
+            <Style Selector="^ TextBlock.ButtonWrapperText">
+                <Setter Property="Foreground" Value="#FFFFFF"/>
+            </Style>
+            
+            <Style Selector="^ Svg.ButtonWrapperIcon">
+                <Setter Property="Css" Value="* { fill: #FFFFFF; }"/>
+            </Style>
+        </Style>
+        <Style Selector="Button.ButtonColorSpirit:disabled /template/ ContentPresenter">
+            <Setter Property="BorderBrush" Value="#30CBD5E1"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="Button.ButtonColorSpirit:disabled">
+            <Style Selector="^ TextBlock.ButtonWrapperText">
+                <Setter Property="Foreground" Value="#79CBD5E1"/>
+            </Style>
+            <Style Selector="^ Svg.ButtonWrapperIcon">
+                <Setter Property="Css" Value="* { fill: #888888; }"/>
+            </Style>
+        </Style>
+        
+        <Style Selector="Button.ButtonColorSky">
+            <Setter Property="Background">
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                    <GradientStop Color="#3b82f6" Offset="0.0"/>
+                    <GradientStop Color="#06b6d4" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter>
+            
+            <Style Selector="^ StackPanel.ButtonWrapper">
+                <Style Selector="^ Svg.ButtonWrapperIcon">
+                    <Setter Property="Css" Value="* { fill: #FFFFFF; }"/>
+                </Style>
+                
+                <Style Selector="^ TextBlock.ButtonWrapperText">
+                    <Setter Property="Foreground" Value="#FFFFFF"/>
+                </Style>
+            </Style>
+        </Style>
+        <Style Selector="Button.ButtonColorSky:pointerover /template/ ContentPresenter">
+            <Setter Property="BorderBrush" Value="#90CBD5E1"/>
+            <Setter Property="Background">
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                    <GradientStop Color="#2563eb" Offset="0.0"/>
+                    <GradientStop Color="#0891b2" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter>
+        </Style>
+        <Style Selector="Button.ButtonColorSky:disabled /template/ ContentPresenter">
+            <Setter Property="BorderBrush" Value="#90CBD5E1"/>
+            <Setter Property="Opacity" Value="0.4"/>
+            <Setter Property="Background">
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                    <GradientStop Color="#2563eb" Offset="0.0"/>
+                    <GradientStop Color="#0891b2" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter>
+        </Style>
+        <Style Selector="Button.ButtonColorSky:disabled">
+            <Style Selector="^ Svg.ButtonWrapperIcon">
+                <Setter Property="Css" Value="* { fill: #999999; }"/>
+            </Style>
+        </Style>
+        
+        <Style Selector="Button.ButtonColorWhiteHover:pointerover /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+        </Style>
+        
+    </UserControl.Styles>
+    
+    <Grid RowDefinitions="*">
+        <Grid Grid.Row="0">
+            <!-- Тёмный фон -->
+            <Rectangle Fill="#0D0D0D"/>
+
+            <!-- Точки -->
+            <Rectangle>
+                <Rectangle.Fill>
+                    <VisualBrush TileMode="Tile"
+                                 Stretch="None"
+                                 SourceRect="0,0,30,30"
+                                 DestinationRect="0,0,30,30">
+                        <VisualBrush.Visual>
+                            <Canvas Width="30" Height="30">
+                                <Ellipse Width="3" Height="3" Fill="Black" Canvas.Left="1.5" Canvas.Top="1.5"/>
+                            </Canvas>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Grid>
+        
+        <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" MaxWidth="400">
+            <Border Padding="20" Background="#121212" CornerRadius="10" BorderThickness="1">
+                <Border.BorderBrush>
+                    #1E1E1E
+                </Border.BorderBrush>
+                
+                <StackPanel Orientation="Vertical" Spacing="12">
+                    <StackPanel Spacing="12" Margin="0 0 0 28">
+                        <StackPanel Spacing="5">
+                            <Border Width="74" Height="74" CornerRadius="25" BorderBrush="#20282828" BorderThickness="0">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                        <GradientStop Color="#12000000" Offset="0.0"/>
+                                        <GradientStop Color="#40000000" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Svg Path="avares://CShroudApp.Desktop/Assets/logo.svg" Width="50" Height="50"/>
+                            </Border>
+                            <TextBlock FontSize="24" Text="CrimsonShroud" TextAlignment="Center"/>
+                        </StackPanel>
+                        <TextBlock FontSize="13" Foreground="#ABFFFFFF" Text="Connect securely and protect your digital freedom" TextAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <!--<StackPanel Spacing="12">
+                        <StackPanel Classes="InputBox">
+                            <Label Classes="InputLabel" Content="Login"/>
+                            <Border Classes="InputBorderWrapper">
+                                <Grid ColumnDefinitions="*, Auto" Classes="InputGridWrapper">
+                                    <TextBox Classes="InputTextBox" Watermark="john_smith"/>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                        
+                        <StackPanel Classes="InputBox">
+                            <Label Classes="InputLabel" Content="Password"/>
+                            <Border Classes="InputBorderWrapper">
+                                <Grid ColumnDefinitions="*, Auto" Classes="InputGridWrapper">
+                                    <TextBox Classes="InputTextBox" RevealPassword="False" PasswordChar="•" Watermark="••••••••••••"/>
+                                    <ToggleButton Classes="InputBoxToggleButton" Grid.Column="1"/>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                        
+                        <Button Classes="InputLineButton GradientCoreColorsButton" Margin="0 10 0 0">
+                            <StackPanel Classes="InputLineButtonWrapper">
+                                <Svg Classes="InputLineButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/lifemonitor.svg"/>
+                                <TextBlock Classes="InputLineButtonText" Text="Sign in"/>
+                            </StackPanel>
+                        </Button>
+                        
+                        <Grid RowDefinitions="*">
+                            <Border Height="1" Background="#1E1E1E" HorizontalAlignment="Stretch" Margin="0,8" BorderThickness="0"/>
+                            <TextBlock Grid.Row="0" Text="OR" Foreground="#A6FFFFFF" VerticalAlignment="Center" FontSize="10" HorizontalAlignment="Center" Background="#60000000" Padding="10 0"/>
+                        </Grid>
+                        
+                        <StackPanel Spacing="12">
+                        
+                            <Button Classes="InputLineButton GradientBlueButton">
+                                <StackPanel Classes="InputLineButtonWrapper">
+                                    <Svg Classes="InputLineButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/Artboard.svg"/>
+                                    <TextBlock Classes="InputLineButtonText" Text="Continue with Telegram"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>-->
+                    
+                    <!--<StackPanel Spacing="17.5">
+                        
+                        <Border Background="#08CBD5E1" BorderThickness="1" BorderBrush="#12CBD5E1" CornerRadius="10" Padding="28">
+                            <StackPanel>
+                                <Border Width="64" Height="64" Margin="0 0 0 14">
+                                    <lottie:Lottie Path="avares://CShroudApp.Desktop/Assets/Animations/lottie/anim-verification.json" Stretch="Fill" Width="160" Height="160"/>
+                                </Border>
+                                <TextBlock FontSize="17.5" FontWeight="500" LineHeight="24.5" HorizontalAlignment="Center" TextAlignment="Center" Margin="0 0 0 10.5">Verification Required</TextBlock>
+                                <TextBlock FontSize="14" Foreground="#cccccc" HorizontalAlignment="Center" TextAlignment="Center" Margin="0 0 0 21">Please click the button with this code in your Telegram app:</TextBlock>
+                                <Grid RowDefinitions="*" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Border Margin="-1 2" CornerRadius="3">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                                                <GradientStop Color="#9812FA" Offset="0.0"/>
+                                                <GradientStop Color="#2D7FFF" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                    
+                                    <Border Grid.Row="0" CornerRadius="3">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                                                <GradientStop Color="#2D7FFF" Offset="0.0"/>
+                                                <GradientStop Color="#9812FA" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                    
+                                    <TextBlock Text="685" FontWeight="500" FontSize="26.25" LetterSpacing="2" Padding="28 14"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" ColumnSpacing="14" RowSpacing="17.5">
+                            <Button Classes="ButtonType1 ButtonColorSpirit" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch">
+                                <StackPanel Classes="ButtonWrapper">
+                                    <Svg Classes="ButtonWrapperIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/redo.svg"/>
+                                    <TextBlock Classes="ButtonWrapperText" Text="Retry"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Classes="ButtonType1 ButtonColorSky" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch">
+                                <StackPanel Classes="ButtonWrapper">
+                                    <Svg Classes="ButtonWrapperIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/Artboard.svg"/>
+                                    <TextBlock Classes="ButtonWrapperText" Text="Open Telegram"/>
+                                </StackPanel>
+                            </Button>
+                            
+                            <Button Classes="EmptyButton ButtonColorWhiteHover" Foreground="#90CBD5E1" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
+                                Cancel
+                            </Button>
+                        </Grid>
+                    </StackPanel>-->
+                    
+                    <ContentControl Content="{Binding CurrentPanel}">
+                        <ContentControl.DataTemplates>
+                            <DataTemplate DataType="viewModels:DefaultLoginPanelViewModel">
+                                <auth:DefaultLoginPanel />
+                            </DataTemplate>
+                            <DataTemplate DataType="viewModels:TelegramQuickLoginPanelViewModel">
+                                <auth:TelegramQuickLoginPanel />
+                            </DataTemplate>
+                        </ContentControl.DataTemplates>
+                    </ContentControl>
+                    
+                    <StackPanel HorizontalAlignment="Center" Spacing="12">
+                        <Border Height="1" Background="#1E1E1E" HorizontalAlignment="Stretch" Margin="0,8" BorderThickness="0"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10" TextAlignment="Center">🔒 Enterprise-grade encryption • 🌍 Global server network • ⚡ Zero-log policy</TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+
+</UserControl>

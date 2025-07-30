@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:lang="clr-namespace:CShroudApp.Desktop.Assets.Localization"
+             xmlns:templatevm="clr-namespace:CShroudApp.Desktop.Resources.Panels.Auth.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="templatevm:DefaultLoginPanelViewModel"
+             x:Class="CShroudApp.Desktop.Resources.Templates.Auth.DefaultLoginPanel">
+    <StackPanel Spacing="12">
+                        <StackPanel Classes="InputBox">
+                            <Label Classes="InputLabel" Content="Login"/>
+                            <Border Classes="InputBorderWrapper">
+                                <Grid ColumnDefinitions="*, Auto" Classes="InputGridWrapper">
+                                    <TextBox Classes="InputTextBox" Watermark="john_smith"/>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                        
+                        <StackPanel Classes="InputBox">
+                            <Label Classes="InputLabel" Content="Password"/>
+                            <Border Classes="InputBorderWrapper">
+                                <Grid ColumnDefinitions="*, Auto" Classes="InputGridWrapper">
+                                    <TextBox Classes="InputTextBox" RevealPassword="False" PasswordChar="•" Watermark="••••••••••••"/>
+                                    <ToggleButton Classes="InputBoxToggleButton" Grid.Column="1"/>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                        
+                        <Button Classes="InputLineButton GradientCoreColorsButton" Margin="0 10 0 0">
+                            <StackPanel Classes="InputLineButtonWrapper">
+                                <Svg Classes="InputLineButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/lifemonitor.svg"/>
+                                <!--<TextBlock Classes="InputLineButtonText" Text="Sign in"/>-->
+                                <TextBlock Classes="InputLineButtonText" Text="Sign In"/>
+                            </StackPanel>
+                        </Button>
+                        
+                        <Grid RowDefinitions="*">
+                            <Border Height="1" Background="#1E1E1E" HorizontalAlignment="Stretch" Margin="0,8" BorderThickness="0"/>
+                            <TextBlock Grid.Row="0" Text="OR" Foreground="#A6FFFFFF" VerticalAlignment="Center" FontSize="10" HorizontalAlignment="Center" Background="#60000000" Padding="10 0"/>
+                        </Grid>
+                        
+                        <StackPanel Spacing="12">
+                        
+                            <Button Classes="InputLineButton GradientBlueButton" Command="{Binding InitializeTelegramQuickAuthSessionCommand}">
+                                <StackPanel Classes="InputLineButtonWrapper">
+                                    <Svg Classes="InputLineButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/Artboard.svg"/>
+                                    <TextBlock Classes="InputLineButtonText" Text="{Binding LoginViaTelegramButtonKey, Converter={StaticResource ResourceKeyToStringConverter}}"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+</UserControl>

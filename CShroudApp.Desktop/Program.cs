@@ -1,7 +1,7 @@
 ﻿using System;
 using Avalonia;
 using Avalonia.Logging;
-using CShroudApp.Presentation.Ui;
+using Backend;
 
 namespace CShroudApp.Desktop;
 
@@ -13,7 +13,7 @@ sealed class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        BackendStarter.Start([], App.GetUiDependencyCollection());
+        //BackendStarter.Start([], App.GetUiDependencyCollection());
         Console.WriteLine("BACKEND HEATED");
         BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
     }

@@ -3,9 +3,9 @@ using Android.App;
 using Android.Content.PM;
 using Avalonia;
 using Avalonia.Android;
-using CShroudApp.Presentation.Ui;
+using Core.Presentation.Ui;
 
-namespace CShroudApp.Android;
+namespace Core.Android;
 
 [Activity(
     Label = "CShroudApp.Android",

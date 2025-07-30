@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>13</LangVersion>
+        <!--<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>-->
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
+        <IsAotCompatible>true</IsAotCompatible>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'win-x64'">
+        <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Update="Binaries\**">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="Internal\**">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <Compile Remove="Presentation\Ui\Views\MainView.Control.axaml.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
+        <AndroidAsset Include="Binaries\**" />
+        <AndroidAsset Include="Internal\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Ardalis.Result" />
+        <PackageReference Include="CommunityToolkit.Mvvm" />
+        <PackageReference Include="MessagePack" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" />
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+        <PackageReference Include="Microsoft.Extensions.Http" />
+        <PackageReference Include="Microsoft.Extensions.Logging" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+        <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" />
+        <PackageReference Include="Svg.Controls.Skia.Avalonia" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Infrastructure\VpnCores\SingBox\SingBoxLayer.cs" />
+      <None Include="Infrastructure\VpnCores\SingBox\SingBoxLayer.cs" />
+      <Compile Update="Presentation\Ui\Views\Auth\LoginView.axaml.cs">
+        <DependentUpon>LoginView.axaml</DependentUpon>
+      </Compile>
+      <AvaloniaXaml Remove="Presentation\Ui\Views\Test\TestTrayMenu.axaml" />
+      <None Include="Presentation\Ui\Views\Test\TestTrayMenu.axaml" />
+      <Compile Remove="Presentation\Ui\Views\Test\TestTrayMenu.axaml.cs" />
+    </ItemGroup>
+</Project>

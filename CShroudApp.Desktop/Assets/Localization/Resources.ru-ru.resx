@@ -1,0 +1,53 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="GreetingText" xml:space="preserve">
+        <value>Хорошего дня!</value>
+    </data>
+    <data name="TrayUiChangeMode" xml:space="preserve">
+        <value>Изменить режим</value>
+    </data>
+    <data name="TrayUiExit" xml:space="preserve">
+        <value>Выйти</value>
+    </data>
+    <data name="TrayUiHideApp" xml:space="preserve">
+        <value>Скрыть CrimsonShroud</value>
+    </data>
+    <data name="TrayUiShowApp" xml:space="preserve">
+        <value>Показать CrimsonShroud</value>
+    </data>
+    <data name="VpnModeProxy" xml:space="preserve">
+        <value>Прокси</value>
+    </data>
+    <data name="VpnModeTransparentProxy" xml:space="preserve">
+        <value>Прозрачность</value>
+    </data>
+    <data name="VpnModeTun" xml:space="preserve">
+        <value>VPN1</value>
+    </data>
+    <data name="VpnModeTunPlusProxy" xml:space="preserve">
+        <value>VPN&amp;Proxy1</value>
+    </data>
+    <data name="UiAuthLoginViaTelegramButton" xml:space="preserve">
+        <value>Продолжить через Телеграм</value>
+    </data>
+    <data name="UiAuthLoginViaTelegramButtonConnecting" xml:space="preserve">
+        <value>Соединение с сервером...</value>
+    </data>
+    <data name="UiAuthRetryLoginViaTelegramButton" xml:space="preserve">
+        <value>Повторить</value>
+    </data>
+    <data name="UiAuthRetryLoginViaTelegramButtonCountingDown" xml:space="preserve">
+        <value>Повторите через {0}с</value>
+    </data>
+</root>
