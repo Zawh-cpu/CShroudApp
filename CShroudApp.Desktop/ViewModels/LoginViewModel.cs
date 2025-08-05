@@ -1,3 +1,4 @@
+using System.Threading;
 using Backend.Application.DTOs;
 using Backend.Domain.Interfaces;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -27,9 +28,9 @@ public partial class LoginViewModel : ViewModelBase, IDisposable
         TelegramQuickLoginVm.GoToDefaultLoginEvent += GoToDefaultLogin;
     }
     
-    private void GoToTelegramQuickLogin(QuickAuthSessionDto session, DateTime lastTelegramQuickAuthSessionRequestObtained)
+    private void GoToTelegramQuickLogin(QuickAuthSessionDto session, DateTime lastTelegramQuickAuthSessionRequestObtained, CancellationTokenSource cts)
     {
-        TelegramQuickLoginVm.SetupQuickAuthSession(session, lastTelegramQuickAuthSessionRequestObtained);
+        TelegramQuickLoginVm.SetupQuickAuthSession(session, lastTelegramQuickAuthSessionRequestObtained, cts);
         
         CurrentPanel.OnUnloaded();
         CurrentPanel = TelegramQuickLoginVm;

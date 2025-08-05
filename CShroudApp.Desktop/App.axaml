@@ -5,6 +5,7 @@
              xmlns:viewModels="clr-namespace:CShroudApp.Desktop.ViewModels"
              xmlns:local="clr-namespace:CShroudApp.Desktop"
              xmlns:converters="clr-namespace:CShroudApp.Desktop.Resources.Converters"
+             xmlns:converters1="clr-namespace:CShroudApp.Desktop.Resources.Panels.Auth.Converters"
              x:Class="CShroudApp.Desktop.App"
              x:DataType="viewModels:AppViewModel"
              RequestedThemeVariant="Default">
@@ -18,6 +19,11 @@
         <FontFamily x:Key="NunitoFont">avares://CShroudApp.Desktop/Assets/Fonts/Nunito#Nunito</FontFamily>
         
         <converters:ResourceKeyToStringConverter x:Key="ResourceKeyToStringConverter" />
+        <converters1:EqualsConverter x:Key="EqualsConverter" />
+        <converters:EqualTypeConverter x:Key="EqualsTypeConverter" />
+        <converters:GentleEqualConverter x:Key="GentleTypeConverter" />
+        <converters:GentleEqualConverter x:Key="FastEqualsConverter" />
+        <converters:WidthMultiplierConverter x:Key="WidthMultiplier"/>
     </Application.Resources>
     
     <Application.DataTemplates>

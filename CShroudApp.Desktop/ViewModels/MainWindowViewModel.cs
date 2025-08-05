@@ -11,13 +11,18 @@ public partial class MainWindowViewModel : ViewModelBase
     
     private readonly INavigationService _navigationService;
 
-    public MainWindowViewModel(INavigationService navigationService)
+    public MainWindowViewModel(INavigationService navigationService, IEventManager eventManager, ISessionManager sessionManager)
     {
         _navigationService = navigationService;
         
         _navigationService.ViewModelChanged += ChangeWindow;
 
-        _navigationService.GoTo<LoginViewModel>();
+        if (sessionManager.RefreshToken is null)
+            _navigationService.GoTo<LoginViewModel>();
+        else
+            _navigationService.GoTo<MainViewModel>();
+        
+        eventManager.OnSessionAuthenticated += () => _navigationService.GoTo<MainViewModel>();
     }
     
     public void ChangeWindow(object? sender, ViewModelBase view)

@@ -1,0 +1,305 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:CShroudApp.Desktop.ViewModels"
+             xmlns:lang="clr-namespace:CShroudApp.Desktop.Assets.Localization"
+             xmlns:mainPages="clr-namespace:CShroudApp.Desktop.ViewModels.MainPages"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="700"
+             x:DataType="vm:MainViewModel"
+             x:Class="CShroudApp.Desktop.Views.MainView"
+             Background="#0A0A0A">
+    
+    <UserControl.Styles>
+        <StyleInclude Source="avares://CShroudApp.Desktop/Assets/Styles/Default.axaml"/>
+        
+        <Style Selector="RadioButton.NavbarPageToggleButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8.75"/>
+            <Setter Property="Padding" Value="14 10.5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border
+                            Height="{TemplateBinding Height}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Width="{TemplateBinding Width}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Padding="{ TemplateBinding Padding}">
+                            <ContentPresenter
+                                Name="PART_ContentPresenter"
+                                Margin="{TemplateBinding Margin}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                RecognizesAccessKey="True" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            
+            <Style Selector="^ StackPanel.NavbarPageToggleButtonWrapper">
+                <Setter Property="Orientation" Value="Horizontal"/>
+                <Setter Property="Spacing" Value="10.5"/>
+            </Style>
+            
+            <Style Selector="^ Svg.NavbarPageToggleButtonIcon">
+                <Setter Property="Width" Value="17.5"/>
+                <Setter Property="Height" Value="17.5"/>
+                <Setter Property="Css" Value="* { fill: #d4d4d4; }"/>
+            </Style>
+            
+            <Style Selector="^ TextBlock.NavbarPageToggleButtonText">
+                <Setter Property="Foreground" Value="#d4d4d4"/>
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+            
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="#80262626"/>
+                <Setter Property="Foreground" Value="#fff"/>
+                
+                <Style Selector="^ Svg.NavbarPageToggleButtonIcon">
+                    <Setter Property="Css" Value="* { fill: #ffffff; }"/>
+                </Style>
+                
+                <Style Selector="^  TextBlock.NavbarPageToggleButtonText">
+                    <Setter Property="Foreground" Value="#fff"/>
+                </Style>
+            </Style>
+            
+            <Style Selector="^:checked">
+                <Setter Property="Background" Value="#335f16fe"/>
+                <Setter Property="BorderBrush" Value="#4d5f16fe"/>
+                <Style Selector="^ Svg.NavbarPageToggleButtonIcon">
+                    <Setter Property="Css" Value="* { fill: #ffffff; }"/>
+                </Style>
+                
+                <Style Selector="^  TextBlock.NavbarPageToggleButtonText">
+                    <Setter Property="Foreground" Value="#fff"/>
+                </Style>
+            </Style>
+        </Style>
+        
+        <Style Selector="Button.NavbarProfileButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="CornerRadius" Value="8.75"/>
+            <Setter Property="Padding" Value="7"/>
+            
+            <Style Selector="^:pointerover /template/ ContentPresenter">
+                <Setter Property="Background" Value="#80262626"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Style>
+        </Style>
+        
+        <Style Selector="Button.NavbarProfileFlyoutItemButton">
+            <Setter Property="Padding" Value="7 5.25"/>
+            <Setter Property="CornerRadius" Value="4.75"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            
+            <Style Selector="^ StackPanel.NavbarProfileFlyoutItemButtonWrapper">
+                <Setter Property="Orientation" Value="Horizontal"/>
+                <Setter Property="Spacing" Value="14"/>
+            </Style>
+        
+            <Style Selector="^ Svg.NavbarProfileFlyoutItemButtonIcon">
+                <Setter Property="Width" Value="14"/>
+                <Setter Property="Height" Value="14"/>
+                <Setter Property="Css" Value="* { stroke: #717182 }"/>
+            </Style>
+        
+            <Style Selector="^ TextBlock.NavbarProfileFlyoutItemButtonText">
+                <Setter Property="FontSize" Value="12.25"/>
+                <Setter Property="LineHeight" Value="17.4999825"/>
+                <Setter Property="Foreground" Value="#d4d4d4"/>
+                <Setter Property="FontWeight" Value="Light"/>
+            </Style>
+            
+            <!--<Style Selector="^:pointerover /template/ ContentPresenter">
+                <Setter Property="Background" Value="#404040"/>
+            </Style>
+            
+            <Style Selector="^:pointerover">
+                <Style Selector="^ TextBlock.NavbarProfileFlyoutItemButtonText">
+                    <Setter Property="Foreground" Value="#fff"/>
+                </Style>
+            </Style>-->
+            
+            <Style Selector="^:nth-last-child(1) TextBlock.NavbarProfileFlyoutItemButtonText">
+                <Setter Property="Foreground" Value="#F02E39"/>
+            </Style>
+            
+            <Style Selector="^:pointerover /template/ ContentPresenter">
+                <Setter Property="Background" Value="#e9ebef"/>
+            </Style>
+            
+            <Style Selector="^:pointerover">
+                <Style Selector="^ TextBlock.NavbarProfileFlyoutItemButtonText">
+                    <Setter Property="Foreground" Value="#030213"/>
+                </Style>
+            </Style>
+        </Style>
+        
+        <Style Selector="Separator.NavbarProfileFlyoutItemSeparator">
+            <Setter Property="Background" Value="#404040"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Height" Value="1"/>
+            <Setter Property="Margin" Value="-3.5 3.5"/>
+        </Style>
+    </UserControl.Styles>
+    
+    <Grid ColumnDefinitions="*">
+        <DockPanel Grid.Column="0" LastChildFill="True">
+            
+            <Border VerticalAlignment="Stretch" Background="#141414" BorderBrush="#262626" BorderThickness="0 0 1 0" DockPanel.Dock="Left">
+                <DockPanel LastChildFill="True" MinWidth="224">
+                    <Border BorderBrush="#292929" BorderThickness="0 0 0 1" DockPanel.Dock="Top" Padding="21">
+                        <Border CornerRadius="6" Background="#1B1B1B" BorderBrush="#242424" BorderThickness="1" Padding="14">
+                            <StackPanel Orientation="Horizontal" Spacing="10.5">
+                                <Ellipse Fill="Red" Width="10.5" Height="10.5"/>
+                                <StackPanel>
+                                    <TextBlock Foreground="#FFF" FontSize="12.25" LineHeight="17.4999825">Disconnected</TextBlock>
+                                    <TextBlock Foreground="#a1a1a1" FontSize="10.5" LineHeight="13.999965">Not protected</TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Border>
+                    
+                    <Border Padding="14" BorderBrush="#262626" BorderThickness="0 1 0 0" DockPanel.Dock="Bottom">
+                        <Button x:Name="NavbarMenuButton" Classes="NavbarProfileButton" HorizontalAlignment="Stretch">
+                            <Button.Flyout>
+                                <Flyout Placement="Top">
+                                    <Flyout.Content>
+                                        <Border MinWidth="190" Background="#262626" BorderBrush="#404040" BorderThickness="1" Margin="0" Padding="3.5" CornerRadius="6.75">
+                                            <StackPanel>
+                                                <Button Classes="NavbarProfileFlyoutItemButton">
+                                                    <StackPanel Classes="NavbarProfileFlyoutItemButtonWrapper">
+                                                        <Svg Classes="NavbarProfileFlyoutItemButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/heartbeat.svg"/>
+                                                        <TextBlock Classes="NavbarProfileFlyoutItemButtonText" Text="Profile Settings"/>
+                                                    </StackPanel>
+                                                </Button>
+                                                
+                                                <Button Classes="NavbarProfileFlyoutItemButton">
+                                                    <StackPanel Classes="NavbarProfileFlyoutItemButtonWrapper">
+                                                        <Svg Classes="NavbarProfileFlyoutItemButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/heartbeat.svg"/>
+                                                        <TextBlock Classes="NavbarProfileFlyoutItemButtonText" Text="Edit Profile"/>
+                                                    </StackPanel>
+                                                </Button>
+                                                
+                                                <Separator Classes="NavbarProfileFlyoutItemSeparator"/>
+                                                
+                                                <Button Classes="NavbarProfileFlyoutItemButton">
+                                                    <StackPanel Classes="NavbarProfileFlyoutItemButtonWrapper">
+                                                        <Svg Classes="NavbarProfileFlyoutItemButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/heartbeat.svg"/>
+                                                        <TextBlock Classes="NavbarProfileFlyoutItemButtonText" Text="Logout"/>
+                                                    </StackPanel>
+                                                </Button>
+                                            </StackPanel>
+                                        </Border>
+                                    </Flyout.Content>
+                                </Flyout>
+                            </Button.Flyout>
+                            
+                            <DockPanel LastChildFill="True">
+                                <Border DockPanel.Dock="Left" Width="35" Height="35" CornerRadius="18" ClipToBounds="True" Margin="0 0 10.5 0">
+                                    <Image Source="avares://CShroudApp.Desktop/Assets/imgs/default-avatar.jpg"/>    
+                                </Border>
+                                <Svg DockPanel.Dock="Right" Path="avares://CShroudApp.Desktop/Assets/icons/svg/down-arrow.svg" Width="18" Height="18" Css="* { fill: #a1a1a1; }"/>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Foreground="#fff" FontSize="12.25" LineHeight="17.4999825" Text="{Binding Session.Nickname}"/>
+                                    <TextBlock Foreground="#a1a1a1" FontSize="10.5" LineHeight="13.999965" Text="{Binding Session.Rate.Name}"/>
+                                </StackPanel>
+                            </DockPanel>
+                        </Button>
+                    </Border>
+                    
+                    <Border Padding="14">
+                        <StackPanel Orientation="Vertical" Spacing="7">
+                            <RadioButton Classes="NavbarPageToggleButton" GroupName="NavsButtons" IsChecked="{Binding CurrentPage.MainPageType, Converter={StaticResource FastEqualsConverter}, 
+                                 ConverterParameter={x:Static mainPages:MainPagesType.Dashboard}}" Command="{Binding NavbarChangePageButtonClicked}" CommandParameter="{x:Static mainPages:MainPagesType.Dashboard}">
+                                <StackPanel Classes="NavbarPageToggleButtonWrapper">
+                                    <Svg Classes="NavbarPageToggleButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/dashboard.svg"/>
+                                    <TextBlock Classes="NavbarPageToggleButtonText">Dashboard</TextBlock>
+                                </StackPanel>
+                            </RadioButton>
+                            
+                            <RadioButton Classes="NavbarPageToggleButton" GroupName="NavsButtons" IsChecked="{Binding CurrentPage.MainPageType, Converter={StaticResource FastEqualsConverter}, 
+                                 ConverterParameter={x:Static mainPages:MainPagesType.Servers}}" Command="{Binding NavbarChangePageButtonClicked}" CommandParameter="{x:Static mainPages:MainPagesType.Servers}">
+                                <StackPanel Classes="NavbarPageToggleButtonWrapper">
+                                    <Svg Classes="NavbarPageToggleButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/server-24-alt.svg"/>
+                                    <TextBlock Classes="NavbarPageToggleButtonText">Servers</TextBlock>
+                                </StackPanel>
+                            </RadioButton>
+                            
+                            <RadioButton Classes="NavbarPageToggleButton" GroupName="NavsButtons">
+                                <StackPanel Classes="NavbarPageToggleButtonWrapper">
+                                    <Svg Classes="NavbarPageToggleButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/harddisk.svg"/>
+                                    <TextBlock Classes="NavbarPageToggleButtonText">Observer</TextBlock>
+                                </StackPanel>
+                            </RadioButton>
+                            
+                            <RadioButton Classes="NavbarPageToggleButton" GroupName="NavsButtons">
+                                <StackPanel Classes="NavbarPageToggleButtonWrapper">
+                                    <Svg Classes="NavbarPageToggleButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/analytics.svg"/>
+                                    <TextBlock Classes="NavbarPageToggleButtonText">Analytics</TextBlock>
+                                </StackPanel>
+                            </RadioButton>
+                            
+                            <RadioButton Classes="NavbarPageToggleButton" GroupName="NavsButtons">
+                                <StackPanel Classes="NavbarPageToggleButtonWrapper">
+                                    <Svg Classes="NavbarPageToggleButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/settings-alt-2.svg"/>
+                                    <TextBlock Classes="NavbarPageToggleButtonText">Settings</TextBlock>
+                                </StackPanel>
+                            </RadioButton>
+                            
+                            <RadioButton Classes="NavbarPageToggleButton" GroupName="NavsButtons">
+                                <StackPanel Classes="NavbarPageToggleButtonWrapper">
+                                    <Svg Classes="NavbarPageToggleButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/user.svg"/>
+                                    <TextBlock Classes="NavbarPageToggleButtonText">Account</TextBlock>
+                                </StackPanel>
+                            </RadioButton>
+                            
+                        </StackPanel>
+                    </Border>
+                </DockPanel>
+            </Border>
+            
+            <DockPanel LastChildFill="True">
+                <Border DockPanel.Dock="Top" Background="#141414" BorderBrush="#262626" BorderThickness="0 0 0 1"
+                        Padding="28 14">
+                    <DockPanel LastChildFill="True">
+                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center" Spacing="14">
+                            <StackPanel Orientation="Horizontal" Spacing="7">
+                                <Svg Path="avares://CShroudApp.Desktop/Assets/icons/svg/heartbeat.svg" Width="14" Height="14"
+                                     Css="* { stroke: #05df72 }"/>
+                                <TextBlock Foreground="#d4d4d4" FontWeight="Light" FontSize="12.25" LineHeight="17.4999825">3.2GB today</TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="7">
+                                <Svg Path="avares://CShroudApp.Desktop/Assets/icons/svg/heartbeat.svg" Width="14" Height="14"
+                                     Css="* { stroke: #05df72 }"/>
+                                <TextBlock Foreground="#d4d4d4" FontWeight="Light" FontSize="12.25" LineHeight="17.4999825">2h 34m</TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                            <TextBlock FontSize="21" LineHeight="27.99993" Foreground="#fff" Text="{Binding CurrentPage.Title}" TextTrimming="WordEllipsis"
+                                       TextWrapping="NoWrap"/>
+                            <TextBlock FontSize="12.25" LineHeight="17.4999825" Foreground="#a1a1a1" TextTrimming="WordEllipsis"
+                                       TextWrapping="NoWrap" Text="{Binding CurrentPage.Description}"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+                
+                <ContentControl Content="{Binding CurrentPage}" Padding="28"/>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

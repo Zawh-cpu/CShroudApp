@@ -6,6 +6,7 @@
              xmlns:auth="clr-namespace:CShroudApp.Desktop.Resources.Templates.Auth"
              xmlns:viewModels="clr-namespace:CShroudApp.Desktop.Resources.Panels.Auth.ViewModels"
              xmlns:vm="clr-namespace:CShroudApp.Desktop.ViewModels"
+             xmlns:lang="clr-namespace:CShroudApp.Desktop.Assets.Localization"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="700"
              x:DataType="vm:LoginViewModel"
              x:Class="CShroudApp.Desktop.Views.LoginView">
@@ -326,103 +327,8 @@
                             </Border>
                             <TextBlock FontSize="24" Text="CrimsonShroud" TextAlignment="Center"/>
                         </StackPanel>
-                        <TextBlock FontSize="13" Foreground="#ABFFFFFF" Text="Connect securely and protect your digital freedom" TextAlignment="Center"/>
+                        <TextBlock FontSize="13" Foreground="#ABFFFFFF" Text="{x:Static lang:Resources.UiAuthCrimsonShroudText}" TextAlignment="Center"/>
                     </StackPanel>
-                    
-                    <!--<StackPanel Spacing="12">
-                        <StackPanel Classes="InputBox">
-                            <Label Classes="InputLabel" Content="Login"/>
-                            <Border Classes="InputBorderWrapper">
-                                <Grid ColumnDefinitions="*, Auto" Classes="InputGridWrapper">
-                                    <TextBox Classes="InputTextBox" Watermark="john_smith"/>
-                                </Grid>
-                            </Border>
-                        </StackPanel>
-                        
-                        <StackPanel Classes="InputBox">
-                            <Label Classes="InputLabel" Content="Password"/>
-                            <Border Classes="InputBorderWrapper">
-                                <Grid ColumnDefinitions="*, Auto" Classes="InputGridWrapper">
-                                    <TextBox Classes="InputTextBox" RevealPassword="False" PasswordChar="•" Watermark="••••••••••••"/>
-                                    <ToggleButton Classes="InputBoxToggleButton" Grid.Column="1"/>
-                                </Grid>
-                            </Border>
-                        </StackPanel>
-                        
-                        <Button Classes="InputLineButton GradientCoreColorsButton" Margin="0 10 0 0">
-                            <StackPanel Classes="InputLineButtonWrapper">
-                                <Svg Classes="InputLineButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/lifemonitor.svg"/>
-                                <TextBlock Classes="InputLineButtonText" Text="Sign in"/>
-                            </StackPanel>
-                        </Button>
-                        
-                        <Grid RowDefinitions="*">
-                            <Border Height="1" Background="#1E1E1E" HorizontalAlignment="Stretch" Margin="0,8" BorderThickness="0"/>
-                            <TextBlock Grid.Row="0" Text="OR" Foreground="#A6FFFFFF" VerticalAlignment="Center" FontSize="10" HorizontalAlignment="Center" Background="#60000000" Padding="10 0"/>
-                        </Grid>
-                        
-                        <StackPanel Spacing="12">
-                        
-                            <Button Classes="InputLineButton GradientBlueButton">
-                                <StackPanel Classes="InputLineButtonWrapper">
-                                    <Svg Classes="InputLineButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/Artboard.svg"/>
-                                    <TextBlock Classes="InputLineButtonText" Text="Continue with Telegram"/>
-                                </StackPanel>
-                            </Button>
-                        </StackPanel>
-                    </StackPanel>-->
-                    
-                    <!--<StackPanel Spacing="17.5">
-                        
-                        <Border Background="#08CBD5E1" BorderThickness="1" BorderBrush="#12CBD5E1" CornerRadius="10" Padding="28">
-                            <StackPanel>
-                                <Border Width="64" Height="64" Margin="0 0 0 14">
-                                    <lottie:Lottie Path="avares://CShroudApp.Desktop/Assets/Animations/lottie/anim-verification.json" Stretch="Fill" Width="160" Height="160"/>
-                                </Border>
-                                <TextBlock FontSize="17.5" FontWeight="500" LineHeight="24.5" HorizontalAlignment="Center" TextAlignment="Center" Margin="0 0 0 10.5">Verification Required</TextBlock>
-                                <TextBlock FontSize="14" Foreground="#cccccc" HorizontalAlignment="Center" TextAlignment="Center" Margin="0 0 0 21">Please click the button with this code in your Telegram app:</TextBlock>
-                                <Grid RowDefinitions="*" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                    <Border Margin="-1 2" CornerRadius="3">
-                                        <Border.Background>
-                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
-                                                <GradientStop Color="#9812FA" Offset="0.0"/>
-                                                <GradientStop Color="#2D7FFF" Offset="1.0"/>
-                                            </LinearGradientBrush>
-                                        </Border.Background>
-                                    </Border>
-                                    
-                                    <Border Grid.Row="0" CornerRadius="3">
-                                        <Border.Background>
-                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
-                                                <GradientStop Color="#2D7FFF" Offset="0.0"/>
-                                                <GradientStop Color="#9812FA" Offset="1.0"/>
-                                            </LinearGradientBrush>
-                                        </Border.Background>
-                                    </Border>
-                                    
-                                    <TextBlock Text="685" FontWeight="500" FontSize="26.25" LetterSpacing="2" Padding="28 14"/>
-                                </Grid>
-                            </StackPanel>
-                        </Border>
-                        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" ColumnSpacing="14" RowSpacing="17.5">
-                            <Button Classes="ButtonType1 ButtonColorSpirit" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch">
-                                <StackPanel Classes="ButtonWrapper">
-                                    <Svg Classes="ButtonWrapperIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/redo.svg"/>
-                                    <TextBlock Classes="ButtonWrapperText" Text="Retry"/>
-                                </StackPanel>
-                            </Button>
-                            <Button Classes="ButtonType1 ButtonColorSky" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch">
-                                <StackPanel Classes="ButtonWrapper">
-                                    <Svg Classes="ButtonWrapperIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/Artboard.svg"/>
-                                    <TextBlock Classes="ButtonWrapperText" Text="Open Telegram"/>
-                                </StackPanel>
-                            </Button>
-                            
-                            <Button Classes="EmptyButton ButtonColorWhiteHover" Foreground="#90CBD5E1" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
-                                Cancel
-                            </Button>
-                        </Grid>
-                    </StackPanel>-->
                     
                     <ContentControl Content="{Binding CurrentPanel}">
                         <ContentControl.DataTemplates>
@@ -437,7 +343,7 @@
                     
                     <StackPanel HorizontalAlignment="Center" Spacing="12">
                         <Border Height="1" Background="#1E1E1E" HorizontalAlignment="Stretch" Margin="0,8" BorderThickness="0"/>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10" TextAlignment="Center">🔒 Enterprise-grade encryption • 🌍 Global server network • ⚡ Zero-log policy</TextBlock>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10" TextAlignment="Center" Text="{x:Static lang:Resources.UiAuthCrimsonShroudFooter}"/>
                     </StackPanel>
                 </StackPanel>
             </Border>

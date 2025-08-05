@@ -1,0 +1,46 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:CShroudApp.Desktop.ViewModels.MainPages"
+             xmlns:lang="clr-namespace:CShroudApp.Desktop.Assets.Localization"
+             xmlns:widgets="clr-namespace:CShroudApp.Desktop.Widgets"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="700"
+             x:DataType="vm:DashboardViewModel"
+             x:Class="CShroudApp.Desktop.Views.MainPages.DashboardView"
+             Background="#0A0A0A">
+    <widgets:AdaptiveGridPanel>
+        <Border CornerRadius="12.75" BorderBrush="#262626" BorderThickness="1" Background="#80171717" Padding="21"
+                HorizontalAlignment="Stretch" widgets:AdaptiveGridPanel.PriorityWeight="2">
+        </Border>
+        
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Spacing="28" widgets:AdaptiveGridPanel.PriorityWeight="1">
+            <Border CornerRadius="12.75" BorderBrush="#262626" BorderThickness="1" Background="#80171717" Padding="21">
+                <StackPanel Orientation="Vertical" Spacing="21">
+                    <Border Padding="10.5">
+                        <StackPanel Orientation="Horizontal" Spacing="7">
+                            <Svg Width="14" Height="14" Path="avares://CShroudApp.Desktop/Assets/icons/svg/server-24-alt.svg" Css="* { fill: #5F16FE}"/>
+                            <TextBlock FontSize="12.25" LineHeight="17.4999825" Foreground="#fff">Current Server</TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <StackPanel Orientation="Vertical" Spacing="10.5">
+                        <ComboBox CornerRadius="6.75" HorizontalAlignment="Stretch"
+                                  Padding="10.5 7"/>
+                        <Button HorizontalAlignment="Stretch" Background="#4d1a1a1a" BorderBrush="#1a1a1a" Padding="10.5 7" CornerRadius="6.75">
+                            <StackPanel Spacing="12.25" Orientation="Horizontal">
+                                <Svg Width="14" Height="14" Path="avares://CShroudApp.Desktop/Assets/icons/svg/server-24-alt.svg" Css="* { fill: #A53889}"/>
+                                <TextBlock Foreground="#A53889" FontSize="12.25" LineHeight="17.4999825">Random Server</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border CornerRadius="12.75" BorderBrush="#262626" BorderThickness="1" Background="#80171717" Padding="21">
+            </Border>
+            <Border CornerRadius="12.75" BorderBrush="#262626" BorderThickness="1" Background="#80171717" Padding="21">
+            </Border>
+            <Border CornerRadius="12.75" BorderBrush="#262626" BorderThickness="1" Background="#80171717" Padding="21">
+            </Border>
+        </StackPanel>
+    </widgets:AdaptiveGridPanel>
+</UserControl>

@@ -23,4 +23,15 @@ public class Token
 
         return new Token() { Data = jwt, Expiration = expirationDate };
     }
+
+    public static Guid? GetUserId(string jwt)
+    {
+        var handler = new JwtSecurityTokenHandler();
+        var token = handler.ReadJwtToken(jwt);
+
+        var expClaim = token.Claims.FirstOrDefault(c => c.Type == "sub");
+        if (expClaim is null) return null;
+        
+        return Guid.Parse(expClaim.Value);
+    }
 }

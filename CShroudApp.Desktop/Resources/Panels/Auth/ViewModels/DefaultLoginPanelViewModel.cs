@@ -1,4 +1,4 @@
-using Avalonia;
+using System.Threading;
 using Backend.Application.DTOs;
 using Backend.Domain.Interfaces;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -15,13 +15,15 @@ public partial class DefaultLoginPanelViewModel : ViewModelBase, IDisposable
     [ObservableProperty] private bool _isAvailableToNextTelegramQuickAuthSession = true;
     private DateTime _lastTelegramQuickAuthSessionRequest = DateTime.MinValue;
     
-    public event Action<QuickAuthSessionDto, DateTime>? GoToTelegramEvent;
+    public event Action<QuickAuthSessionDto, DateTime, CancellationTokenSource>? GoToTelegramEvent;
 
-    private IApiRepository _apiRepository;
+    // private readonly IApiRepository _apiRepository;
+    private readonly IQuickAuthService _quickAuthService;
 
-    public DefaultLoginPanelViewModel(IApiRepository apiRepository)
+    public DefaultLoginPanelViewModel(IQuickAuthService quickAuthService)
     {
-        _apiRepository = apiRepository;
+        // _apiRepository = apiRepository;
+        _quickAuthService = quickAuthService;
     }
 
     public void SetupTelegramQuickAuthButtonState(bool isAvailable)
@@ -43,16 +45,16 @@ public partial class DefaultLoginPanelViewModel : ViewModelBase, IDisposable
         if (!IsAvailableToNextTelegramQuickAuthSession) return;
         SetupTelegramQuickAuthButtonState(false);
         _lastTelegramQuickAuthSessionRequest = DateTime.UtcNow;
-        
-        var session = await _apiRepository.BeginQuickAuthSessionAsync();
+
+        var sourceToken = new CancellationTokenSource();
+        var session = await _quickAuthService.RunSession(sourceToken.Token);
         SetupTelegramQuickAuthButtonState(true);
         if (!session.IsSuccess)
-        {
-            Console.WriteLine("Failed to initialize quick auth session (Telegram)");
             return;
-        }
-
-        GoToTelegramEvent?.Invoke(session.Value, _lastTelegramQuickAuthSessionRequest);
+        
+        Console.WriteLine(session.Value.SessionId);
+        Console.WriteLine(session.Value.ValidVariant);
+        GoToTelegramEvent?.Invoke(session.Value, _lastTelegramQuickAuthSessionRequest, sourceToken);
     }
 
     public override void OnLoaded()

@@ -1,4 +1,5 @@
 ﻿using Ardalis.Result;
+using Backend.Application.DTOs;
 using Backend.Domain.Entities;
 using Backend.Domain.Entities.User;
 using Backend.Domain.Interfaces;
@@ -9,13 +10,10 @@ public class SessionManager : ISessionManager
 {
     private readonly IApiRepository _apiRepository;
     private readonly IStorageManager _storageManager;
+    private readonly IEventManager _eventManager;
     
     private User _session = User.Unauthenticated();
     public DateTime SessionExpires { get; private set; } = DateTime.MinValue;
-
-    public event EventHandler? UnauthorizedSession;
-    public event Action? SessionHasBeenAuthorized;
-    public event Action? LogoutAction;
     
     public User Session
     {
@@ -31,7 +29,8 @@ public class SessionManager : ISessionManager
                 }
                 else
                 {
-                    UnauthorizedSession?.Invoke(this, EventArgs.Empty);
+                    // TODO: Check for unauthorized actions
+                    //UnauthorizedSession?.Invoke(this, EventArgs.Empty);
                     return User.Unauthenticated();
                 }
             }
@@ -58,12 +57,14 @@ public class SessionManager : ISessionManager
     public string? ActionToken
     {
         set => _apiRepository.ActionToken = value;
+        get => _apiRepository.ActionToken;
     }
 
-    public SessionManager(IApiRepository apiRepository, IStorageManager storageManager)
+    public SessionManager(IApiRepository apiRepository, IStorageManager storageManager, IEventManager eventManager)
     {
         _apiRepository = apiRepository;
         _storageManager = storageManager;
+        _eventManager = eventManager;
         
         var token = _storageManager.RefreshToken;
         if (token is not null)
@@ -72,9 +73,19 @@ public class SessionManager : ISessionManager
             if (parsedToken.Expiration > DateTime.UtcNow)
             {
                 RefreshToken = token;
-                SessionHasBeenAuthorized?.Invoke();
+                _eventManager.SessionAuthenticated();
             }
         }
+
+        _eventManager.OnSignInDataReceived += SignInDataReceived;
+    }
+
+    private void SignInDataReceived(SignInDto data)
+    {
+        RefreshToken = data.RefreshToken;
+        ActionToken = data.ActionToken;
+        
+        _eventManager.SessionAuthenticated();
     }
     
     public async Task<Result<User>> UpdateSession()
@@ -95,6 +106,6 @@ public class SessionManager : ISessionManager
 
     public void Logout()
     {
-        LogoutAction?.Invoke();
+        //LogoutAction?.Invoke();
     }
 }

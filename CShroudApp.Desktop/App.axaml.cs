@@ -9,6 +9,7 @@ using CShroudApp.Desktop.Interfaces;
 using CShroudApp.Desktop.Resources.Panels.Auth.ViewModels;
 using CShroudApp.Desktop.Services;
 using CShroudApp.Desktop.ViewModels;
+using CShroudApp.Desktop.ViewModels.MainPages;
 using CShroudApp.Desktop.Views;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -30,6 +31,10 @@ public partial class App : Avalonia.Application
         collection.AddSingleton<LoginViewModel>();
         collection.AddSingleton<DefaultLoginPanelViewModel>();
         collection.AddSingleton<TelegramQuickLoginPanelViewModel>();
+
+        collection.AddSingleton<MainViewModel>();
+        collection.AddSingleton<DashboardViewModel>();
+        collection.AddSingleton<ServersViewModel>();
         
         return collection;
     }

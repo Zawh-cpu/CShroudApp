@@ -103,6 +103,33 @@ namespace CShroudApp.Desktop.Assets.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string UiAuthCancelButton {
+            get {
+                return ResourceManager.GetString("UiAuthCancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔒 Enterprise-grade encryption • 🌍 Global server network • ⚡ Zero-log policy.
+        /// </summary>
+        public static string UiAuthCrimsonShroudFooter {
+            get {
+                return ResourceManager.GetString("UiAuthCrimsonShroudFooter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connect securely and protect your digital freedom.
+        /// </summary>
+        public static string UiAuthCrimsonShroudText {
+            get {
+                return ResourceManager.GetString("UiAuthCrimsonShroudText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continue with Telegram.
         /// </summary>
         public static string UiAuthLoginViaTelegramButton {
@@ -121,6 +148,24 @@ namespace CShroudApp.Desktop.Assets.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Telegram.
+        /// </summary>
+        public static string UiAuthOpenTelegramButton {
+            get {
+                return ResourceManager.GetString("UiAuthOpenTelegramButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OR.
+        /// </summary>
+        public static string UiAuthOR {
+            get {
+                return ResourceManager.GetString("UiAuthOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Retry.
         /// </summary>
         public static string UiAuthRetryLoginViaTelegramButton {
@@ -135,6 +180,87 @@ namespace CShroudApp.Desktop.Assets.Localization {
         public static string UiAuthRetryLoginViaTelegramButtonCountingDown {
             get {
                 return ResourceManager.GetString("UiAuthRetryLoginViaTelegramButtonCountingDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign In.
+        /// </summary>
+        public static string UiAuthSignIn {
+            get {
+                return ResourceManager.GetString("UiAuthSignIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verification Failed.
+        /// </summary>
+        public static string UiAuthVerificationFailed {
+            get {
+                return ResourceManager.GetString("UiAuthVerificationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It seems that the wrong option was selected or the session has expired..
+        /// </summary>
+        public static string UiAuthVerificationFailedText {
+            get {
+                return ResourceManager.GetString("UiAuthVerificationFailedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You could try it again or later.
+        /// </summary>
+        public static string UiAuthVerificationFailedText2 {
+            get {
+                return ResourceManager.GetString("UiAuthVerificationFailedText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verification Required.
+        /// </summary>
+        public static string UiAuthVerificationRequired {
+            get {
+                return ResourceManager.GetString("UiAuthVerificationRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please click the button with this code in your Telegram app:.
+        /// </summary>
+        public static string UiAuthVerificationRequiredText {
+            get {
+                return ResourceManager.GetString("UiAuthVerificationRequiredText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verification Success.
+        /// </summary>
+        public static string UiAuthVerificationSuccess {
+            get {
+                return ResourceManager.GetString("UiAuthVerificationSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We are already authorizing you in the system..
+        /// </summary>
+        public static string UiAuthVerificationSuccessText {
+            get {
+                return ResourceManager.GetString("UiAuthVerificationSuccessText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please wait a moment ❤️ㅤ.
+        /// </summary>
+        public static string UiAuthVerificationSuccessText2 {
+            get {
+                return ResourceManager.GetString("UiAuthVerificationSuccessText2", resourceCulture);
             }
         }
         

@@ -29,15 +29,15 @@
                         
                         <Button Classes="InputLineButton GradientCoreColorsButton" Margin="0 10 0 0">
                             <StackPanel Classes="InputLineButtonWrapper">
-                                <Svg Classes="InputLineButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/lifemonitor.svg"/>
+                                <Svg Classes="InputLineButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/right-arrow.svg"/>
                                 <!--<TextBlock Classes="InputLineButtonText" Text="Sign in"/>-->
-                                <TextBlock Classes="InputLineButtonText" Text="Sign In"/>
+                                <TextBlock Classes="InputLineButtonText" Text="{x:Static lang:Resources.UiAuthSignIn}"/>
                             </StackPanel>
                         </Button>
                         
                         <Grid RowDefinitions="*">
                             <Border Height="1" Background="#1E1E1E" HorizontalAlignment="Stretch" Margin="0,8" BorderThickness="0"/>
-                            <TextBlock Grid.Row="0" Text="OR" Foreground="#A6FFFFFF" VerticalAlignment="Center" FontSize="10" HorizontalAlignment="Center" Background="#60000000" Padding="10 0"/>
+                            <TextBlock Grid.Row="0" Text="{x:Static lang:Resources.UiAuthOR}" Foreground="#A6FFFFFF" VerticalAlignment="Center" FontSize="10" HorizontalAlignment="Center" Background="#60000000" Padding="10 0"/>
                         </Grid>
                         
                         <StackPanel Spacing="12">

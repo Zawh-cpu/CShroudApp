@@ -50,4 +50,43 @@
     <data name="UiAuthRetryLoginViaTelegramButtonCountingDown" xml:space="preserve">
         <value>Повторите через {0}с</value>
     </data>
+    <data name="UiAuthOpenTelegramButton" xml:space="preserve">
+        <value>Перейти в Телеграм</value>
+    </data>
+    <data name="UiAuthSignIn" xml:space="preserve">
+        <value>Ввойти</value>
+    </data>
+    <data name="UiAuthOR" xml:space="preserve">
+        <value>ИЛИ</value>
+    </data>
+    <data name="UiAuthVerificationRequired" xml:space="preserve">
+        <value>Требуется подтверждение</value>
+    </data>
+    <data name="UiAuthVerificationRequiredText" xml:space="preserve">
+        <value>Пожалуйста, нажмите кнопку с этим кодом в вашем приложении Telegram:</value>
+    </data>
+    <data name="UiAuthVerificationFailed" xml:space="preserve">
+        <value>Проверка провалена</value>
+    </data>
+    <data name="UiAuthVerificationFailedText" xml:space="preserve">
+        <value>Похоже, был выбран неправильный вариант или сеанс истек.</value>
+    </data>
+    <data name="UiAuthVerificationFailedText2" xml:space="preserve">
+        <value>Вы можете попробовать еще раз или позже.</value>
+    </data>
+    <data name="UiAuthVerificationSuccess" xml:space="preserve">
+        <value>Успешная проверка</value>
+    </data>
+    <data name="UiAuthVerificationSuccessText" xml:space="preserve">
+        <value>Мы уже авторизуем вас в системе.</value>
+    </data>
+    <data name="UiAuthVerificationSuccessText2" xml:space="preserve">
+        <value>Пожалуйста, подождите немного ❤️ㅤ</value>
+    </data>
+    <data name="UiAuthCancelButton" xml:space="preserve">
+        <value>Отменить</value>
+    </data>
+    <data name="UiAuthCrimsonShroudText" xml:space="preserve">
+        <value>Безопасное подключение и защита вашей цифровой свободы</value>
+    </data>
 </root>

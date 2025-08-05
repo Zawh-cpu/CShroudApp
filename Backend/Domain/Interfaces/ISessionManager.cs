@@ -12,7 +12,4 @@ public interface ISessionManager
     
     public string? RefreshToken { get; set; }
     public string? ActionToken { set; }
-
-    event EventHandler? UnauthorizedSession;
-    event Action? SessionHasBeenAuthorized;
 }

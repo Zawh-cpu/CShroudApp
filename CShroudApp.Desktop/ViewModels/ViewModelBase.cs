@@ -11,6 +11,7 @@ public class ViewModelBase : ObservableObject
     
     public virtual void OnLoaded()
     {
+        CancellationTokenSource = new CancellationTokenSource();
         IsShowedNow = true;
     }
 

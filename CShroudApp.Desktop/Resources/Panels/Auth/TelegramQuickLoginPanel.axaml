@@ -1,62 +1,107 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl x:Name="RootControl" xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:lottie="clr-namespace:Avalonia.Labs.Lottie;assembly=Avalonia.Labs.Lottie"
              xmlns:templatevm="clr-namespace:CShroudApp.Desktop.Resources.Panels.Auth.ViewModels"
+             xmlns:lang="clr-namespace:CShroudApp.Desktop.Assets.Localization"
+             xmlns:converters="clr-namespace:CShroudApp.Desktop.Resources.Panels.Auth.Converters"
+             xmlns:behaviors="clr-namespace:CShroudApp.Desktop.Resources.Panels.Auth.Behaviors"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="templatevm:TelegramQuickLoginPanelViewModel"
              x:Class="CShroudApp.Desktop.Resources.Templates.Auth.TelegramQuickLoginPanel">
+    <UserControl.Resources>
+        <converters:EqualsConverter x:Key="Equal" />
+    </UserControl.Resources>
+
     <StackPanel Spacing="17.5">
-                        
-                        <Border Background="#08CBD5E1" BorderThickness="1" BorderBrush="#12CBD5E1" CornerRadius="10" Padding="28">
-                            <StackPanel>
-                                <Border Width="64" Height="64" Margin="0 0 0 14">
-                                    <!--<Image Source="avares://CShroudApp.Desktop/Assets/imgs/default-avatar.jpg"/>-->
-                                    <lottie:Lottie Path="avares://CShroudApp.Desktop/Assets/Animations/lottie/anim-verification.json" Stretch="Fill" Width="160" Height="160"/>
-                                </Border>
-                                <TextBlock FontSize="17.5" FontWeight="500" LineHeight="24.5" HorizontalAlignment="Center" TextAlignment="Center" Margin="0 0 0 10.5">Verification Required</TextBlock>
-                                <TextBlock FontSize="14" Foreground="#cccccc" HorizontalAlignment="Center" TextAlignment="Center" Margin="0 0 0 21">Please click the button with this code in your Telegram app:</TextBlock>
-                                <Grid RowDefinitions="*" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                    <Border Margin="-1 2" CornerRadius="3">
-                                        <Border.Background>
-                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
-                                                <GradientStop Color="#9812FA" Offset="0.0"/>
-                                                <GradientStop Color="#2D7FFF" Offset="1.0"/>
-                                            </LinearGradientBrush>
-                                        </Border.Background>
-                                    </Border>
-                                    
-                                    <Border Grid.Row="0" CornerRadius="3">
-                                        <Border.Background>
-                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
-                                                <GradientStop Color="#2D7FFF" Offset="0.0"/>
-                                                <GradientStop Color="#9812FA" Offset="1.0"/>
-                                            </LinearGradientBrush>
-                                        </Border.Background>
-                                    </Border>
-                                    
-                                    <TextBlock Text="{Binding QuickSession.ValidVariant}" FontWeight="500" FontSize="26.25" LetterSpacing="2" Padding="28 14"/>
-                                </Grid>
-                            </StackPanel>
+
+        <Border Background="#08CBD5E1" BorderThickness="1" BorderBrush="#12CBD5E1" CornerRadius="10" Padding="28">
+            <StackPanel Orientation="Vertical">
+                <StackPanel
+                    IsVisible="{Binding QuickAuthState, Converter={StaticResource Equal}, ConverterParameter={x:Static templatevm:SessionState.Awaiting}}">
+                    <Border Width="80" Height="80" Margin="0 0 0 14">
+                        <lottie:Lottie
+                            Path="avares://CShroudApp.Desktop/Assets/Animations/lottie/anim-verification.json"
+                            Stretch="UniformToFill" Width="160" Height="160" />
+                    </Border>
+                    <TextBlock FontSize="17.5" FontWeight="500" LineHeight="24.5" HorizontalAlignment="Center"
+                               TextAlignment="Center" Margin="0 0 0 10.5" Text="{x:Static lang:Resources.UiAuthVerificationRequired}"/>
+                    <TextBlock FontSize="14" Foreground="#cccccc" HorizontalAlignment="Center" TextAlignment="Center"
+                               Margin="0 0 0 21" Text="{x:Static lang:Resources.UiAuthVerificationRequiredText}"/>
+                    <Grid RowDefinitions="*" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Border Margin="-1 2" CornerRadius="3">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                                    <GradientStop Color="#9812FA" Offset="0.0" />
+                                    <GradientStop Color="#2D7FFF" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Border.Background>
                         </Border>
-                        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" ColumnSpacing="14" RowSpacing="17.5">
-                            <Button Classes="ButtonType1 ButtonColorSpirit" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" IsEnabled="{Binding IsAvailableToNextTelegramQuickAuthSession}" Command="{Binding RetryTelegramQuickAuthSessionCommand}">
-                                <StackPanel Classes="ButtonWrapper">
-                                    <Svg Classes="ButtonWrapperIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/redo.svg"/>
-                                    <TextBlock Classes="ButtonWrapperText" Text="{Binding RetryButtonText}"/>
-                                </StackPanel>
-                            </Button>
-                            <Button Classes="ButtonType1 ButtonColorSky" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch">
-                                <StackPanel Classes="ButtonWrapper">
-                                    <Svg Classes="ButtonWrapperIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/Artboard.svg"/>
-                                    <TextBlock Classes="ButtonWrapperText" Text="Open Telegram"/>
-                                </StackPanel>
-                            </Button>
-                            
-                            <Button Classes="EmptyButton ButtonColorWhiteHover" Foreground="#90CBD5E1" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Command="{Binding GoToDefaultLoginCommand}">
-                                Cancel
-                            </Button>
-                        </Grid>
-                    </StackPanel>
+
+                        <Border Grid.Row="0" CornerRadius="3">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+                                    <GradientStop Color="#2D7FFF" Offset="0.0" />
+                                    <GradientStop Color="#9812FA" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+
+                        <TextBlock Text="{Binding QuickSession.ValidVariant}" FontWeight="500" FontSize="26.25"
+                                   LetterSpacing="2" Padding="28 14" />
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel
+                    IsVisible="{Binding QuickAuthState, Converter={StaticResource Equal}, ConverterParameter={x:Static templatevm:SessionState.Failed}}">
+                    <Border Width="80" Height="80" Margin="0 0 0 14">
+                        <lottie:Lottie Path="avares://CShroudApp.Desktop/Assets/Animations/lottie/anim-error.json"
+                                       RepeatCount="1" Stretch="UniformToFill" Width="90" Height="90"
+                                       behaviors:LottieBehavior.PlayAnimationOnTrue="{Binding QuickAuthState, Converter={StaticResource Equal}, ConverterParameter={x:Static templatevm:SessionState.Failed}}" />
+                    </Border>
+                    <TextBlock FontSize="17.5" FontWeight="500" LineHeight="24.5" HorizontalAlignment="Center"
+                               TextAlignment="Center" Margin="0 0 0 10.5" Text="{x:Static lang:Resources.UiAuthVerificationFailed}"/>
+                    <TextBlock FontSize="14" Foreground="#cccccc" HorizontalAlignment="Center" TextAlignment="Center"
+                               Margin="0 0 0 21" Text="{x:Static lang:Resources.UiAuthVerificationFailedText}"/>
+                    <TextBlock FontSize="14" Foreground="#cccccc" HorizontalAlignment="Center" TextAlignment="Center" Text="{x:Static lang:Resources.UiAuthVerificationFailedText2}"/>
+                </StackPanel>
+
+                <StackPanel
+                    IsVisible="{Binding QuickAuthState, Converter={StaticResource Equal}, ConverterParameter={x:Static templatevm:SessionState.Success}}">
+                    <Border Width="80" Height="80" Margin="0 0 0 14">
+                        <lottie:Lottie
+                            Path="avares://CShroudApp.Desktop/Assets/Animations/lottie/anim-platn-grown.json"
+                            RepeatCount="1" Stretch="UniformToFill" Width="90" Height="90"
+                            behaviors:LottieBehavior.PlayAnimationOnTrue="{Binding QuickAuthState, Converter={StaticResource Equal}, ConverterParameter={x:Static templatevm:SessionState.Success}}" />
+                    </Border>
+                    <TextBlock FontSize="17.5" FontWeight="500" LineHeight="24.5" HorizontalAlignment="Center"
+                               TextAlignment="Center" Margin="0 0 0 10.5" Text="{x:Static lang:Resources.UiAuthVerificationSuccess}"/>
+                    <TextBlock FontSize="14" Foreground="#cccccc" HorizontalAlignment="Center" TextAlignment="Center"
+                               Margin="0 0 0 21" Text="{x:Static lang:Resources.UiAuthVerificationSuccessText}"/>
+                    <TextBlock FontSize="14" Foreground="#cccccc" HorizontalAlignment="Center" TextAlignment="Center" Text="{x:Static lang:Resources.UiAuthVerificationSuccessText2}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" ColumnSpacing="14" RowSpacing="17.5">
+            <Button Classes="ButtonType1 ButtonColorSpirit" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch"
+                    IsEnabled="{Binding IsAvailableToNextTelegramQuickAuthSession}"
+                    Command="{Binding RetryTelegramQuickAuthSessionCommand}">
+                <StackPanel Classes="ButtonWrapper">
+                    <Svg Classes="ButtonWrapperIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/redo.svg"/>
+                    <TextBlock Classes="ButtonWrapperText" Text="{Binding RetryButtonText}"/>
+                </StackPanel>
+            </Button>
+            <Button Classes="ButtonType1 ButtonColorSky" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch"
+                    Command="{Binding OpenTelegramCommand}">
+                <StackPanel Classes="ButtonWrapper">
+                    <Svg Classes="ButtonWrapperIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/Artboard.svg"/>
+                    <TextBlock Classes="ButtonWrapperText" Text="{x:Static lang:Resources.UiAuthOpenTelegramButton}"/>
+                </StackPanel>
+            </Button>
+
+            <Button Classes="EmptyButton ButtonColorWhiteHover" Foreground="#90CBD5E1" Grid.Row="1" Grid.Column="0"
+                    Grid.ColumnSpan="2" HorizontalAlignment="Center" Command="{Binding GoToDefaultLoginCommand}" Content="{x:Static lang:Resources.UiAuthCancelButton}"/>
+        </Grid>
+    </StackPanel>
 </UserControl>

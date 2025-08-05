@@ -57,4 +57,46 @@
     <data name="UiAuthRetryLoginViaTelegramButtonCountingDown" xml:space="preserve">
         <value>Retry via {0}s</value>
     </data>
+    <data name="UiAuthOpenTelegramButton" xml:space="preserve">
+        <value>Open Telegram</value>
+    </data>
+    <data name="UiAuthSignIn" xml:space="preserve">
+        <value>Sign In</value>
+    </data>
+    <data name="UiAuthOR" xml:space="preserve">
+        <value>OR</value>
+    </data>
+    <data name="UiAuthVerificationRequired" xml:space="preserve">
+        <value>Verification Required</value>
+    </data>
+    <data name="UiAuthVerificationRequiredText" xml:space="preserve">
+        <value>Please click the button with this code in your Telegram app:</value>
+    </data>
+    <data name="UiAuthVerificationFailed" xml:space="preserve">
+        <value>Verification Failed</value>
+    </data>
+    <data name="UiAuthVerificationFailedText" xml:space="preserve">
+        <value>It seems that the wrong option was selected or the session has expired.</value>
+    </data>
+    <data name="UiAuthVerificationFailedText2" xml:space="preserve">
+        <value>You could try it again or later</value>
+    </data>
+    <data name="UiAuthVerificationSuccess" xml:space="preserve">
+        <value>Verification Success</value>
+    </data>
+    <data name="UiAuthVerificationSuccessText" xml:space="preserve">
+        <value>We are already authorizing you in the system.</value>
+    </data>
+    <data name="UiAuthVerificationSuccessText2" xml:space="preserve">
+        <value>Please wait a moment ❤️ㅤ</value>
+    </data>
+    <data name="UiAuthCancelButton" xml:space="preserve">
+        <value>Cancel</value>
+    </data>
+    <data name="UiAuthCrimsonShroudText" xml:space="preserve">
+        <value>Connect securely and protect your digital freedom</value>
+    </data>
+    <data name="UiAuthCrimsonShroudFooter" xml:space="preserve">
+        <value>🔒 Enterprise-grade encryption • 🌍 Global server network • ⚡ Zero-log policy</value>
+    </data>
 </root>

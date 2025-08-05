@@ -44,6 +44,7 @@ public static class BackendStarter
 
         builder.Services.AddSingleton<ApplicationConfig>(cfg);
         builder.Services.AddSingleton<IConfigManager, ConfigManager>();
+        builder.Services.AddSingleton<IEventManager, EventManager>();
         builder.Services.AddSingleton<IApiRepository, ApiRepository>();
         builder.Services.AddSingleton<IStorageManager, StorageManager>();
         builder.Services.AddSingleton<ISessionManager, SessionManager>();
@@ -76,6 +77,9 @@ public static class BackendStarter
         
         var app = builder.Build();
         //LocalizationService.CurrentLocalization = cfg.Localization;
+        
+        // Preheating important services
+        _ = app.Services.GetService<ISessionManager>();
         
         PrestartedHost = app;
         return app;
