@@ -4,9 +4,133 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:CShroudApp.Desktop.ViewModels.MainPages"
              xmlns:lang="clr-namespace:CShroudApp.Desktop.Assets.Localization"
+             xmlns:widgets="clr-namespace:CShroudApp.Desktop.Widgets"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="700"
              x:DataType="vm:ServersViewModel"
              x:Class="CShroudApp.Desktop.Views.MainPages.ServersView"
              Background="#0A0A0A">
-    Welcome to Avalonia!
+    <UserControl.Styles>
+        <StyleInclude Source="avares://CShroudApp.Desktop/Assets/Styles/Default.axaml"/>
+        
+        <Style Selector="Border.ServerItem">
+            <Setter Property="BorderBrush" Value="#262626"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12.75"/>
+            <Setter Property="Padding" Value="21"/>
+            <Setter Property="Background" Value="#80171717"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="1"/>
+        </Style>
+    </UserControl.Styles>
+    
+    <StackPanel Spacing="28">
+        <DockPanel>
+            <StackPanel Spacing="7">
+                <TextBlock FontSize="17.5" LineHeight="24.5" Foreground="#ffffff">Server Selection</TextBlock>
+                <TextBlock FontSize="14" LineHeight="21" Foreground="#a1a1a1">Choose the best server for your needs from our global network</TextBlock>
+            </StackPanel>
+            
+            <ComboBox HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center">
+                
+            </ComboBox>
+        </DockPanel>
+        
+        <ListBox ItemsSource="{Binding SharedMemory.AvailableServers}"
+                 SelectedItem="{Binding SharedMemory.SelectedServer, Mode=TwoWay}"
+                 SelectionMode="Single"
+                 BorderThickness="0"
+                 Background="Transparent">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <widgets:VariableGrid MaxColumns="4"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Classes="ServerItem" HorizontalAlignment="Stretch">
+                        <StackPanel Spacing="14">
+                            <StackPanel HorizontalAlignment="Center">
+                                <Svg Width="31.5" Height="31.5"
+                                     Path="{Binding Country, StringFormat=avares://CShroudApp.Desktop/Assets/flags/svg/{0}.svg}" Margin="0 0 0 14"/>
+                                
+                                <TextBlock TextAlignment="Center" FontSize="14" LineHeight="21" Text="{Binding Name}"/>
+                                <TextBlock TextAlignment="Center" FontSize="12.25" LineHeight="17.4999825" Foreground="#a1a1a1" Text="{Binding Country}"/>
+                            </StackPanel>
+                            
+                            <StackPanel Spacing="7">
+                                <Grid ColumnDefinitions="*, Auto">
+                                    <TextBlock FontSize="12.25" LineHeight="17.4999825" Foreground="#a1a1a1">Latency</TextBlock>
+                                    <TextBlock Grid.Column="1" FontSize="12.25" LineHeight="17.4999825" Text="{Binding AveragePing, StringFormat='{}{0:N0}ms'}"/>
+                                </Grid>
+                                <StackPanel Orientation="Vertical" Spacing="7">
+                                    <Grid ColumnDefinitions="*, Auto">
+                                        <TextBlock FontSize="12.25" LineHeight="17.4999825" Foreground="#a1a1a1">Load</TextBlock>
+                                        <TextBlock Grid.Column="1" FontSize="12.25" LineHeight="17.4999825">45%</TextBlock>
+                                    </Grid>
+                                    <ProgressBar Height="7" HorizontalAlignment="Stretch" CornerRadius="4" Background="#33ffffff"
+                                                 Minimum="0" Maximum="100" Value="45" Foreground="#ffffff"/>
+                                </StackPanel>
+                            </StackPanel>
+                            
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Svg Width="21" Height="21"
+                                     Path="avares://CShroudApp.Desktop/Assets/icons/svg/check-2.svg"
+                                     Css="* { fill: #3B82F6; }"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+            <!-- Стиль для выделенного элемента -->
+            <ListBox.Styles>
+                <Style Selector="ListBoxItem">
+                    <Setter Property="Padding" Value="9" /> 
+                    
+                    <Setter Property="RenderTransform" Value="scale(1)" />
+                    
+                    <Setter Property="Transitions">
+                        <Transitions>
+                            <ThicknessTransition Property="Padding" Duration="0:0:0.18"/>
+                            <ThicknessTransition Property="Margin" Duration="0:0:0.18"/>
+                            <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1"/>
+                        </Transitions>
+                    </Setter>
+                </Style>
+                
+                <Style Selector="ListBoxItem:selected">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0" />
+                </Style>
+                
+                <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0" />
+                </Style>
+                
+                <Style Selector="ListBoxItem:pointerover">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    
+                    <Setter Property="RenderTransform" Value="scale(1.05)"/>
+                </Style>
+                
+                <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0" />
+                </Style>
+                
+                <Style Selector="ListBoxItem:selected Border.ServerItem">
+                    <Setter Property="BorderBrush" Value="#2F7CFF" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="Margin" Value="0"/>
+                </Style>
+                
+                <Style Selector="ListBoxItem:pointerover Border.ServerItem">
+                    <Setter Property="Background" Value="#b3171717" />
+                </Style>
+            </ListBox.Styles>
+        </ListBox>
+    </StackPanel>
 </UserControl>

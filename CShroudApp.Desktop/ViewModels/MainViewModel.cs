@@ -29,7 +29,7 @@ public partial class MainViewModel : ViewModelBase
         _sessionManager = sessionManager;
         _eventManager = eventManager;
 
-        CurrentPage = new DashboardViewModel();
+        CurrentPage = (MainPageViewModelBasic)_serviceProvider.GetRequiredService(typeof(DashboardViewModel));
     }
 
     public void NavbarChangePageButtonClicked(MainPagesType mainPageType)

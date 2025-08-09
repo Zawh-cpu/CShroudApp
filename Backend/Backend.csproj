@@ -6,7 +6,7 @@
         <!--<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>-->
         <InvariantGlobalization>true</InvariantGlobalization>
         <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
-        <IsAotCompatible>true</IsAotCompatible>
+        <!--<IsAotCompatible>true</IsAotCompatible>-->
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'win-x64'">

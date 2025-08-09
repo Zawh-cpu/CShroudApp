@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:CShroudApp.Desktop.ViewModels"
              xmlns:lang="clr-namespace:CShroudApp.Desktop.Assets.Localization"
              xmlns:mainPages="clr-namespace:CShroudApp.Desktop.ViewModels.MainPages"
+             xmlns:widgets="clr-namespace:CShroudApp.Desktop.Widgets"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="700"
              x:DataType="vm:MainViewModel"
              x:Class="CShroudApp.Desktop.Views.MainView"
@@ -158,8 +159,8 @@
     </UserControl.Styles>
     
     <Grid ColumnDefinitions="*">
+        <widgets:DottedBackground Background="#0A0A0A" DotsColor="#0F0F0F" DotRadius="2"/>
         <DockPanel Grid.Column="0" LastChildFill="True">
-            
             <Border VerticalAlignment="Stretch" Background="#141414" BorderBrush="#262626" BorderThickness="0 0 1 0" DockPanel.Dock="Left">
                 <DockPanel LastChildFill="True" MinWidth="224">
                     <Border BorderBrush="#292929" BorderThickness="0 0 0 1" DockPanel.Dock="Top" Padding="21">
@@ -272,7 +273,6 @@
                     </Border>
                 </DockPanel>
             </Border>
-            
             <DockPanel LastChildFill="True">
                 <Border DockPanel.Dock="Top" Background="#141414" BorderBrush="#262626" BorderThickness="0 0 0 1"
                         Padding="28 14">
@@ -297,8 +297,9 @@
                         </StackPanel>
                     </DockPanel>
                 </Border>
-                
-                <ContentControl Content="{Binding CurrentPage}" Padding="28"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <ContentControl Content="{Binding CurrentPage}" Padding="28"/>
+                </ScrollViewer>
             </DockPanel>
         </DockPanel>
     </Grid>

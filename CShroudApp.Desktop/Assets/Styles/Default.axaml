@@ -9,11 +9,13 @@
     <Style Selector="TextBox">
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontFamily" Value="{StaticResource InterFont}"/>
+        <Setter Property="FontWeight" Value="Light"/>
     </Style>
     <Style Selector="TextBlock">
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontFamily" Value="{StaticResource InterFont}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="FontWeight" Value="Light"/>
     </Style>
     
     <Style Selector="FlyoutPresenter">
@@ -21,5 +23,7 @@
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        
     </Style>
 </Styles>

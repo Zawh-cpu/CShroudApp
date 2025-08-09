@@ -33,6 +33,7 @@ public partial class App : Avalonia.Application
         collection.AddSingleton<TelegramQuickLoginPanelViewModel>();
 
         collection.AddSingleton<MainViewModel>();
+        collection.AddSingleton<MainSharedMemory>();
         collection.AddSingleton<DashboardViewModel>();
         collection.AddSingleton<ServersViewModel>();
         
@@ -68,7 +69,7 @@ public partial class App : Avalonia.Application
             {
                 singleViewPlatform.MainView = new MainUserControl()
                 {
-                    DataContext = new DesignerViewModel()
+                    DataContext = vm
                 };
             }
             else
