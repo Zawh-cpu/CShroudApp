@@ -89,4 +89,19 @@
     <data name="UiAuthCrimsonShroudText" xml:space="preserve">
         <value>Безопасное подключение и защита вашей цифровой свободы</value>
     </data>
+    <data name="city-newyork" xml:space="preserve">
+        <value>Нью-Йорк</value>
+    </data>
+    <data name="UiAuthCrimsonShroudFooter" xml:space="preserve">
+        <value>🔒 Сильное шифрование • 🌍 Глобальная сеть • ⚡ Нет сбора информации</value>
+    </data>
+    <data name="city-frankfurt" xml:space="preserve">
+        <value>Франкфурт</value>
+    </data>
+    <data name="region-us" xml:space="preserve">
+        <value>Соединенный Штаты</value>
+    </data>
+    <data name="region-de" xml:space="preserve">
+        <value>Германия</value>
+    </data>
 </root>

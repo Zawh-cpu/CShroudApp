@@ -1,0 +1,36 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:widgets="clr-namespace:CShroudApp.Desktop.Widgets">
+    <Design.PreviewWith>
+        <Grid Width="250" Height="250" ColumnDefinitions="*, Auto, *" RowDefinitions="*, Auto, *">
+            <widgets:IconButton Background="Red" Foreground="CadetBlue" Padding="34" Content="ButtonText" Grid.Row="1" Grid.Column="1"
+                                IconPath="avares://CShroudApp.Desktop/Assets/icons/svg/analytics.svg"
+                                IconWidth="32" IconHeight="32" IconColor="CadetBlue"/>
+        </Grid>
+    </Design.PreviewWith>
+    
+    <ControlTheme x:Key="{x:Type widgets:IconButton}" TargetType="widgets:IconButton">
+        <Setter Property="Background" Value="{DynamicResource ButtonBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource ButtonBorderThemeThickness}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}"
+                        CornerRadius="{TemplateBinding CornerRadius}" BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                    <StackPanel Orientation="Horizontal" Spacing="{TemplateBinding Gap}" HorizontalAlignment="Center">
+                        <Svg Width="{TemplateBinding IconWidth}" Height="{TemplateBinding IconHeight}"
+                             Path="{TemplateBinding IconPath}" Css="{TemplateBinding IconColor, Converter={StaticResource ColorToCss}}"
+                             VerticalAlignment="Center"/>
+                        <TextBlock VerticalAlignment="Center" Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"
+                                   FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}"
+                                   FontWeight="{TemplateBinding FontWeight}" LineHeight="{TemplateBinding LineHeight}"/>
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+</ResourceDictionary>

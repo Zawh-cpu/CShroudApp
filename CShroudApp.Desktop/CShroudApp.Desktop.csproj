@@ -49,12 +49,19 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Assets\icons\ico\" />
       <Folder Include="Resources\Panels\" />
       <Folder Include="Resources\Templates\" />
     </ItemGroup>
 
     <ItemGroup>
       <AdditionalFiles Include="Resources\Panels\Auth\DefaultLoginPanel.axaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AvaloniaXaml Update="Widgets\IconButtonGeneric.axaml">
+        <DependentUpon>IconButton.cs</DependentUpon>
+      </AvaloniaXaml>
     </ItemGroup>
 
     <!--<ItemGroup>

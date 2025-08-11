@@ -1,0 +1,72 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:ClassModifier="internal">
+  <Design.PreviewWith>
+    <StackPanel Margin="20" Width="250" Spacing="24">
+      <StackPanel Spacing="12" >
+        <ToggleSwitch/>
+        <ToggleSwitch IsChecked="True" />
+        <ToggleSwitch HorizontalContentAlignment="Left"
+                      Content="Header"
+                      OffContent="Off"
+                      OnContent="On"/>
+        <ToggleSwitch Background="Yellow" Foreground="Brown"/>
+      </StackPanel>
+    </StackPanel>
+  </Design.PreviewWith>
+
+  <Thickness x:Key="ToggleSwitchTopHeaderMargin">0,0,0,6</Thickness>
+  <GridLength x:Key="ToggleSwitchPreContentMargin">6</GridLength>
+  <GridLength x:Key="ToggleSwitchPostContentMargin">6</GridLength>
+  <x:Double x:Key="ToggleSwitchThemeMinWidth">0</x:Double>
+
+  <ControlTheme x:Key="{x:Type ToggleSwitch}" TargetType="ToggleSwitch">
+    <Setter Property="Background" Value="{DynamicResource ToggleButtonBackground}" />
+    <Setter Property="Foreground" Value="{DynamicResource ToggleButtonForeground}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ToggleButtonBorderThemeThickness}" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+    <Setter Property="Padding" Value="{DynamicResource ButtonPadding}" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="RenderTransform" Value="none" />
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Padding="4" Background="{TemplateBinding Background}" CornerRadius="50">
+          <Grid Width="28" Height="14" x:Name="PART_MovingKnobs">
+            <Border Background="{TemplateBinding Foreground}" Margin="0" BorderThickness="0" CornerRadius="7" x:Name="SwitchKnob"/>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^ /template/ Border#SwitchKnob">
+      <Setter Property="Transitions">
+        <Transitions>
+          <ThicknessTransition
+            Property="Margin"
+            Duration="0:0:0.28"
+            Easing="CubicEaseOut" />
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="^:checked /template/ Border#SwitchKnob">
+      <Setter Property="Margin" Value="14 0 0 0"/>
+    </Style>
+
+    <Style Selector="^:unchecked /template/ Border#SwitchKnob">
+      <Setter Property="Margin" Value="0 0 14 0"/>
+    </Style>
+
+    <Style Selector="^:pressed:checked /template/ Border#SwitchKnob">
+      <Setter Property="Margin" Value="0,0,0,0"/>
+    </Style>
+
+    <Style Selector="^:pressed:unchecked /template/ Border#SwitchKnob">
+      <Setter Property="Margin" Value="0,0,0,0"/>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

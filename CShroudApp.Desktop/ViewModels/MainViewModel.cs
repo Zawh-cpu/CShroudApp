@@ -11,7 +11,8 @@ public partial class MainViewModel : ViewModelBase
     public static Dictionary<MainPagesType, Type> MainPagesTypes { get; } = new()
     {
         [MainPagesType.Dashboard] = typeof(DashboardViewModel),
-        [MainPagesType.Servers] = typeof(ServersViewModel)
+        [MainPagesType.Servers] = typeof(ServersViewModel),
+        [MainPagesType.Settings] = typeof(SettingsViewModel)
     };
 
     private readonly IServiceProvider _serviceProvider;

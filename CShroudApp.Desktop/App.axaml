@@ -10,11 +10,14 @@
              x:DataType="viewModels:AppViewModel"
              RequestedThemeVariant="Default">
     
-    <Application.Styles>
-        <FluentTheme/>
-    </Application.Styles>
-    
     <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <MergeResourceInclude Source="avares://CShroudApp.Desktop/Controls/ToggleSwitch.axaml"/>
+                <MergeResourceInclude Source="avares://CShroudApp.Desktop/Widgets/IconButtonGeneric.axaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        
         <FontFamily x:Key="InterFont">avares://CShroudApp.Desktop/Assets/Fonts/Inter#Inter</FontFamily>
         <FontFamily x:Key="NunitoFont">avares://CShroudApp.Desktop/Assets/Fonts/Nunito#Nunito</FontFamily>
         
@@ -24,7 +27,16 @@
         <converters:GentleEqualConverter x:Key="GentleTypeConverter" />
         <converters:GentleEqualConverter x:Key="FastEqualsConverter" />
         <converters:WidthMultiplierConverter x:Key="WidthMultiplier"/>
+        <converters:ColorToCssConverter x:Key="ColorToCss"/>
+        <converters:ColorToBrushConverter x:Key="ColorToBrush"/>
     </Application.Resources>
+    
+    <Application.Styles>
+        <FluentTheme/>
+        <StyleInclude Source="avares://CShroudApp.Desktop/Assets/Styles/Default.axaml"/>
+        <StyleInclude Source="avares://CShroudApp.Desktop/Assets/Styles/Buttons.axaml"/>
+        <StyleInclude Source="avares://CShroudApp.Desktop/Assets/Styles/Colors.axaml"/>
+    </Application.Styles>
     
     <Application.DataTemplates>
         <local:ViewLocator/>

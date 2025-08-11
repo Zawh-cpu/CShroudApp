@@ -255,7 +255,8 @@
                                 </StackPanel>
                             </RadioButton>
                             
-                            <RadioButton Classes="NavbarPageToggleButton" GroupName="NavsButtons">
+                            <RadioButton Classes="NavbarPageToggleButton" GroupName="NavsButtons" IsChecked="{Binding CurrentPage.MainPageType, Converter={StaticResource FastEqualsConverter}, 
+                                 ConverterParameter={x:Static mainPages:MainPagesType.Settings}}" Command="{Binding NavbarChangePageButtonClicked}" CommandParameter="{x:Static mainPages:MainPagesType.Settings}">
                                 <StackPanel Classes="NavbarPageToggleButtonWrapper">
                                     <Svg Classes="NavbarPageToggleButtonIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/settings-alt-2.svg"/>
                                     <TextBlock Classes="NavbarPageToggleButtonText">Settings</TextBlock>

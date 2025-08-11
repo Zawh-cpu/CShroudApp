@@ -11,5 +11,6 @@ public abstract class MainPageViewModelBasic : ViewModelBase
 public enum MainPagesType
 {
     Dashboard,
-    Servers
+    Servers,
+    Settings
 }

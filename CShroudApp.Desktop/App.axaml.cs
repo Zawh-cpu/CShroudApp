@@ -36,6 +36,7 @@ public partial class App : Avalonia.Application
         collection.AddSingleton<MainSharedMemory>();
         collection.AddSingleton<DashboardViewModel>();
         collection.AddSingleton<ServersViewModel>();
+        collection.AddSingleton<SettingsViewModel>();
         
         return collection;
     }

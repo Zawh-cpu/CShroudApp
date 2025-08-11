@@ -58,11 +58,47 @@ namespace CShroudApp.Desktop.Assets.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Frankfurt.
+        /// </summary>
+        public static string city_frankfurt {
+            get {
+                return ResourceManager.GetString("city-frankfurt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New York City.
+        /// </summary>
+        public static string city_newyork {
+            get {
+                return ResourceManager.GetString("city-newyork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Good Day!.
         /// </summary>
         public static string GreetingText {
             get {
                 return ResourceManager.GetString("GreetingText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Germany.
+        /// </summary>
+        public static string region_de {
+            get {
+                return ResourceManager.GetString("region-de", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to United States.
+        /// </summary>
+        public static string region_us {
+            get {
+                return ResourceManager.GetString("region-us", resourceCulture);
             }
         }
         

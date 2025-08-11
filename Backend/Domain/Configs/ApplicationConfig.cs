@@ -6,6 +6,8 @@ namespace Backend.Domain.Configs;
 
 public class ApplicationConfig
 {
+    public GeneralSettingsConfig GeneralSettings { get; set; } = new();
+    
     [JsonConverter(typeof(JsonStringEnumConverter<Localization>))]
     public Localization Localization { get; set; } = Localization.English;
     

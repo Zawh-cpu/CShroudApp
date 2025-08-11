@@ -1,0 +1,18 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:CShroudApp.Desktop.Resources.AttachedProperties"
+        xmlns:widgets="clr-namespace:CShroudApp.Desktop.Widgets">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+        </Border>
+    </Design.PreviewWith>
+    
+    <Style Selector=":is(Control)._SkyColor">
+        <Setter Property="local:ColorProperties.MainColor" Value="#2F7CFF"/>
+    </Style>
+    
+    <Style Selector=":is(Control)._MagentaColor">
+        <Setter Property="local:ColorProperties.MainColor" Value="#A53889"/>
+    </Style>
+</Styles>

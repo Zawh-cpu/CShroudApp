@@ -1,4 +1,6 @@
 using System.Collections.ObjectModel;
+using Backend.Domain.Configs;
+using Backend.Infrastructure.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CShroudApp.Desktop.ViewModels.MainPages;
@@ -39,8 +41,15 @@ public partial class MainSharedMemory : ObservableObject
     [ObservableProperty]
     private Server? _selectedServer;
     
+    public ApplicationConfig ApplicationConfig { get; set; }
+    
     partial void OnSelectedServerChanged(Server? value)
     {
         SelectedServer = value;
+    }
+
+    public MainSharedMemory(ApplicationConfig applicationConfig)
+    {   
+        ApplicationConfig = applicationConfig;
     }
 }

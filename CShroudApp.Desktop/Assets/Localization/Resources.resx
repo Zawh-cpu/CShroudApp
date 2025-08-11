@@ -99,4 +99,16 @@
     <data name="UiAuthCrimsonShroudFooter" xml:space="preserve">
         <value>🔒 Enterprise-grade encryption • 🌍 Global server network • ⚡ Zero-log policy</value>
     </data>
+    <data name="city-newyork" xml:space="preserve">
+        <value>New York City</value>
+    </data>
+    <data name="city-frankfurt" xml:space="preserve">
+        <value>Frankfurt</value>
+    </data>
+    <data name="region-us" xml:space="preserve">
+        <value>United States</value>
+    </data>
+    <data name="region-de" xml:space="preserve">
+        <value>Germany</value>
+    </data>
 </root>
