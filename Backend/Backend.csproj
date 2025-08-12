@@ -40,6 +40,7 @@
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
         <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" />
         <PackageReference Include="Svg.Controls.Skia.Avalonia" />
+        <PackageReference Include="System.Drawing.Common" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
     </ItemGroup>
 

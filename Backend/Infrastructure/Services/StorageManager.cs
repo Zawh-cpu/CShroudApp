@@ -85,7 +85,20 @@ public class StorageManager : IStorageManager
         if (!(value.AliveUntil is null || DateTime.UtcNow < value.AliveUntil)) return null;
         return value.Value as TEntity;
     }
+
+    public bool TryGetValue<TEntity>(string key, out TEntity? output) where TEntity : class
+    {
+        var value = _storage.GetValueOrDefault(key);
+        if (!(value.AliveUntil is null || DateTime.UtcNow < value.AliveUntil))
+        {
+            output = null;
+            return false;
+        }
         
+        output = value.Value as TEntity;
+        return true;
+    }
+
     public async Task SetValueAsync(string key, object data, TimeSpan? aliveTime = null, bool saveChanges = true)
     {
         _storage[key] = new ContainerStruct { Value = data, AliveUntil = aliveTime is not null ? DateTime.UtcNow + aliveTime : null };

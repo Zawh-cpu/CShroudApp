@@ -1,9 +1,15 @@
 using System.Collections.ObjectModel;
 using Backend.Domain.Configs;
+using Backend.Domain.Interfaces;
 using Backend.Infrastructure.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CShroudApp.Desktop.ViewModels.MainPages;
+
+public class UiCachedOptions
+{
+    public bool SettingsIsSplitTunnelingAppsSelectorCollapsed { get; set; } = false;
+}
 
 public class Server
 {
@@ -41,6 +47,9 @@ public partial class MainSharedMemory : ObservableObject
     [ObservableProperty]
     private Server? _selectedServer;
     
+    [ObservableProperty]
+    private UiCachedOptions _uiCachedOptions;
+    
     public ApplicationConfig ApplicationConfig { get; set; }
     
     partial void OnSelectedServerChanged(Server? value)
@@ -48,8 +57,11 @@ public partial class MainSharedMemory : ObservableObject
         SelectedServer = value;
     }
 
-    public MainSharedMemory(ApplicationConfig applicationConfig)
+    public MainSharedMemory(ApplicationConfig applicationConfig, IStorageManager storageManager)
     {   
         ApplicationConfig = applicationConfig;
+
+        var value = storageManager.GetValue<UiCachedOptions>("SharedMemoryUiCachedOptions");
+        _uiCachedOptions = value ?? new UiCachedOptions();
     }
 }

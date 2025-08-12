@@ -62,6 +62,7 @@ public static class BackendStarter
             case Platform.Windows:
                 builder.Services.AddSingleton<IProxyManager, WindowsProxyService>();
                 builder.Services.AddSingleton<IToastManager, WindowsToastManager>();
+                builder.Services.AddSingleton<IInstalledAppsManager, WindowsInstalledAppsManager>();
                 break;
             case Platform.Android:
                 builder.Services.AddSingleton<IProxyManager, AndroidProxyService>();

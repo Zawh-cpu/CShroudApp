@@ -99,7 +99,7 @@
                         <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1"/>
                     </Grid>
                     
-                    <Border Padding="14 0 0 0" BorderBrush="#4d5f16fe" BorderThickness="2 0 0 0">
+                    <Border Padding="14 0 0 0" BorderBrush="#4d5f16fe" BorderThickness="2 0 0 0" IsVisible="{Binding SharedMemory.ApplicationConfig.Vpn.SplitTunneling.Enabled}">
                         <StackPanel Spacing="14">
                             <Grid ColumnDefinitions="*, Auto">
                                 <TextBlock HorizontalAlignment="Stretch">Application Selection</TextBlock>
@@ -116,7 +116,54 @@
                                 </StackPanel>
                             </Grid>
                             
-                            <StackPanel Orientation="Vertical" Spacing="10.5">
+                            <Border Padding="10.5" Background="#33262626" BorderBrush="#404040" BorderThickness="1" CornerRadius="8.75" IsVisible="{Binding SharedMemory.UiCachedOptions.SettingsIsSplitTunnelingAppsSelectorCollapsed}">
+                                <Grid ColumnDefinitions="*, Auto">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center" Spacing="7">
+                                        <Svg Path="avares://CShroudApp.Desktop/Assets/icons/svg/layer.svg" Width="14" Height="14"
+                                             Css="* { fill: #F67E47; }"/>
+                                        <TextBlock Foreground="#d4d4d4" FontSize="12.25" LineHeight="17.4999825">2 of 7 apps bypassing VPN</TextBlock>
+                                    </StackPanel>
+                                    
+                                    <Button Grid.Column="1" HorizontalAlignment="Right" Padding="8.75 0" Height="28" Background="Transparent">
+                                        <StackPanel Orientation="Horizontal" Spacing="8.75" VerticalAlignment="Center">
+                                            <TextBlock Foreground="#2F7CFF" FontSize="12.25" FontWeight="500" LineHeight="17.4999825">View Details</TextBlock>
+                                            <Svg Path="avares://CShroudApp.Desktop/Assets/icons/svg/down-arrow2.svg" Width="14" Height="14"
+                                                 Css="* { fill: #2F7CFF; }"/>
+                                        </StackPanel>
+                                        
+                                        <Button.Styles>
+                                            <Style Selector="Button:pointerover /template/ ContentPresenter">
+                                                <Setter Property="Background" Value="#80262626"/>
+                                            </Style>
+                                        </Button.Styles>
+                                    </Button>
+                                </Grid>
+                            </Border>
+                            
+                            <ItemsControl ItemsSource="{Binding ApplicationList}" IsVisible="{Binding !SharedMemory.UiCachedOptions.SettingsIsSplitTunnelingAppsSelectorCollapsed}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel  Orientation="Vertical" Spacing="10.5"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Padding="10.5" CornerRadius="8.75" Background="#4d262626">
+                                            <StackPanel Orientation="Horizontal" Spacing="14">
+                                                <ToggleButton Width="14" Height="14"></ToggleButton>
+                                                <Image Width="24" Height="24" Source="{Binding Icon}"/>
+                                                <StackPanel>
+                                                    <TextBlock Foreground="#fff" FontWeight="500" FontSize="14" LineHeight="21" Text="{Binding Name}"/>
+                                                    <TextBlock Foreground="#a1a1a1" FontSize="10.5" LineHeight="13.999965">Using VPN</TextBlock>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            
+                            <!--<StackPanel Orientation="Vertical" Spacing="10.5">
                                 
                                 <Border Padding="10.5" CornerRadius="8.75" Background="#4d262626">
                                     <StackPanel Orientation="Horizontal" Spacing="14">
@@ -140,7 +187,7 @@
                                     </StackPanel>
                                 </Border>
                                 
-                            </StackPanel>
+                            </StackPanel>-->
                         </StackPanel>
                     </Border>
                 </StackPanel>
@@ -173,7 +220,7 @@
                         <TextBlock Classes="SettingsGroupItemDescription">Launch CrimsonShroud when your computer starts</TextBlock>
                     </StackPanel>
                     
-                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1" IsChecked="{Binding SharedMemory.ApplicationConfig.GeneralSettings.StartOnSystemStartup}"/>
+                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1" IsChecked="{Binding SharedMemory.ApplicationConfig.GeneralSettings.StartOnSystemStartup}" Command="{Binding UpdateConfigCommand}"/>
                 </Grid>
                 
                 <Grid Classes="SettingsGroupItem" ColumnDefinitions="*, Auto">
@@ -269,7 +316,7 @@
                     <widgets:IconButton Content="Check for Updates" HorizontalAlignment="Stretch" Background="#2F7CFF" Padding="10.5 5"
                                         FontSize="12.25" LineHeight="17.4999825" FontWeight="400" Foreground="#ffffff" IconColor="#ffffff"
                                         IconWidth="14" IconHeight="14" Gap="10.5" CornerRadius="6.75"
-                                        IconPath="avares://CShroudApp.Desktop/Assets/icons/svg/update.svg"/>
+                                        IconPath="avares://CShroudApp.Desktop/Assets/icons/svg/update.svg" Command="{Binding CheckForUpdatesCommand}"/>
                 </Border>
             </StackPanel>
         </Border>
