@@ -249,13 +249,13 @@
                             </StackPanel>
                             
                             <StackPanel>
-                                <Button Classes="ButtonType3">
+                                <Button Classes="ButtonType3" Command="{Binding ToggleConnectionToNetworkCommand}">
                                     <TextBlock Classes="ButtonTypeText">Connect</TextBlock>
                                 </Button>
                             </StackPanel>
                         </StackPanel>
                         
-                        <Grid ColumnDefinitions="*, *" ColumnSpacing="10.5">
+                        <Grid ColumnDefinitions="*, *" ColumnSpacing="10.5" IsVisible="{Binding !SharedMemory.IsConnectedToNetwork}">
                             <Button Classes="ButtonType4 ButtonColorLimeGreen">
                                 <StackPanel Classes="ButtonTypeWrapper">
                                     <Svg Classes="ButtonTypeIcon"
@@ -272,7 +272,7 @@
                             </Button>
                         </Grid>
                         
-                        <Grid ColumnDefinitions="Auto, *" ColumnSpacing="14" Margin="0 42 0 0">
+                        <Grid ColumnDefinitions="Auto, *" ColumnSpacing="14" Margin="0 42 0 0" IsVisible="{Binding SharedMemory.IsConnectedToNetwork}">
                             <Border Classes="StatsItemPanel">
                                 <StackPanel Classes="StatsItemPanelWrapper">
                                     <Svg Classes="StatsItemPanelIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/download.svg"
@@ -288,19 +288,19 @@
                                         <Svg Classes="StatsItemPanelIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/thunder.svg"
                                              Css="* { fill: #05df72 }"/>
                                         <TextBlock Classes="StatsItemPanelHeader">Latency</TextBlock>
-                                        <TextBlock Classes="StatsItemPanelContent">18ms</TextBlock>
+                                        <TextBlock Classes="StatsItemPanelContent" Text="{Binding SharedMemory.VpnService.Ping, StringFormat='{}{0}ms'}"/>
                                     </StackPanel>
                                     <StackPanel Classes="StatsItemPanelWrapper">
                                         <Svg Classes="StatsItemPanelIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/download.svg"
                                              Css="* { fill: #00BCD4 }"/>
                                         <TextBlock Classes="StatsItemPanelHeader">Download</TextBlock>
-                                        <TextBlock Classes="StatsItemPanelContent">32 MB/s</TextBlock>
+                                        <TextBlock Classes="StatsItemPanelContent" Text="{Binding DownloadSpeed, Converter={StaticResource SpeedFormatter}}"/>
                                     </StackPanel>
                                     <StackPanel Classes="StatsItemPanelWrapper">
                                         <Svg Classes="StatsItemPanelIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/upload.svg"
                                              Css="* { fill: #9C27B0}"/>
                                         <TextBlock Classes="StatsItemPanelHeader">Upload</TextBlock>
-                                        <TextBlock Classes="StatsItemPanelContent">32 MB/s</TextBlock>
+                                        <TextBlock Classes="StatsItemPanelContent" Text="{Binding UploadSpeed, Converter={StaticResource SpeedFormatter}}"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Border>
@@ -327,7 +327,7 @@
                                     HorizontalAlignment="Stretch"
                                     Padding="10.5 7"
                                     ItemsSource="{Binding SharedMemory.AvailableServers}"
-                                    SelectedItem="{Binding SharedMemory.SelectedServer}">
+                                    SelectedItem="{Binding SharedMemory.SelectedNetworkShard}">
     
                                     <!-- Кастомный вид элементов -->
                                     <ComboBox.ItemTemplate>

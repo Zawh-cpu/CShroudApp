@@ -26,6 +26,7 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia"/>
+        <PackageReference Include="Avalonia.Controls.DataGrid" />
         <PackageReference Include="Avalonia.Desktop"/>
         <PackageReference Include="Avalonia.Labs.Gif" />
         <PackageReference Include="Avalonia.Labs.Lottie" />
@@ -34,6 +35,7 @@
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics"/>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
+        <PackageReference Include="Svg.Controls.Skia.Avalonia" />
     </ItemGroup>
 
     <ItemGroup>
@@ -56,11 +58,15 @@
 
     <ItemGroup>
       <AdditionalFiles Include="Resources\Panels\Auth\DefaultLoginPanel.axaml" />
+      <AdditionalFiles Include="Widgets\IconButtonGeneric.axaml" />
     </ItemGroup>
 
     <ItemGroup>
       <AvaloniaXaml Update="Widgets\IconButtonGeneric.axaml">
         <DependentUpon>IconButton.cs</DependentUpon>
+      </AvaloniaXaml>
+      <AvaloniaXaml Update="Widgets\ToggleIconButtonGeneric.axaml">
+        <DependentUpon>ToggleIconButton.cs</DependentUpon>
       </AvaloniaXaml>
     </ItemGroup>
 

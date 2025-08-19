@@ -15,6 +15,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <MergeResourceInclude Source="avares://CShroudApp.Desktop/Controls/ToggleSwitch.axaml"/>
                 <MergeResourceInclude Source="avares://CShroudApp.Desktop/Widgets/IconButtonGeneric.axaml"/>
+                <MergeResourceInclude Source="avares://CShroudApp.Desktop/Widgets/ToggleIconButtonGeneric.axaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         
@@ -29,6 +30,7 @@
         <converters:WidthMultiplierConverter x:Key="WidthMultiplier"/>
         <converters:ColorToCssConverter x:Key="ColorToCss"/>
         <converters:ColorToBrushConverter x:Key="ColorToBrush"/>
+        <converters:SpeedFormatterConverter x:Key="SpeedFormatter"/>
     </Application.Resources>
     
     <Application.Styles>

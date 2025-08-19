@@ -310,48 +310,77 @@ public partial class SingBoxCore : IVpnCore
 
         if (_settings.Vpn.SplitTunneling.Enabled)
         {
-            if (_settings.Vpn.SplitTunneling.BypassIps.Any())
+            List<string> bypassIps = [];
+            List<string> bypassHosts = [];
+            List<string> bypassPaths = [];
+            List<uint> bypassPorts = [];
+            List<string> bypassProcesses = [];
+            foreach (var rule in _settings.Vpn.SplitTunneling.Rules)
+            {
+                if (!rule.Enabled) continue;
+                
+                switch (rule.Type)
+                {
+                    case SplitTunnelingRuleType.Ip:
+                        bypassIps.Add(rule.Value);
+                        break;
+                    case SplitTunnelingRuleType.Host:
+                        bypassHosts.Add(rule.Value);
+                        break;
+                    case SplitTunnelingRuleType.Path:
+                        bypassPaths.Add(rule.Value);
+                        break;
+                    case SplitTunnelingRuleType.Port:
+                        bypassPorts.Add(uint.Parse(rule.Value));
+                        break;
+                    case SplitTunnelingRuleType.Process:
+                        bypassProcesses.Add(rule.Value);
+                        break;
+                }
+            }
+            
+            if (bypassIps.Count != 0)
                 _config.Route.Rules.Add(
                     new RouteObject.RouteRule()
                     {
                         Outbound = "direct",
-                        IpCidr = _settings.Vpn.SplitTunneling.BypassIps
+                        IpCidr = bypassIps.ToArray()
                     }
                 );
 
-            if (_settings.Vpn.SplitTunneling.BypassHosts.Any())
+            if (bypassHosts.Count != 0)
                 _config.Route.Rules.Add(
                     new RouteObject.RouteRule()
                     {
                         Outbound = "direct",
-                        Domain = _settings.Vpn.SplitTunneling.BypassHosts
+                        Domain = bypassHosts.ToArray()
                     }
                 );
 
-            if (_settings.Vpn.SplitTunneling.BypassPorts.Any())
+            if (bypassPorts.Count != 0)
                 _config.Route.Rules.Add(
                     new RouteObject.RouteRule()
                     {
                         Outbound = "direct",
-                        Port = _settings.Vpn.SplitTunneling.BypassPorts
+                        Port = bypassPorts.ToArray()
                     }
                 );
             
-            if (_settings.Vpn.SplitTunneling.BypassProcesses.Any())
+            if (bypassProcesses.Count != 0)
                 _config.Route.Rules.Add(
                     new RouteObject.RouteRule()
                     {
                         Outbound = "direct",
-                        ProcessName = _settings.Vpn.SplitTunneling.BypassProcesses
+                        ProcessName = bypassProcesses.ToArray()
                     }
                 );
             
-            if (_settings.Vpn.SplitTunneling.BypassApps.Any())
+            if (bypassPaths.Count != 0)
                 _config.Route.Rules.Add(
                     new RouteObject.RouteRule()
                     {
                         Outbound = "direct",
-                        ProcessPath = _settings.Vpn.SplitTunneling.BypassApps
+                        ProcessPath = bypassPaths.ToArray()
                     }
                 );
         }
@@ -407,48 +436,77 @@ public partial class SingBoxCore : IVpnCore
 
         if (_settings.Vpn.SplitTunneling.Enabled)
         {
-            if (_settings.Vpn.SplitTunneling.BypassIps.Any())
+            List<string> bypassIps = [];
+            List<string> bypassHosts = [];
+            List<string> bypassPaths = [];
+            List<uint> bypassPorts = [];
+            List<string> bypassProcesses = [];
+            foreach (var rule in _settings.Vpn.SplitTunneling.Rules)
+            {
+                if (!rule.Enabled) continue;
+                
+                switch (rule.Type)
+                {
+                    case SplitTunnelingRuleType.Ip:
+                        bypassIps.Add(rule.Value);
+                        break;
+                    case SplitTunnelingRuleType.Host:
+                        bypassHosts.Add(rule.Value);
+                        break;
+                    case SplitTunnelingRuleType.Path:
+                        bypassPaths.Add(rule.Value);
+                        break;
+                    case SplitTunnelingRuleType.Port:
+                        bypassPorts.Add(uint.Parse(rule.Value));
+                        break;
+                    case SplitTunnelingRuleType.Process:
+                        bypassProcesses.Add(rule.Value);
+                        break;
+                }
+            }
+            
+            if (bypassIps.Count != 0)
                 _config.Route.Rules.Add(
                     new RouteObject.RouteRule()
                     {
                         Outbound = "proxy",
-                        IpCidr = _settings.Vpn.SplitTunneling.BypassIps
+                        IpCidr = bypassIps.ToArray()
                     }
                 );
 
-            if (_settings.Vpn.SplitTunneling.BypassHosts.Any())
+            if (bypassHosts.Count != 0)
                 _config.Route.Rules.Add(
                     new RouteObject.RouteRule()
                     {
                         Outbound = "proxy",
-                        Domain = _settings.Vpn.SplitTunneling.BypassHosts
+                        Domain = bypassHosts.ToArray()
                     }
                 );
 
-            if (_settings.Vpn.SplitTunneling.BypassPorts.Any())
+            if (bypassPorts.Count != 0)
                 _config.Route.Rules.Add(
                     new RouteObject.RouteRule()
                     {
                         Outbound = "proxy",
-                        Port = _settings.Vpn.SplitTunneling.BypassPorts
+                        Port = bypassPorts.ToArray()
                     }
                 );
             
-            if (_settings.Vpn.SplitTunneling.BypassProcesses.Any())
+            if (bypassProcesses.Count != 0)
                 _config.Route.Rules.Add(
                     new RouteObject.RouteRule()
                     {
                         Outbound = "proxy",
-                        ProcessName = _settings.Vpn.SplitTunneling.BypassProcesses
+                        ProcessName = bypassProcesses.ToArray()
                     }
                 );
             
-            if (_settings.Vpn.SplitTunneling.BypassApps.Any())
+            if (bypassPaths.Count != 0)
                 _config.Route.Rules.Add(
                     new RouteObject.RouteRule()
                     {
                         Outbound = "proxy",
-                        ProcessPath = _settings.Vpn.SplitTunneling.BypassApps
+                        ProcessPath = bypassPaths.ToArray()
                     }
                 );
         }
@@ -542,6 +600,9 @@ public partial class SingBoxCore : IVpnCore
             await _process.StandardInput.WriteAsync(JsonSerializer.Serialize(_config, SingBoxJsonContext.Default.TopConfig));
         
         _process.StandardInput.Close();
+        
+        if (SpeedExtCts.IsCancellationRequested)
+            SpeedExtCts = new CancellationTokenSource();
         
         _ = Task.Run(async() => await StartSpeedStreamAsync(SpeedExtCts.Token));
         

@@ -301,6 +301,105 @@ namespace CShroudApp.Desktop.Assets.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advanced Features.
+        /// </summary>
+        public static string UiSettingsAdvancedFeatures {
+            get {
+                return ResourceManager.GetString("UiSettingsAdvancedFeatures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternative routing mode for specific applications.
+        /// </summary>
+        public static string UiSettingsAdvancedFeaturesBypassModeDesc {
+            get {
+                return ResourceManager.GetString("UiSettingsAdvancedFeaturesBypassModeDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable Bypass Mode.
+        /// </summary>
+        public static string UiSettingsAdvancedFeaturesBypassModeToggler {
+            get {
+                return ResourceManager.GetString("UiSettingsAdvancedFeaturesBypassModeToggler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure split tunneling and advanced routing options.
+        /// </summary>
+        public static string UiSettingsAdvancedFeaturesDesc {
+            get {
+                return ResourceManager.GetString("UiSettingsAdvancedFeaturesDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application Selection.
+        /// </summary>
+        public static string UiSettingsAdvancedFeaturesSplitTunnelingApplicationSelection {
+            get {
+                return ResourceManager.GetString("UiSettingsAdvancedFeaturesSplitTunnelingApplicationSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allow specific apps to bypass VPN.
+        /// </summary>
+        public static string UiSettingsAdvancedFeaturesSplitTunnelingDesc {
+            get {
+                return ResourceManager.GetString("UiSettingsAdvancedFeaturesSplitTunnelingDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bypassing VPN.
+        /// </summary>
+        public static string UiSettingsAdvancedFeaturesSplitTunnelingItemVpnBypassing {
+            get {
+                return ResourceManager.GetString("UiSettingsAdvancedFeaturesSplitTunnelingItemVpnBypassing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using VPN.
+        /// </summary>
+        public static string UiSettingsAdvancedFeaturesSplitTunnelingItemVpnUsing {
+            get {
+                return ResourceManager.GetString("UiSettingsAdvancedFeaturesSplitTunnelingItemVpnUsing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} of {1} apps bypassing VPN.
+        /// </summary>
+        public static string UiSettingsAdvancedFeaturesSplitTunnelingTextBypassingVpn {
+            get {
+                return ResourceManager.GetString("UiSettingsAdvancedFeaturesSplitTunnelingTextBypassingVpn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} of {1} apps using VPN.
+        /// </summary>
+        public static string UiSettingsAdvancedFeaturesSplitTunnelingTextUsingVpn {
+            get {
+                return ResourceManager.GetString("UiSettingsAdvancedFeaturesSplitTunnelingTextUsingVpn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable Split Tunneling.
+        /// </summary>
+        public static string UiSettingsAdvancedFeaturesSplitTunnelingToggler {
+            get {
+                return ResourceManager.GetString("UiSettingsAdvancedFeaturesSplitTunnelingToggler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Proxy.
         /// </summary>
         public static string VpnModeProxy {

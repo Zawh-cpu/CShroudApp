@@ -9,4 +9,10 @@ public interface IEventManager
     
     public event Action? OnSessionAuthenticated;
     public void SessionAuthenticated();
+    
+    public event Action? OnFailedConnectToNetwork;
+    public void FailedConnectToNetwork();
+    
+    public event Action? OnConnectedToNetworkSuccessfully;
+    public void ConnectedToNetworkSuccessfully();
 }

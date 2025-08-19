@@ -19,7 +19,6 @@ public partial class SingBoxCore
 
     public async Task StartSpeedStreamAsync(CancellationToken token)
     {
-        Console.WriteLine($"STARTING SPEED STREAM {_settings.DeveloperSettings.ClashApiPort}");
         try
         {
             var handler = new SocketsHttpHandler
@@ -31,8 +30,6 @@ public partial class SingBoxCore
             {
                 BaseAddress = new Uri($"http://127.0.0.1:{_settings.DeveloperSettings.ClashApiPort}/")
             };
-            
-            Console.WriteLine(client.BaseAddress);
 
             using var response = await client.GetAsync("traffic", HttpCompletionOption.ResponseHeadersRead, token);
             response.EnsureSuccessStatusCode();

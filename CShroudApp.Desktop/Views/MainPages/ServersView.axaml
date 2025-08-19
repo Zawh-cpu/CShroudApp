@@ -33,7 +33,8 @@
         <DockPanel>
             <StackPanel Spacing="7">
                 <TextBlock FontSize="17.5" LineHeight="24.5" Foreground="#ffffff">Server Selection</TextBlock>
-                <TextBlock FontSize="14" LineHeight="21" Foreground="#a1a1a1">Choose the best server for your needs from our global network</TextBlock>
+                <TextBlock FontSize="14" LineHeight="21" Foreground="#a1a1a1" TextTrimming="WordEllipsis"
+                           TextWrapping="NoWrap">Choose the best server for your needs from our global network</TextBlock>
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right" Spacing="10">
@@ -43,7 +44,7 @@
         </DockPanel>
         
         <ListBox ItemsSource="{Binding SharedMemory.AvailableServers}"
-                 SelectedItem="{Binding SharedMemory.SelectedServer, Mode=TwoWay}"
+                 SelectedItem="{Binding SharedMemory.SelectedNetworkShard, Mode=TwoWay}"
                  SelectionMode="Single"
                  BorderThickness="0"
                  Background="Transparent">

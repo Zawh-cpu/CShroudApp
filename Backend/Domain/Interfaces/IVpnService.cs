@@ -13,6 +13,7 @@ public interface IVpnService
     Task RestartAsync(VpnMode mode, VpnConnectionCredentials credentials);
     
     bool IsRunning { get; }
+    bool IsConnected { get; }
     
     event EventHandler? VpnEnabled;
     event EventHandler? VpnDisabled;
@@ -23,4 +24,5 @@ public interface IVpnService
     
     public ulong Upload { get; }
     public ulong Download { get; }
+    public uint Ping { get; }
 }

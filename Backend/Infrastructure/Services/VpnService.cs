@@ -17,6 +17,7 @@ public class VpnService : IVpnService
     private readonly IVpnCore _vpnCore;
     private readonly IProxyManager _proxyManager;
     private readonly ApplicationConfig _applicationConfig;
+    private readonly IEventManager _eventManager;
     
     public VpnProtocol[] SupportedProtocols => _vpnCore.SupportedProtocols;
 
@@ -25,17 +26,21 @@ public class VpnService : IVpnService
     
     public ulong Upload => _vpnCore.Upload;
     public ulong Download => _vpnCore.Download;
+    public uint Ping => _vpnCore.Ping;
     public event Action<ulong, ulong>? SpeedUpdated;
 
     public DateTime? SessionStartTime { get; set; }
+
+    public bool IsConnected => IsRunning;
     
     //public int 
 
-    public VpnService(IVpnCore vpnCore, IProxyManager proxyManager, ApplicationConfig applicationConfig)
+    public VpnService(IVpnCore vpnCore, IProxyManager proxyManager, ApplicationConfig applicationConfig, IEventManager eventManager)
     {
         _vpnCore = vpnCore;
         _proxyManager = proxyManager;
         _applicationConfig = applicationConfig;
+        _eventManager = eventManager;
 
         _vpnCore.CoreEnabled += OnCoreEnabled;
         _vpnCore.CoreDisabled += OnCoreDisabled;
@@ -130,6 +135,7 @@ public class VpnService : IVpnService
         
         SessionStartTime = DateTime.UtcNow;
         VpnEnabled?.Invoke(this, e);
+        _eventManager.ConnectedToNetworkSuccessfully();
     }
     
     private void OnCoreDisabled(object? sender, EventArgs e)

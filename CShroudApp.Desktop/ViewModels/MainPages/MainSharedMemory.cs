@@ -1,17 +1,23 @@
 using System.Collections.ObjectModel;
 using Backend.Domain.Configs;
+using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
 using Backend.Infrastructure.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Extensions.Options;
 
 namespace CShroudApp.Desktop.ViewModels.MainPages;
 
-public class UiCachedOptions
+public partial class UiCachedOptions: ObservableObject
 {
-    public bool SettingsIsSplitTunnelingAppsSelectorCollapsed { get; set; } = false;
+    [ObservableProperty]
+    private bool _settingsIsSplitTunnelingAppsSelectorCollapsed = false;
+    
+    [ObservableProperty]
+    private NetworkShard? _selectedNetworkShard;
 }
 
-public class Server
+public class NetworkShard
 {
     public required string Name { get; set; }
     public required string Country { get; set; }
@@ -24,7 +30,7 @@ public class Server
 
 public partial class MainSharedMemory : ObservableObject
 {
-    public ObservableCollection<Server> AvailableServers { get; set; } =
+    public ObservableCollection<NetworkShard> AvailableServers { get; set; } =
     [
         new()
         {
@@ -45,23 +51,44 @@ public partial class MainSharedMemory : ObservableObject
     ];
     
     [ObservableProperty]
-    private Server? _selectedServer;
+    private NetworkShard? _selectedNetworkShard;
     
     [ObservableProperty]
     private UiCachedOptions _uiCachedOptions;
     
     public ApplicationConfig ApplicationConfig { get; set; }
     
-    partial void OnSelectedServerChanged(Server? value)
+    partial void OnSelectedNetworkShardChanged(NetworkShard? value)
     {
-        SelectedServer = value;
+        SelectedNetworkShard = value;
+
+        if (value is not null)
+            _uiCachedOptions.SelectedNetworkShard = SelectedNetworkShard;
     }
 
-    public MainSharedMemory(ApplicationConfig applicationConfig, IStorageManager storageManager)
+    private Debouncer _uiCachedOptionsDebouncer = new();
+    
+    public IVpnService VpnService { get; }
+    public IEventManager EventManager { get; }
+    
+    public bool IsConnectedToNetwork => VpnService.IsConnected;
+    
+    public MainSharedMemory(ApplicationConfig applicationConfig, IStorageManager storageManager, IVpnService vpnService, IEventManager eventManager)
     {   
         ApplicationConfig = applicationConfig;
+        VpnService = vpnService;
+        EventManager = eventManager;
 
         var value = storageManager.GetValue<UiCachedOptions>("SharedMemoryUiCachedOptions");
         _uiCachedOptions = value ?? new UiCachedOptions();
+        
+        _uiCachedOptions.PropertyChanged += (s, e) => _uiCachedOptionsDebouncer.Debounce(
+            async void () => await storageManager.SetValueAsync("SharedMemoryUiCachedOptions", _uiCachedOptions, saveChanges: true), 2000);
+        
+        if (_uiCachedOptions.SelectedNetworkShard is not null)
+            SelectedNetworkShard = _uiCachedOptions.SelectedNetworkShard;
+        
+        VpnService.VpnEnabled += (obj, e) => OnPropertyChanged(nameof(IsConnectedToNetwork));
+        VpnService.VpnDisabled += (obj, e) => OnPropertyChanged(nameof(IsConnectedToNetwork));
     }
 }

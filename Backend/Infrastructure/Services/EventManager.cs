@@ -17,4 +17,16 @@ public class EventManager : IEventManager
     {
         OnSessionAuthenticated?.Invoke();
     }
+
+    public event Action? OnFailedConnectToNetwork;
+    public void FailedConnectToNetwork()
+    {
+        OnFailedConnectToNetwork?.Invoke();
+    }
+
+    public event Action? OnConnectedToNetworkSuccessfully;
+    public void ConnectedToNetworkSuccessfully()
+    {
+        OnConnectedToNetworkSuccessfully?.Invoke();
+    }
 }

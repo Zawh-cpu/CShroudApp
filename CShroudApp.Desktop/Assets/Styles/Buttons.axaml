@@ -139,6 +139,31 @@
         </Style>
     </Style>
     
+    <Style Selector="widgets|ToggleIconButton.IconButtonType1">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Background" Value="#4d1a1a1a"/>
+        <Setter Property="BorderBrush" Value="#1a1a1a"/>
+        <Setter Property="CornerRadius" Value="6.75"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="IconColor" Value="{Binding (aproperties:ColorProperties.MainColor), RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="Foreground" Value="{Binding (aproperties:ColorProperties.MainColor),
+                        RelativeSource={RelativeSource Self},
+                        Converter={StaticResource ColorToBrush}}"/>
+        <Setter Property="IconWidth" Value="14"/>
+        <Setter Property="IconHeight" Value="14"/>
+        <Setter Property="Gap" Value="14"/>
+        <Setter Property="LineHeight" Value="17.4999825"/>
+        <Setter Property="FontSize" Value="12.25"/>
+        <Setter Property="Padding" Value="8.750 0"/>
+        <Setter Property="FontWeight" Value="500"/>
+        <Setter Property="FontFamily" Value="{StaticResource InterFont}"/>
+        
+        <Style Selector="^:pointerover">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="IconColor" Value="#FFFFFF"/>
+        </Style>
+    </Style>
+    
     
 </Styles>
 

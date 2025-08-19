@@ -18,5 +18,6 @@ public interface IVpnCore
     
     public ulong Upload { get; set; }
     public ulong Download { get; set; }
+    public uint Ping { get; set; }
     public event Action<ulong, ulong>? SpeedUpdated;
 }

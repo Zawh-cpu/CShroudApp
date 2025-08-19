@@ -6,8 +6,11 @@ namespace Backend.Domain.Entities;
 
 public class VpnConnectionCredentials
 {
-    public required VpnProtocol Protocol { get; set; }
+    public required Guid ServerId { get; set; }
     public required string Location { get; set; }
+    
+    
+    public required VpnProtocol Protocol { get; set; }
     
     public string? IpAddressV4 { get; set; }
     public string? IpAddressV6 { get; set; }

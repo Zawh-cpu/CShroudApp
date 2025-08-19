@@ -194,6 +194,7 @@ public class ApiRepository : IApiRepository
     {
         return new VpnConnectionCredentials()
         {
+            ServerId = Guid.NewGuid(),
             Host = "localhost",
             Port = 443,
             IpAddressV4 = "179.61.132.185",
@@ -204,11 +205,11 @@ public class ApiRepository : IApiRepository
             YourAddress = "179.61.132.185",
             TransparentHosts = new()
             {
-                "frankfurt.reality.zawh.ru",
+                "179.61.132.185",
             },
             Credentials = new JsonObject()
             {
-                ["Host"] = "frankfurt.reality.zawh.ru",
+                ["Host"] = "179.61.132.185",
                 ["Port"] = 443,
                 ["Uuid"] = "8d50da4e-fff4-4188-bbd1-7d620c7296f0",
                 ["Flow"] = "xtls-rprx-vision",

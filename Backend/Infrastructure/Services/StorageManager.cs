@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.Json;
 using Backend.Domain.Interfaces;
 using Backend.Domain.Configs;
+using Backend.Domain.Entities;
 using MessagePack;
 using Microsoft.Extensions.Options;
 
@@ -17,6 +18,7 @@ public class StorageManager : IStorageManager
     }
     
     private Dictionary<string, ContainerStruct> _storage;
+    private Debouncer _debouncer = new();
 
     public StorageManager()
     {
@@ -103,7 +105,7 @@ public class StorageManager : IStorageManager
     {
         _storage[key] = new ContainerStruct { Value = data, AliveUntil = aliveTime is not null ? DateTime.UtcNow + aliveTime : null };
         if (saveChanges)
-            await SaveChanges();
+            _debouncer.Debounce(SaveChanges, 2000);
     } 
     
     public async Task SetValueIfNot(string key, object data, TimeSpan? aliveTime = null, bool saveChanges = true)
@@ -111,14 +113,14 @@ public class StorageManager : IStorageManager
         if (_storage.TryGetValue(key, out var value) && value.Value == data && (value.AliveUntil is null || DateTime.UtcNow < value.AliveUntil)) return;
         _storage[key] = new ContainerStruct { Value = data, AliveUntil = aliveTime is not null ? DateTime.UtcNow + aliveTime : null };
         if (saveChanges)
-            await SaveChanges();
+            _debouncer.Debounce(SaveChanges, 2000);
     }
 
     public async Task DelValueAsync(string key, bool saveChanges = true)
     {
         _storage.Remove(key);
         if (saveChanges)
-            await SaveChanges();
+            _debouncer.Debounce(SaveChanges, 2000);
     }
 
     public async Task SaveChanges()

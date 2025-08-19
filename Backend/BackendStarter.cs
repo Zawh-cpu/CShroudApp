@@ -9,6 +9,7 @@ using Backend.Infrastructure.Platforms.Windows.Services;
 using Backend.Infrastructure.Services;
 using Backend.Infrastructure.StaticServices;
 using Backend.Infrastructure.VpnCores.SingBox;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -17,27 +18,25 @@ namespace Backend;
 
 public static class BackendStarter
 {
-    private static IHost? PrestartedHost;
+    private static IHost? _prestartedHost;
     
     public static IHost Start(string[] args, ServiceCollection? additionalServices)
     {
-        if (PrestartedHost is not null) return PrestartedHost;
+        if (_prestartedHost is not null) return _prestartedHost;
         
         var builder = new HostApplicationBuilder(args);
         builder.Logging.AddConsole();
 
-        ApplicationConfig cfg;
-        try
-        {
-            cfg = JsonSerializer.Deserialize<ApplicationConfig>(File.ReadAllText(AppConstants.ConfigFilePath),
-                ConfigsJsonContext.Default.ApplicationConfig)!;
-        }
-        catch(Exception)
-        {
-            cfg = new ApplicationConfig();
-        }
-
+        FileChecker.CheckFiles();
+        
+        builder.Configuration.AddJsonFile(AppConstants.ConfigFilePath, optional: true, reloadOnChange: false);
+        builder.Services.Configure<ApplicationConfig>(builder.Configuration.GetSection(nameof(ApplicationConfig)));
+        
         Console.WriteLine(AppConstants.ConfigFilePath);
+        
+        var cfg = builder.Configuration
+            .GetRequiredSection(nameof(ApplicationConfig))
+            .Get<ApplicationConfig>()!;
         
         builder.Services.AddHttpClient("CrimsonShroudApiHook",
             client => client.BaseAddress = new Uri(cfg.Network.ReservedGatewayAddresses.First()));
@@ -82,7 +81,7 @@ public static class BackendStarter
         // Preheating important services
         _ = app.Services.GetService<ISessionManager>();
         
-        PrestartedHost = app;
+        _prestartedHost = app;
         return app;
     }
 }

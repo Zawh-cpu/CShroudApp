@@ -36,6 +36,10 @@ public partial class MainViewModel : ViewModelBase
     public void NavbarChangePageButtonClicked(MainPagesType mainPageType)
     {
         if (MainPagesTypes.TryGetValue(mainPageType, out var type))
+        {
+            CurrentPage?.OnUnloaded();
             CurrentPage = (MainPageViewModelBasic)_serviceProvider.GetRequiredService(type);
+            CurrentPage.OnLoaded();
+        }
     }
 }

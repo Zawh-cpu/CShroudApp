@@ -5,322 +5,485 @@
              xmlns:vm="clr-namespace:CShroudApp.Desktop.ViewModels.MainPages"
              xmlns:aproperties="clr-namespace:CShroudApp.Desktop.Resources.AttachedProperties"
              xmlns:widgets="clr-namespace:CShroudApp.Desktop.Widgets"
+             xmlns:lang="clr-namespace:CShroudApp.Desktop.Assets.Localization"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="1100"
              x:DataType="vm:SettingsViewModel"
              x:Class="CShroudApp.Desktop.Views.MainPages.SettingsView"
              Background="#0A0A0A">
-    
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:SettingsViewModel />
+    </Design.DataContext>
+
     <UserControl.Styles>
-        <StyleInclude Source="avares://CShroudApp.Desktop/Assets/Styles/Default.axaml"/>
-        
+        <StyleInclude Source="avares://CShroudApp.Desktop/Assets/Styles/Default.axaml" />
+
         <Style Selector="Border.SettingsGroup">
-            <Setter Property="Background" Value="#80171717"/>
-            <Setter Property="BorderBrush" Value="#262626"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="12.75"/>
-            <Setter Property="Padding" Value="21"/>
-            
+            <Setter Property="Background" Value="#80171717" />
+            <Setter Property="BorderBrush" Value="#262626" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="12.75" />
+            <Setter Property="Padding" Value="21" />
+
             <Style Selector="^ StackPanel.SettingsGroupWrapper">
-                <Setter Property="Orientation" Value="Vertical"/>
-                <Setter Property="Spacing" Value="21"/>
+                <Setter Property="Orientation" Value="Vertical" />
+                <Setter Property="Spacing" Value="21" />
             </Style>
-            
+
             <Style Selector="^ StackPanel.SettingsGroupHeader">
-                <Setter Property="Orientation" Value="Vertical"/>
-                <Setter Property="Spacing" Value="5.25"/>
-                    
+                <Setter Property="Orientation" Value="Vertical" />
+                <Setter Property="Spacing" Value="5.25" />
+
                 <Style Selector="^ StackPanel.SettingsGroupHeaderWrapper">
-                    <Setter Property="Orientation" Value="Horizontal"/>
-                    <Setter Property="Spacing" Value="7"/>
+                    <Setter Property="Orientation" Value="Horizontal" />
+                    <Setter Property="Spacing" Value="7" />
                 </Style>
-                
+
                 <Style Selector="^ Svg.SettingsGroupHeaderIcon">
-                    <Setter Property="Width" Value="20"/>
-                    <Setter Property="Height" Value="20"/>
-                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Width" Value="20" />
+                    <Setter Property="Height" Value="20" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
                 </Style>
-                
+
                 <Style Selector="^ TextBlock.SettingsGroupHeaderTitle">
-                    <Setter Property="FontSize" Value="14"/>
-                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="FontSize" Value="14" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
                 </Style>
-                
+
                 <Style Selector="^ TextBlock.SettingsGroupHeaderDescription">
-                    <Setter Property="FontSize" Value="14"/>
-                    <Setter Property="Foreground" Value="#a1a1a1"/>
+                    <Setter Property="FontSize" Value="14" />
+                    <Setter Property="Foreground" Value="#a1a1a1" />
                 </Style>
             </Style>
-            
+
             <Style Selector="^ Grid.SettingsGroupItem">
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                
+                <Setter Property="VerticalAlignment" Value="Center" />
+
                 <Style Selector="^ ToggleSwitch.SettingsGroupItemToggleSwitch">
                     <Setter Property="Background" Value="#cc1a1a1a" />
                     <Setter Property="Foreground" Value="#ffffff" />
-                
+
                     <Style Selector="^:checked">
                         <Setter Property="Background" Value="#ffffff" />
                         <Setter Property="Foreground" Value="#000000" />
                     </Style>
                 </Style>
-                
+
                 <Style Selector="^ TextBlock.SettingsGroupItemName">
                 </Style>
-                
+
                 <Style Selector="^ TextBlock.SettingsGroupItemDescription">
-                    <Setter Property="Foreground" Value="#a1a1a1"/>
-                    <Setter Property="FontSize" Value="12.25"/>
-                    <Setter Property="LineHeight" Value="17.4999825"/>
+                    <Setter Property="Foreground" Value="#a1a1a1" />
+                    <Setter Property="FontSize" Value="12.25" />
+                    <Setter Property="LineHeight" Value="17.4999825" />
                 </Style>
             </Style>
         </Style>
     </UserControl.Styles>
-    
+
     <StackPanel Orientation="Vertical" Spacing="28">
-        
+
         <Border Classes="SettingsGroup">
             <StackPanel Classes="SettingsGroupWrapper">
                 <StackPanel Classes="SettingsGroupHeader">
                     <StackPanel Classes="SettingsGroupHeaderWrapper">
-                        <Svg Classes="SettingsGroupHeaderIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/arrows-split.svg"
-                             Css="* { stroke: #5F16FE; }"/>
-                        <TextBlock Classes="SettingsGroupHeaderTitle">Advanced Features</TextBlock>
+                        <Svg Classes="SettingsGroupHeaderIcon"
+                             Path="avares://CShroudApp.Desktop/Assets/icons/svg/arrows-split.svg"
+                             Css="* { stroke: #5F16FE; }" />
+                        <TextBlock Classes="SettingsGroupHeaderTitle"
+                                   Text="{x:Static lang:Resources.UiSettingsAdvancedFeatures}" />
                     </StackPanel>
-                    <TextBlock Classes="SettingsGroupHeaderDescription">Configure split tunneling and advanced routing options</TextBlock>
+                    <TextBlock Classes="SettingsGroupHeaderDescription"
+                               Text="{x:Static lang:Resources.UiSettingsAdvancedFeaturesDesc}" />
                 </StackPanel>
-                
+
                 <StackPanel Spacing="21">
                     <Grid Classes="SettingsGroupItem" ColumnDefinitions="*, Auto">
                         <StackPanel>
-                            <TextBlock Classes="SettingsGroupItemName">Enable Split Tunneling</TextBlock>
-                            <TextBlock Classes="SettingsGroupItemDescription">Allow specific apps to bypass VPN</TextBlock>
+                            <TextBlock Classes="SettingsGroupItemName"
+                                       Text="{x:Static lang:Resources.UiSettingsAdvancedFeaturesSplitTunnelingToggler}" />
+                            <TextBlock Classes="SettingsGroupItemDescription"
+                                       Text="{x:Static lang:Resources.UiSettingsAdvancedFeaturesSplitTunnelingDesc}" />
                         </StackPanel>
-                    
-                        <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1"/>
+
+                        <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1"
+                                      IsChecked="{Binding SharedMemory.ApplicationConfig.Vpn.SplitTunneling.Enabled}"
+                                      Command="{Binding OpenSplitTunnelingListCommand}" />
                     </Grid>
-                    
-                    <Border Padding="14 0 0 0" BorderBrush="#4d5f16fe" BorderThickness="2 0 0 0" IsVisible="{Binding SharedMemory.ApplicationConfig.Vpn.SplitTunneling.Enabled}">
+
+                    <Border Padding="14 0 0 0" BorderBrush="#4d5f16fe" BorderThickness="2 0 0 0"
+                            IsVisible="{Binding SharedMemory.ApplicationConfig.Vpn.SplitTunneling.Enabled}">
                         <StackPanel Spacing="14">
                             <Grid ColumnDefinitions="*, Auto">
-                                <TextBlock HorizontalAlignment="Stretch">Application Selection</TextBlock>
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="7">
-                                    
-                                    <widgets:IconButton Content="Collapse"
-                                                        IconPath="avares://CShroudApp.Desktop/Assets/icons/svg/fast-forward.svg"
-                                                        Classes="IconButtonType1 _SkyColor" Height="28"/>
-                                    
+                                <TextBlock HorizontalAlignment="Stretch"
+                                           Text="{x:Static lang:Resources.UiSettingsAdvancedFeaturesSplitTunnelingApplicationSelection}" TextTrimming="WordEllipsis"
+                                           TextWrapping="NoWrap"/>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"
+                                            Spacing="7">
+
+                                    <widgets:ToggleIconButton Classes="IconButtonType1 _SkyColor" Height="28"
+                                                              IsChecked="{Binding SharedMemory.UiCachedOptions.SettingsIsSplitTunnelingAppsSelectorCollapsed}">
+
+                                        <widgets:ToggleIconButton.Styles>
+                                            <Style Selector="widgets|ToggleIconButton">
+                                                <Setter Property="Content" Value="Collapse" />
+                                                <Setter Property="IconPath"
+                                                        Value="avares://CShroudApp.Desktop/Assets/icons/svg/upper-arrow.svg" />
+
+                                                <Style Selector="^:checked">
+                                                    <Setter Property="Content" Value="Expand" />
+                                                    <Setter Property="IconPath"
+                                                            Value="avares://CShroudApp.Desktop/Assets/icons/svg/down-arrow2.svg" />
+                                                </Style>
+                                            </Style>
+                                        </widgets:ToggleIconButton.Styles>
+                                    </widgets:ToggleIconButton>
+
+
                                     <widgets:IconButton Content="Add Custom"
                                                         IconPath="avares://CShroudApp.Desktop/Assets/icons/svg/fast-forward.svg"
-                                                        Classes="IconButtonType1 _MagentaColor" Height="28"/>
-                                    
+                                                        Classes="IconButtonType1 _MagentaColor" Height="28" />
+
+                                    <widgets:IconButton Content="Uncheck all"
+                                                        IconPath="avares://CShroudApp.Desktop/Assets/icons/svg/cancel.svg"
+                                                        Classes="IconButtonType1 _OrangeColor" Height="28"
+                                                        Command="{Binding SplitTunnelingUncheckAllCommand}" />
+
                                 </StackPanel>
                             </Grid>
-                            
-                            <Border Padding="10.5" Background="#33262626" BorderBrush="#404040" BorderThickness="1" CornerRadius="8.75" IsVisible="{Binding SharedMemory.UiCachedOptions.SettingsIsSplitTunnelingAppsSelectorCollapsed}">
+
+                            <Border Padding="10.5" Background="#33262626" BorderBrush="#404040" BorderThickness="1"
+                                    CornerRadius="8.75"
+                                    IsVisible="{Binding SharedMemory.UiCachedOptions.SettingsIsSplitTunnelingAppsSelectorCollapsed}">
                                 <Grid ColumnDefinitions="*, Auto">
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center" Spacing="7">
-                                        <Svg Path="avares://CShroudApp.Desktop/Assets/icons/svg/layer.svg" Width="14" Height="14"
-                                             Css="* { fill: #F67E47; }"/>
-                                        <TextBlock Foreground="#d4d4d4" FontSize="12.25" LineHeight="17.4999825">2 of 7 apps bypassing VPN</TextBlock>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Center" Spacing="7">
+                                        <Svg Path="avares://CShroudApp.Desktop/Assets/icons/svg/layer.svg" Width="14"
+                                             Height="14"
+                                             Css="* { fill: #F67E47; }" />
+                                        <TextBlock Foreground="#d4d4d4" FontSize="12.25" LineHeight="17.4999825"
+                                                   IsVisible="{Binding !SharedMemory.ApplicationConfig.Vpn.ReverseMode}">
+                                            <TextBlock.Text>
+                                                <MultiBinding
+                                                    StringFormat="{x:Static lang:Resources.UiSettingsAdvancedFeaturesSplitTunnelingTextBypassingVpn}">
+                                                    <Binding Path="SelectedSplitTunnelingRules.Count" />
+                                                    <Binding Path="AvailableRulesList.Count" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <TextBlock Foreground="#d4d4d4" FontSize="12.25" LineHeight="17.4999825"
+                                                   IsVisible="{Binding SharedMemory.ApplicationConfig.Vpn.ReverseMode}">
+                                            <TextBlock.Text>
+                                                <MultiBinding
+                                                    StringFormat="{x:Static lang:Resources.UiSettingsAdvancedFeaturesSplitTunnelingTextUsingVpn}">
+                                                    <Binding Path="SelectedSplitTunnelingRules.Count" />
+                                                    <Binding Path="AvailableRulesList.Count" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
                                     </StackPanel>
-                                    
-                                    <Button Grid.Column="1" HorizontalAlignment="Right" Padding="8.75 0" Height="28" Background="Transparent">
+
+                                    <Button Grid.Column="1" HorizontalAlignment="Right" Padding="8.75 0" Height="28"
+                                            Background="Transparent">
                                         <StackPanel Orientation="Horizontal" Spacing="8.75" VerticalAlignment="Center">
-                                            <TextBlock Foreground="#2F7CFF" FontSize="12.25" FontWeight="500" LineHeight="17.4999825">View Details</TextBlock>
-                                            <Svg Path="avares://CShroudApp.Desktop/Assets/icons/svg/down-arrow2.svg" Width="14" Height="14"
-                                                 Css="* { fill: #2F7CFF; }"/>
+                                            <TextBlock Foreground="#2F7CFF" FontSize="12.25" FontWeight="500"
+                                                       LineHeight="17.4999825">
+                                                View Details
+                                            </TextBlock>
+                                            <Svg Path="avares://CShroudApp.Desktop/Assets/icons/svg/down-arrow2.svg"
+                                                 Width="14" Height="14"
+                                                 Css="* { fill: #2F7CFF; }" />
                                         </StackPanel>
-                                        
+
                                         <Button.Styles>
                                             <Style Selector="Button:pointerover /template/ ContentPresenter">
-                                                <Setter Property="Background" Value="#80262626"/>
+                                                <Setter Property="Background" Value="#80262626" />
                                             </Style>
                                         </Button.Styles>
+
+                                        <Interaction.Behaviors>
+                                            <EventTriggerBehavior EventName="Click">
+                                                <ChangePropertyAction
+                                                    TargetObject="{Binding SharedMemory.UiCachedOptions}"
+                                                    PropertyName="SettingsIsSplitTunnelingAppsSelectorCollapsed"
+                                                    Value="False" />
+                                            </EventTriggerBehavior>
+                                        </Interaction.Behaviors>
                                     </Button>
                                 </Grid>
                             </Border>
-                            
-                            <ItemsControl ItemsSource="{Binding ApplicationList}" IsVisible="{Binding !SharedMemory.UiCachedOptions.SettingsIsSplitTunnelingAppsSelectorCollapsed}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel  Orientation="Vertical" Spacing="10.5"/>
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border Padding="10.5" CornerRadius="8.75" Background="#4d262626">
-                                            <StackPanel Orientation="Horizontal" Spacing="14">
-                                                <ToggleButton Width="14" Height="14"></ToggleButton>
-                                                <Image Width="24" Height="24" Source="{Binding Icon}"/>
-                                                <StackPanel>
-                                                    <TextBlock Foreground="#fff" FontWeight="500" FontSize="14" LineHeight="21" Text="{Binding Name}"/>
-                                                    <TextBlock Foreground="#a1a1a1" FontSize="10.5" LineHeight="13.999965">Using VPN</TextBlock>
+
+                            <StackPanel Orientation="Vertical" Spacing="14" IsVisible="{Binding !SharedMemory.UiCachedOptions.SettingsIsSplitTunnelingAppsSelectorCollapsed}">
+                                <TextBox CornerRadius="8.75" Background="#4d1a1a1a" BorderBrush="#1a1a1a" BorderThickness="1"
+                                         Watermark="Search rule" Foreground="#fff">
+                                </TextBox>
+                                <ListBox Background="Transparent" SelectionMode="Multiple, Toggle"
+                                         ItemsSource="{Binding FilteredAvailableRulesList}"
+                                         SelectedItems="{Binding SelectedSplitTunnelingRules, Mode=TwoWay}">
+                                    <ListBox.Styles>
+                                        <Style Selector="ListBoxItem">
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="Padding" Value="0" />
+                                        </Style>
+
+                                        <Style Selector="ListBoxItem /template/ ContentPresenter">
+                                            <Setter Property="Background" Value="Transparent" />
+                                        </Style>
+
+                                        <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+                                            <Setter Property="Background" Value="Transparent" />
+                                        </Style>
+
+                                        <Style Selector="ListBoxItem:pressed /template/ ContentPresenter">
+                                            <Setter Property="Background" Value="Transparent" />
+                                        </Style>
+
+                                        <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="Cursor" Value="Hand" />
+                                        </Style>
+
+
+                                        <Style Selector="Border.SplitTunnelingItem">
+                                            <Setter Property="Padding" Value="10.5" />
+                                            <Setter Property="CornerRadius" Value="8.75" />
+                                            <Setter Property="Background" Value="#4d262626" />
+
+                                            <Style Selector="^:pointerover">
+                                                <Setter Property="Background" Value="#80262626" />
+                                            </Style>
+
+                                            <Style Selector="^ StackPanel.SplitTunnelingItemWrapper">
+                                                <Setter Property="Orientation" Value="Horizontal" />
+                                                <Setter Property="Spacing" Value="14" />
+                                            </Style>
+
+                                            <Style Selector="^ ToggleButton.SplitTunnelingItemToggler">
+                                                <Setter Property="Width" Value="14" />
+                                                <Setter Property="Height" Value="14" />
+                                                <Setter Property="BorderBrush" Value="#262626" />
+                                                <Setter Property="BorderThickness" Value="1" />
+                                                <Setter Property="Background" Value="#4d1a1a1a" />
+
+                                                <Style Selector="^:checked /template/ ContentPresenter">
+                                                    <Setter Property="Background" Value="#fff" />
+                                                </Style>
+                                            </Style>
+
+                                            <Style Selector="^ TextBlock.SplitTunnelingItemTitle">
+                                                <Setter Property="Foreground" Value="#fff" />
+                                                <Setter Property="FontWeight" Value="500" />
+                                                <Setter Property="FontSize" Value="14" />
+                                                <Setter Property="LineHeight" Value="21" />
+                                            </Style>
+
+                                            <Style Selector="^ TextBlock.SplitTunnelingItemBehaviorDesc">
+                                                <Setter Property="Foreground" Value="#a1a1a1" />
+                                                <Setter Property="FontSize" Value="10.5" />
+                                                <Setter Property="LineHeight" Value="13.999965" />
+                                            </Style>
+                                        </Style>
+                                    </ListBox.Styles>
+
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel Orientation="Vertical"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+
+                                    <!--
+                                {Binding !#SplitTunnelingItems.((vm:SettingsViewModel)DataContext).SharedMemory.ApplicationConfig.Vpn.ReverseMode}
+                                {Binding ((vm:SettingsViewModel)DataContext).SharedMemory.ApplicationConfig.Vpn.ReverseMode,
+                                    RelativeSource={RelativeSource AncestorType=ListBox}}
+                                -->
+
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Classes="SplitTunnelingItem" Margin="0 0 0 10.5">
+                                                <StackPanel Classes="SplitTunnelingItemWrapper">
+                                                    <ToggleButton Classes="SplitTunnelingItemToggler"
+                                                                  IsChecked="{Binding $parent[ListBoxItem].IsSelected, Mode=TwoWay}"
+                                                                  IsHitTestVisible="False" />
+                                                    <Image Width="24" Height="24" Source="{Binding Icon}" />
+                                                    <StackPanel Orientation="Vertical">
+                                                        <TextBlock Classes="SplitTunnelingItemTitle"
+                                                                   Text="{Binding Name}" />
+                                                        <StackPanel
+                                                            IsVisible="{Binding !((vm:SettingsViewModel)DataContext).SharedMemory.ApplicationConfig.Vpn.ReverseMode,
+                                                                                RelativeSource={RelativeSource AncestorType=ListBox}}">
+                                                            <TextBlock Classes="SplitTunnelingItemBehaviorDesc"
+                                                                       Foreground="#2F7CFF"
+                                                                       Text="{x:Static lang:Resources.UiSettingsAdvancedFeaturesSplitTunnelingItemVpnUsing}"
+                                                                       IsVisible="{Binding !$parent[ListBoxItem].IsSelected, Mode=TwoWay}" />
+                                                            <TextBlock Classes="SplitTunnelingItemBehaviorDesc"
+                                                                       Foreground="#F67E47"
+                                                                       Text="{x:Static lang:Resources.UiSettingsAdvancedFeaturesSplitTunnelingItemVpnBypassing}"
+                                                                       IsVisible="{Binding $parent[ListBoxItem].IsSelected, Mode=TwoWay}" />
+                                                        </StackPanel>
+                                                        <StackPanel
+                                                            IsVisible="{Binding ((vm:SettingsViewModel)DataContext).SharedMemory.ApplicationConfig.Vpn.ReverseMode,
+                                                                                RelativeSource={RelativeSource AncestorType=ListBox}}">
+                                                            <TextBlock Classes="SplitTunnelingItemBehaviorDesc"
+                                                                       Foreground="#2F7CFF"
+                                                                       Text="{x:Static lang:Resources.UiSettingsAdvancedFeaturesSplitTunnelingItemVpnUsing}"
+                                                                       IsVisible="{Binding $parent[ListBoxItem].IsSelected, Mode=TwoWay}" />
+                                                            <TextBlock Classes="SplitTunnelingItemBehaviorDesc"
+                                                                       Foreground="#F67E47"
+                                                                       Text="{x:Static lang:Resources.UiSettingsAdvancedFeaturesSplitTunnelingItemVpnBypassing}"
+                                                                       IsVisible="{Binding !$parent[ListBoxItem].IsSelected, Mode=TwoWay}" />
+                                                        </StackPanel>
+                                                    </StackPanel>
                                                 </StackPanel>
-                                            </StackPanel>
-                                        </Border>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                            
-                            <!--<StackPanel Orientation="Vertical" Spacing="10.5">
-                                
-                                <Border Padding="10.5" CornerRadius="8.75" Background="#4d262626">
-                                    <StackPanel Orientation="Horizontal" Spacing="14">
-                                        <ToggleButton Width="14" Height="14"></ToggleButton>
-                                        <Image Width="24" Height="24" Source="avares://CShroudApp.Desktop/Assets/icons/ico/google_chrome.ico"/>
-                                        <StackPanel>
-                                            <TextBlock Foreground="#fff" FontWeight="500" FontSize="14" LineHeight="21">Chrome</TextBlock>
-                                            <TextBlock Foreground="#a1a1a1" FontSize="10.5" LineHeight="13.999965">Using VPN</TextBlock>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-                                
-                                <Border Padding="10.5" CornerRadius="8.75" Background="#4d262626">
-                                    <StackPanel Orientation="Horizontal" Spacing="14">
-                                        <ToggleButton Width="14" Height="14"></ToggleButton>
-                                        <Image Width="24" Height="24" Source="avares://CShroudApp.Desktop/Assets/icons/ico/google_chrome.ico"/>
-                                        <StackPanel>
-                                            <TextBlock Foreground="#fff" FontWeight="500" FontSize="14" LineHeight="21">Chrome</TextBlock>
-                                            <TextBlock Foreground="#a1a1a1" FontSize="10.5" LineHeight="13.999965">Using VPN</TextBlock>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-                                
-                            </StackPanel>-->
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
                         </StackPanel>
                     </Border>
                 </StackPanel>
-                
+
                 <Grid Classes="SettingsGroupItem" ColumnDefinitions="*, Auto">
                     <StackPanel>
-                        <TextBlock Classes="SettingsGroupItemName">Enable Bypass Mode</TextBlock>
-                        <TextBlock Classes="SettingsGroupItemDescription">Alternative routing mode for specific applications</TextBlock>
+                        <TextBlock Classes="SettingsGroupItemName"
+                                   Text="{x:Static lang:Resources.UiSettingsAdvancedFeaturesBypassModeToggler}" />
+                        <TextBlock Classes="SettingsGroupItemDescription"
+                                   Text="{x:Static lang:Resources.UiSettingsAdvancedFeaturesBypassModeDesc}" />
                     </StackPanel>
-                    
-                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1"/>
+
+                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1"
+                                  IsChecked="{Binding SharedMemory.ApplicationConfig.Vpn.ReverseMode}" />
                 </Grid>
             </StackPanel>
         </Border>
-        
+
         <Border Classes="SettingsGroup">
             <StackPanel Classes="SettingsGroupWrapper">
                 <StackPanel Classes="SettingsGroupHeader">
                     <StackPanel Classes="SettingsGroupHeaderWrapper">
-                        <Svg Classes="SettingsGroupHeaderIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/monitor.svg"
-                             Css="* { fill: #2F7CFF; }"/>
+                        <Svg Classes="SettingsGroupHeaderIcon"
+                             Path="avares://CShroudApp.Desktop/Assets/icons/svg/monitor.svg"
+                             Css="* { fill: #2F7CFF; }" />
                         <TextBlock Classes="SettingsGroupHeaderTitle">General Settings</TextBlock>
                     </StackPanel>
                     <TextBlock Classes="SettingsGroupHeaderDescription">Configure basic application behavior and startup options</TextBlock>
                 </StackPanel>
-                
+
                 <Grid Classes="SettingsGroupItem" ColumnDefinitions="*, Auto">
                     <StackPanel>
                         <TextBlock Classes="SettingsGroupItemName">Start on System Boot</TextBlock>
                         <TextBlock Classes="SettingsGroupItemDescription">Launch CrimsonShroud when your computer starts</TextBlock>
                     </StackPanel>
-                    
-                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1" IsChecked="{Binding SharedMemory.ApplicationConfig.GeneralSettings.StartOnSystemStartup}" Command="{Binding UpdateConfigCommand}"/>
+
+                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1"
+                                  IsChecked="{Binding SharedMemory.ApplicationConfig.GeneralSettings.StartOnSystemStartup}" />
                 </Grid>
-                
+
                 <Grid Classes="SettingsGroupItem" ColumnDefinitions="*, Auto">
                     <StackPanel>
                         <TextBlock Classes="SettingsGroupItemName">Auto Connect on Startup</TextBlock>
                         <TextBlock Classes="SettingsGroupItemDescription">Automatically connect to Network when app launches</TextBlock>
                     </StackPanel>
-                    
-                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1"/>
+
+                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1" />
                 </Grid>
-                
+
                 <Grid Classes="SettingsGroupItem" ColumnDefinitions="*, Auto">
                     <StackPanel>
                         <TextBlock Classes="SettingsGroupItemName">Minimize to System Tray</TextBlock>
                         <TextBlock Classes="SettingsGroupItemDescription">Hide app in system tray when closed</TextBlock>
                     </StackPanel>
-                    
-                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1"/>
+
+                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1" />
                 </Grid>
             </StackPanel>
         </Border>
-        
+
         <Border Classes="SettingsGroup">
             <StackPanel Classes="SettingsGroupWrapper">
                 <StackPanel Classes="SettingsGroupHeader">
                     <StackPanel Classes="SettingsGroupHeaderWrapper">
-                        <Svg Classes="SettingsGroupHeaderIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/padlock.svg"
-                             Css="* { fill: #F02E39; }"/>
+                        <Svg Classes="SettingsGroupHeaderIcon"
+                             Path="avares://CShroudApp.Desktop/Assets/icons/svg/padlock.svg"
+                             Css="* { fill: #F02E39; }" />
                         <TextBlock Classes="SettingsGroupHeaderTitle">Security &amp; Privacy</TextBlock>
                     </StackPanel>
                     <TextBlock Classes="SettingsGroupHeaderDescription">Configure advanced security features to protect your privacy</TextBlock>
                 </StackPanel>
-                
+
                 <Grid Classes="SettingsGroupItem" ColumnDefinitions="*, Auto">
                     <StackPanel>
                         <TextBlock Classes="SettingsGroupItemName">Kill Switch</TextBlock>
                         <TextBlock Classes="SettingsGroupItemDescription">Block all internet traffic if VPN disconnects</TextBlock>
                     </StackPanel>
-                    
-                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1"/>
+
+                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1" />
                 </Grid>
-                
+
                 <Grid Classes="SettingsGroupItem" ColumnDefinitions="*, Auto">
                     <StackPanel>
                         <TextBlock Classes="SettingsGroupItemName">IPv6 Leak Protection</TextBlock>
                         <TextBlock Classes="SettingsGroupItemDescription">Block IPv6 traffic to prevent IP leaks</TextBlock>
                     </StackPanel>
-                    
-                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1"/>
+
+                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1" />
                 </Grid>
-                
+
                 <Grid Classes="SettingsGroupItem" ColumnDefinitions="*, Auto">
                     <StackPanel>
                         <TextBlock Classes="SettingsGroupItemName">WebRTC Blocking</TextBlock>
                         <TextBlock Classes="SettingsGroupItemDescription">Block WebRTC to prevent real IP exposure</TextBlock>
                     </StackPanel>
-                    
-                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1"/>
+
+                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1" />
                 </Grid>
             </StackPanel>
         </Border>
-        
+
         <Border Classes="SettingsGroup">
             <StackPanel Classes="SettingsGroupWrapper">
                 <StackPanel Classes="SettingsGroupHeader">
                     <StackPanel Classes="SettingsGroupHeaderWrapper">
-                        <Svg Classes="SettingsGroupHeaderIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/bell.svg"
-                             Css="* { fill: #F67E47; }"/>
+                        <Svg Classes="SettingsGroupHeaderIcon"
+                             Path="avares://CShroudApp.Desktop/Assets/icons/svg/bell.svg"
+                             Css="* { fill: #F67E47; }" />
                         <TextBlock Classes="SettingsGroupHeaderTitle">Notifications &amp; Updates</TextBlock>
                     </StackPanel>
                     <TextBlock Classes="SettingsGroupHeaderDescription">Configure system notifications and automatic updates</TextBlock>
                 </StackPanel>
-                
+
                 <Grid Classes="SettingsGroupItem" ColumnDefinitions="*, Auto">
                     <StackPanel>
                         <TextBlock Classes="SettingsGroupItemName">Show Notifications</TextBlock>
                         <TextBlock Classes="SettingsGroupItemDescription">Display system notifications for VPN events</TextBlock>
                     </StackPanel>
-                    
-                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1"/>
+
+                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1" />
                 </Grid>
-                
+
                 <Grid Classes="SettingsGroupItem" ColumnDefinitions="*, Auto">
                     <StackPanel>
                         <TextBlock Classes="SettingsGroupItemName">Automatic Updates</TextBlock>
                         <TextBlock Classes="SettingsGroupItemDescription">Download and install updates automatically</TextBlock>
                     </StackPanel>
-                    
-                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1"/>
+
+                    <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1" />
                 </Grid>
-                
+
                 <Border BorderBrush="#262626" BorderThickness="0 1 0 0" Padding="0 14 0 0">
-                    <widgets:IconButton Content="Check for Updates" HorizontalAlignment="Stretch" Background="#2F7CFF" Padding="10.5 5"
-                                        FontSize="12.25" LineHeight="17.4999825" FontWeight="400" Foreground="#ffffff" IconColor="#ffffff"
+                    <widgets:IconButton Content="Check for Updates" HorizontalAlignment="Stretch" Background="#2F7CFF"
+                                        Padding="10.5 5"
+                                        FontSize="12.25" LineHeight="17.4999825" FontWeight="400" Foreground="#ffffff"
+                                        IconColor="#ffffff"
                                         IconWidth="14" IconHeight="14" Gap="10.5" CornerRadius="6.75"
-                                        IconPath="avares://CShroudApp.Desktop/Assets/icons/svg/update.svg" Command="{Binding CheckForUpdatesCommand}"/>
+                                        IconPath="avares://CShroudApp.Desktop/Assets/icons/svg/update.svg"
+                                        Command="{Binding CheckForUpdatesCommand}" />
                 </Border>
             </StackPanel>
         </Border>
-        
+
     </StackPanel>
-    
+
 </UserControl>

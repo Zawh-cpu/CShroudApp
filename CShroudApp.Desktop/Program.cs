@@ -14,7 +14,6 @@ sealed class Program
     public static void Main(string[] args)
     {
         //BackendStarter.Start([], App.GetUiDependencyCollection());
-        Console.WriteLine("BACKEND HEATED");
         BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
     }
 

@@ -104,4 +104,37 @@
     <data name="region-de" xml:space="preserve">
         <value>Германия</value>
     </data>
+    <data name="UiSettingsAdvancedFeaturesSplitTunnelingItemVpnBypassing" xml:space="preserve">
+        <value>Избегает VPN</value>
+    </data>
+    <data name="UiSettingsAdvancedFeaturesSplitTunnelingItemVpnUsing" xml:space="preserve">
+        <value>Использует VPN</value>
+    </data>
+    <data name="UiSettingsAdvancedFeaturesSplitTunnelingTextBypassingVpn" xml:space="preserve">
+        <value>{0} из {1} приложений игнорируют VPN</value>
+    </data>
+    <data name="UiSettingsAdvancedFeaturesSplitTunnelingTextUsingVpn" xml:space="preserve">
+        <value>{0} из {1} приложений используют VPN</value>
+    </data>
+    <data name="UiSettingsAdvancedFeatures" xml:space="preserve">
+        <value>Расширенные Функции</value>
+    </data>
+    <data name="UiSettingsAdvancedFeaturesDesc" xml:space="preserve">
+        <value>Настройте раздельное туннелирование и расширенные параметры маршрутизации</value>
+    </data>
+    <data name="UiSettingsAdvancedFeaturesSplitTunnelingToggler" xml:space="preserve">
+        <value>Включить Раздельное Туннелирование</value>
+    </data>
+    <data name="UiSettingsAdvancedFeaturesSplitTunnelingDesc" xml:space="preserve">
+        <value>Разрешить определенным приложениям обходить VPN</value>
+    </data>
+    <data name="UiSettingsAdvancedFeaturesSplitTunnelingApplicationSelection" xml:space="preserve">
+        <value>Выбор Приложений</value>
+    </data>
+    <data name="UiSettingsAdvancedFeaturesBypassModeToggler" xml:space="preserve">
+        <value>Включить Режим Обхода</value>
+    </data>
+    <data name="UiSettingsAdvancedFeaturesBypassModeDesc" xml:space="preserve">
+        <value>Альтернативный режим маршрутизации для выбранных приложений</value>
+    </data>
 </root>

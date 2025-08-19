@@ -2,6 +2,7 @@
 using System.Text.Json;
 using Backend.Domain.Configs;
 using Backend.Domain.JsonContexts;
+using Backend.Infrastructure.Services;
 
 namespace Backend.Domain.Utils;
 
@@ -21,6 +22,6 @@ public static class FileChecker
     public static void CheckFiles()
     {
         if (CheckAndCreatePathToIfNotExists(AppConstants.ConfigFilePath))
-            File.WriteAllText(AppConstants.ConfigFilePath, JsonSerializer.Serialize(new ApplicationConfig(), ConfigsJsonContext.Default.ApplicationConfig));
+            ConfigManager.ParseAndWriteConfig(AppConstants.ConfigFilePath, new ApplicationConfig());
     }
 }

@@ -15,4 +15,8 @@
     <Style Selector=":is(Control)._MagentaColor">
         <Setter Property="local:ColorProperties.MainColor" Value="#A53889"/>
     </Style>
+    
+    <Style Selector=":is(Control)._OrangeColor">
+        <Setter Property="local:ColorProperties.MainColor" Value="#F67E47"/>
+    </Style>
 </Styles>
