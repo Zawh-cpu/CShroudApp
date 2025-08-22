@@ -6,9 +6,15 @@ namespace Backend.Domain.Configs;
 
 public class NetworkConfig : INotifyPropertyChanged
 {
-    private List<string> _reservedGatewayAddresses = [ "http://localhost:5234" ];
+    private List<string> _reservedGatewayAddresses = [];
     public List<string> ReservedGatewayAddresses { get => _reservedGatewayAddresses; set => SetField(ref _reservedGatewayAddresses, value); }
 
+    public void ApplyDefault()
+    {
+        if (_reservedGatewayAddresses.Count == 0)
+            _reservedGatewayAddresses = ["http://localhost:5234"];
+    }
+    
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

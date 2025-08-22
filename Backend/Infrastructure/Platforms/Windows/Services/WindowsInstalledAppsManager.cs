@@ -35,6 +35,9 @@ public class WindowsInstalledAppsManager : IInstalledAppsManager
                 if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(exePath))
                 {
                     exePath = exePath.Trim('"');
+                    int commaIndex = exePath.IndexOf(',');
+                    if (commaIndex >= 0)
+                        exePath = exePath.Substring(0, commaIndex);
                     Icon? icon = null;
                     if (File.Exists(exePath))
                     {

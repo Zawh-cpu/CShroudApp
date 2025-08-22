@@ -17,11 +17,6 @@ public class VpnConfig : INotifyPropertyChanged
 
     [JsonConverter(typeof(JsonStringEnumConverter<VpnCore>))]
     public VpnCore Core { get => _core; set => SetField(ref _core, value); }
-
-    
-    private bool _reverseMode = false;
-    public bool ReverseMode { get => _reverseMode; set => SetField(ref _reverseMode, value); }
-
     
     private bool _savePreviousProxy = true;
     public bool SavePreviousProxy { get => _savePreviousProxy; set => SetField(ref _savePreviousProxy, value); }

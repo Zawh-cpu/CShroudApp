@@ -1,5 +1,6 @@
 ﻿using Ardalis.Result;
 using Backend.Domain.Entities;
+using Backend.Infrastructure.Services;
 
 namespace Backend.Domain.Interfaces;
 
@@ -19,9 +20,9 @@ public interface IVpnService
     event EventHandler? VpnDisabled;
     event Action<Result<object>>? VpnStartedCancellation;
     public event Action<ulong, ulong>? SpeedUpdated;
-    
-    public DateTime? SessionStartTime { get; }
-    
+
+    public NetworkSession? Session { get; }
+
     public ulong Upload { get; }
     public ulong Download { get; }
     public uint Ping { get; }

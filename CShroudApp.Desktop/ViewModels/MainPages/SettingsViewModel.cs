@@ -37,15 +37,22 @@ public partial class SettingsViewModel : MainPageViewModelBasic
     
 
     public ObservableCollection<ApplicationDataDto> AvailableRulesList { get; set; } = [];
-    public ObservableCollection<ApplicationDataDto> FilteredAvailableRulesList => AvailableRulesList;
+    // public ObservableCollection<ApplicationDataDto> FilteredAvailableRulesList => AvailableRulesList;
+    
+    private DataGridCollectionView _collectionView;
+    public IEnumerable<ApplicationDataDto> FilteredAvailableRulesList => _collectionView.Cast<ApplicationDataDto>();
+    
     public ObservableCollection<ApplicationDataDto> SelectedSplitTunnelingRules { get; set; } = [];
+    
+    [ObservableProperty]
+    private string? _searchText;
     
     public SettingsViewModel(MainSharedMemory sharedMemory, IInstalledAppsManager installedAppsManager)
     {
         SharedMemory = sharedMemory;
         InstalledAppsManager = installedAppsManager;
-
-        SelectedSplitTunnelingRules.CollectionChanged += OnSelectedSplitTunnelingRulesChanged;
+        _collectionView = new DataGridCollectionView(AvailableRulesList);
+        _collectionView.Filter = FilterItems;
     }
     
     public SettingsViewModel()
@@ -58,7 +65,8 @@ public partial class SettingsViewModel : MainPageViewModelBasic
         SharedMemory = sharedMemory;
         InstalledAppsManager = installedAppsManager;
         
-        SelectedSplitTunnelingRules.CollectionChanged += OnSelectedSplitTunnelingRulesChanged;
+        _collectionView = new(AvailableRulesList);
+        _collectionView.Filter = FilterItems;
     }
 
     [RelayCommand]
@@ -111,6 +119,8 @@ public partial class SettingsViewModel : MainPageViewModelBasic
             if (rule.Enabled)
                 SelectedSplitTunnelingRules.Add(dto);
         }
+        
+        OnPropertyChanged(nameof(FilteredAvailableRulesList));
     }
 
     private void OnSelectedSplitTunnelingRulesChanged(object? obj, NotifyCollectionChangedEventArgs args)
@@ -171,16 +181,36 @@ public partial class SettingsViewModel : MainPageViewModelBasic
                     SharedMemory.ApplicationConfig.Vpn.SplitTunneling.Rules.Remove(rule);
             }
     }
+    
+    private bool FilterItems(object obj)
+    {
+        if (obj is not ApplicationDataDto dto)
+            return false;
+
+        if (string.IsNullOrWhiteSpace(SearchText))
+            return true;
+
+        return dto.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase);
+    }
+    
 
     [RelayCommand]
     private void SplitTunnelingUncheckAll()
     {
         SelectedSplitTunnelingRules.Clear();
     }
+    
+    partial void OnSearchTextChanged(string? value)
+    {
+        _collectionView.Refresh();
+        OnPropertyChanged(nameof(FilteredAvailableRulesList));
+    }
 
     public override void OnLoaded()
     {
         base.OnLoaded();
+        
+        SelectedSplitTunnelingRules.CollectionChanged += OnSelectedSplitTunnelingRulesChanged;
         if (SharedMemory.ApplicationConfig.Vpn.SplitTunneling.Enabled)
             OpenSplitTunnelingList();
     }
@@ -188,6 +218,8 @@ public partial class SettingsViewModel : MainPageViewModelBasic
     public override void OnUnloaded()
     {
         base.OnUnloaded();
+        
+        SelectedSplitTunnelingRules.CollectionChanged -= OnSelectedSplitTunnelingRulesChanged;
         AvailableRulesList.Clear();
         SelectedSplitTunnelingRules.Clear();
     }

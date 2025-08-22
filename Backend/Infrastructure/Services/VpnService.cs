@@ -6,6 +6,12 @@ using Backend.Domain.Interfaces;
 
 namespace Backend.Infrastructure.Services;
 
+public class NetworkSession
+{
+    public required VpnConnectionCredentials Credentials { get; set; }
+    public required DateTime ConnectedDate { get; set; }
+}
+
 public class VpnService : IVpnService
 {
     public bool IsRunning => _vpnCore.IsRunning;
@@ -28,10 +34,11 @@ public class VpnService : IVpnService
     public ulong Download => _vpnCore.Download;
     public uint Ping => _vpnCore.Ping;
     public event Action<ulong, ulong>? SpeedUpdated;
-
-    public DateTime? SessionStartTime { get; set; }
-
+    
     public bool IsConnected => IsRunning;
+    public NetworkSession? Session { get; private set; }
+
+    private VpnConnectionCredentials creds;
     
     //public int 
 
@@ -66,6 +73,14 @@ public class VpnService : IVpnService
         var result = await _vpnCore.EnableAsync(mode, credentials);
         if (!result.IsSuccess) VpnStartedCancellation?.Invoke(result);
         
+        // A little bit strange
+        
+        Session = new()
+        {
+            ConnectedDate = DateTime.UtcNow,
+            Credentials = credentials
+        };
+        
         return result.Map();
     }
 
@@ -88,7 +103,7 @@ public class VpnService : IVpnService
         
         _savedCurrentSessionConfig = null;
         _currentEnabledMode = null;
-        SessionStartTime = null;
+        Session = null;
         
         await _vpnCore.DisableAsync();
     }
@@ -133,7 +148,6 @@ public class VpnService : IVpnService
             _savedCurrentSessionConfig = null;
         }
         
-        SessionStartTime = DateTime.UtcNow;
         VpnEnabled?.Invoke(this, e);
         _eventManager.ConnectedToNetworkSuccessfully();
     }

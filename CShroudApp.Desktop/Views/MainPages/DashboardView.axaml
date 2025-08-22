@@ -278,7 +278,7 @@
                                     <Svg Classes="StatsItemPanelIcon" Path="avares://CShroudApp.Desktop/Assets/icons/svg/download.svg"
                                          Css="* { fill: #00BCD4 }"/>
                                     <TextBlock Classes="StatsItemPanelHeader">Connected to</TextBlock>
-                                    <TextBlock Classes="StatsItemPanelContent">us New York</TextBlock>
+                                    <TextBlock Classes="StatsItemPanelContent" Text="{Binding SharedMemory.VpnService.Session.Credentials.Location}"/>
                                 </StackPanel>
                             </Border>
                             

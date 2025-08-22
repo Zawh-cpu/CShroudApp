@@ -315,6 +315,7 @@ public partial class SingBoxCore : IVpnCore
             List<string> bypassPaths = [];
             List<uint> bypassPorts = [];
             List<string> bypassProcesses = [];
+            
             foreach (var rule in _settings.Vpn.SplitTunneling.Rules)
             {
                 if (!rule.Enabled) continue;
@@ -407,6 +408,8 @@ public partial class SingBoxCore : IVpnCore
                 Format = "binary",
                 Path = Path.Combine(AppConstants.InternalGeoRulesPath, "geoip-cn.srs")
             }];
+        
+        _config.Route.Final = "proxy";
     }
     private void SetupRoutesReversed(VpnMode mode)
     {
@@ -533,6 +536,8 @@ public partial class SingBoxCore : IVpnCore
                 Format = "binary",
                 Path = Path.Combine(AppConstants.InternalGeoRulesPath, "geoip-cn.srs")
             }];
+
+        _config.Route.Final = "direct";
     }
 
     private void SetupRoutesProcessFix()
@@ -577,7 +582,7 @@ public partial class SingBoxCore : IVpnCore
         SetupInbounds(mode);
         SetupOutbounds(credentials);
         
-        if (_settings.Vpn.ReverseMode)
+        if (_settings.Vpn.SplitTunneling.ReverseMode)
             SetupRoutesReversed(mode);
         else
             SetupRoutes(mode);

@@ -38,6 +38,8 @@ public static class BackendStarter
             .GetRequiredSection(nameof(ApplicationConfig))
             .Get<ApplicationConfig>()!;
         
+        cfg.ApplyDefault();
+        
         builder.Services.AddHttpClient("CrimsonShroudApiHook",
             client => client.BaseAddress = new Uri(cfg.Network.ReservedGatewayAddresses.First()));
 

@@ -164,7 +164,7 @@
                                              Height="14"
                                              Css="* { fill: #F67E47; }" />
                                         <TextBlock Foreground="#d4d4d4" FontSize="12.25" LineHeight="17.4999825"
-                                                   IsVisible="{Binding !SharedMemory.ApplicationConfig.Vpn.ReverseMode}">
+                                                   IsVisible="{Binding !SharedMemory.ApplicationConfig.Vpn.SplitTunneling.ReverseMode}">
                                             <TextBlock.Text>
                                                 <MultiBinding
                                                     StringFormat="{x:Static lang:Resources.UiSettingsAdvancedFeaturesSplitTunnelingTextBypassingVpn}">
@@ -174,7 +174,7 @@
                                             </TextBlock.Text>
                                         </TextBlock>
                                         <TextBlock Foreground="#d4d4d4" FontSize="12.25" LineHeight="17.4999825"
-                                                   IsVisible="{Binding SharedMemory.ApplicationConfig.Vpn.ReverseMode}">
+                                                   IsVisible="{Binding SharedMemory.ApplicationConfig.Vpn.SplitTunneling.ReverseMode}">
                                             <TextBlock.Text>
                                                 <MultiBinding
                                                     StringFormat="{x:Static lang:Resources.UiSettingsAdvancedFeaturesSplitTunnelingTextUsingVpn}">
@@ -217,7 +217,7 @@
 
                             <StackPanel Orientation="Vertical" Spacing="14" IsVisible="{Binding !SharedMemory.UiCachedOptions.SettingsIsSplitTunnelingAppsSelectorCollapsed}">
                                 <TextBox CornerRadius="8.75" Background="#4d1a1a1a" BorderBrush="#1a1a1a" BorderThickness="1"
-                                         Watermark="Search rule" Foreground="#fff">
+                                         Watermark="Search rule" Foreground="#fff" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
                                 </TextBox>
                                 <ListBox Background="Transparent" SelectionMode="Multiple, Toggle"
                                          ItemsSource="{Binding FilteredAvailableRulesList}"
@@ -311,7 +311,7 @@
                                                         <TextBlock Classes="SplitTunnelingItemTitle"
                                                                    Text="{Binding Name}" />
                                                         <StackPanel
-                                                            IsVisible="{Binding !((vm:SettingsViewModel)DataContext).SharedMemory.ApplicationConfig.Vpn.ReverseMode,
+                                                            IsVisible="{Binding !((vm:SettingsViewModel)DataContext).SharedMemory.ApplicationConfig.Vpn.SplitTunneling.ReverseMode,
                                                                                 RelativeSource={RelativeSource AncestorType=ListBox}}">
                                                             <TextBlock Classes="SplitTunnelingItemBehaviorDesc"
                                                                        Foreground="#2F7CFF"
@@ -323,7 +323,7 @@
                                                                        IsVisible="{Binding $parent[ListBoxItem].IsSelected, Mode=TwoWay}" />
                                                         </StackPanel>
                                                         <StackPanel
-                                                            IsVisible="{Binding ((vm:SettingsViewModel)DataContext).SharedMemory.ApplicationConfig.Vpn.ReverseMode,
+                                                            IsVisible="{Binding ((vm:SettingsViewModel)DataContext).SharedMemory.ApplicationConfig.Vpn.SplitTunneling.ReverseMode,
                                                                                 RelativeSource={RelativeSource AncestorType=ListBox}}">
                                                             <TextBlock Classes="SplitTunnelingItemBehaviorDesc"
                                                                        Foreground="#2F7CFF"
@@ -354,7 +354,7 @@
                     </StackPanel>
 
                     <ToggleSwitch Classes="SettingsGroupItemToggleSwitch" Grid.Column="1"
-                                  IsChecked="{Binding SharedMemory.ApplicationConfig.Vpn.ReverseMode}" />
+                                  IsChecked="{Binding SharedMemory.ApplicationConfig.Vpn.SplitTunneling.ReverseMode}" />
                 </Grid>
             </StackPanel>
         </Border>

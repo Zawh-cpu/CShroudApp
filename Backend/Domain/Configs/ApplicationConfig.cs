@@ -63,4 +63,9 @@ public class ApplicationConfig : INotifyPropertyChanged
         Hook(Network);
         Hook(DeveloperSettings);
     }
+    
+    public void ApplyDefault()
+    {
+        Network.ApplyDefault();
+    }
 }

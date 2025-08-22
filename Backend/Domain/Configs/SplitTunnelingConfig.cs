@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Backend.Domain.Configs;
@@ -32,6 +33,7 @@ public partial class SplitTunnelingRule
     
     public string Value { get; set; } = string.Empty;
     
+    [JsonConverter(typeof(JsonStringEnumConverter<SplitTunnelingRuleType>))]
     public SplitTunnelingRuleType Type { get; set; } = SplitTunnelingRuleType.Process;
 
     public bool IsCustom { get; set; }
@@ -41,6 +43,9 @@ public class SplitTunnelingConfig : INotifyPropertyChanged
 {
     private bool _enabled;
     public bool Enabled { get => _enabled; set => SetField(ref _enabled, value); }
+    
+    private bool _reverseMode = false;
+    public bool ReverseMode { get => _reverseMode; set => SetField(ref _reverseMode, value); }
     
     public ObservableCollection<SplitTunnelingRule> Rules { get; set; } = [];
 
